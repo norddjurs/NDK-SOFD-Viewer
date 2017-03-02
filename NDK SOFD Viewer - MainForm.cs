@@ -162,13 +162,46 @@ namespace NDK.SofdViewer {
 			this.actionAdDisableUser.Click += this.ActionAdDisableUserClick;
 			this.actionPanel.Controls.Add(this.actionAdDisableUser);
 
-
-
 			// Initialize filters.
 			this.filterText.Text = this.GetOptionValue("filterText", Environment.UserName);
 			this.filterTextAutoWildcards.Checked = this.GetOptionValue("filterTextAutoWildcards", true);
 			this.filterActive.CheckState = (CheckState)this.GetOptionValue("filterActive", (Int32)CheckState.Checked);
 			this.filterAd.CheckState = (CheckState)this.GetOptionValue("filterAd", (Int32)CheckState.Checked);
+
+			this.filterEmploymentFirstDateBegin.Value = this.GetOptionValue("filterEmploymentFirstDateBeginValue", DateTime.Now);
+			this.filterEmploymentFirstDateBegin.Checked = this.GetOptionValue("filterEmploymentFirstDateBegin", false);
+			this.filterEmploymentFirstDateEnd.Value = this.GetOptionValue("filterEmploymentFirstDateEndValue", DateTime.Now);
+			this.filterEmploymentFirstDateEnd.Checked = this.GetOptionValue("filterEmploymentFirstDateEnd", false);
+
+			this.filterEmploymentLastDateBegin.Value = this.GetOptionValue("filterEmploymentLastDateBeginValue", DateTime.Now);
+			this.filterEmploymentLastDateBegin.Checked = this.GetOptionValue("filterEmploymentLastDateBegin", false);
+			this.filterEmploymentLastDateEnd.Value = this.GetOptionValue("filterEmploymentLastDateEndValue", DateTime.Now);
+			this.filterEmploymentLastDateEnd.Checked = this.GetOptionValue("filterEmploymentLastDateEnd", false);
+
+			this.filterEmploymentOldestFirstDateBegin.Value = this.GetOptionValue("filterEmploymentOldestFirstDateBeginValue", DateTime.Now);
+			this.filterEmploymentOldestFirstDateBegin.Checked = this.GetOptionValue("filterEmploymentOldestFirstDateBegin", false);
+			this.filterEmploymentOldestFirstDateEnd.Value = this.GetOptionValue("filterEmploymentOldestFirstDateEndValue", DateTime.Now);
+			this.filterEmploymentOldestFirstDateEnd.Checked = this.GetOptionValue("filterEmploymentOldestFirstDateEnd", false);
+
+			this.filterEmploymentJubileeDateBegin.Value = this.GetOptionValue("filterEmploymentJubileeDateBeginValue", DateTime.Now);
+			this.filterEmploymentJubileeDateBegin.Checked = this.GetOptionValue("filterEmploymentJubileeDateBegin", false);
+			this.filterEmploymentJubileeDateEnd.Value = this.GetOptionValue("filterEmploymentJubileeDateEndValue", DateTime.Now);
+			this.filterEmploymentJubileeDateEnd.Checked = this.GetOptionValue("filterEmploymentJubileeDateEnd", false);
+
+			this.filterHistoryActiveFromDateBegin.Value = this.GetOptionValue("filterHistoryActiveFromDateBeginValue", DateTime.Now);
+			this.filterHistoryActiveFromDateBegin.Checked = this.GetOptionValue("filterHistoryActiveFromDateBegin", false);
+			this.filterHistoryActiveFromDateEnd.Value = this.GetOptionValue("filterHistoryActiveFromDateEndValue", DateTime.Now);
+			this.filterHistoryActiveFromDateEnd.Checked = this.GetOptionValue("filterHistoryActiveFromDateEnd", false);
+
+			this.filterHistoryActiveToDateBegin.Value = this.GetOptionValue("filterHistoryActiveToDateBeginValue", DateTime.Now);
+			this.filterHistoryActiveToDateBegin.Checked = this.GetOptionValue("filterHistoryActiveToDateBegin", false);
+			this.filterHistoryActiveToDateEnd.Value = this.GetOptionValue("filterHistoryActiveToDateEndValue", DateTime.Now);
+			this.filterHistoryActiveToDateEnd.Checked = this.GetOptionValue("filterHistoryActiveToDateEnd", false);
+
+			this.filterHistoryChangedDateBegin.Value = this.GetOptionValue("filterHistoryChangedDateBeginValue", DateTime.Now);
+			this.filterHistoryChangedDateBegin.Checked = this.GetOptionValue("filterHistoryChangedDateBegin", false);
+			this.filterHistoryChangedDateEnd.Value = this.GetOptionValue("filterHistoryChangedDateEndValue", DateTime.Now);
+			this.filterHistoryChangedDateEnd.Checked = this.GetOptionValue("filterHistoryChangedDateEnd", false);
 
 			// Search.
 			this.SearchStartTimer(this, e);
@@ -188,10 +221,44 @@ namespace NDK.SofdViewer {
 
 			// Save filter states.
 			this.SetOptionValues("filterText", this.filterText.Text);
-			this.GetOptionValue("filterTextAutoWildcards", this.filterTextAutoWildcards.Checked);
+			this.SetOptionValue("filterTextAutoWildcards", this.filterTextAutoWildcards.Checked);
 			this.SetOptionValue("filterActive", (Int32)this.filterActive.CheckState);
 			this.SetOptionValue("filterAd", (Int32)this.filterAd.CheckState);
 
+			this.SetOptionValue("filterEmploymentFirstDateBeginValue", this.filterEmploymentFirstDateBegin.Value);
+			this.SetOptionValue("filterEmploymentFirstDateBegin", this.filterEmploymentFirstDateBegin.Checked);
+			this.SetOptionValue("filterEmploymentFirstDateEndValue", this.filterEmploymentFirstDateEnd.Value);
+			this.SetOptionValue("filterEmploymentFirstDateEnd", this.filterEmploymentFirstDateEnd.Checked);
+
+			this.SetOptionValue("filterEmploymentLastDateBeginValue", this.filterEmploymentLastDateBegin.Value);
+			this.SetOptionValue("filterEmploymentLastDateBegin", this.filterEmploymentLastDateBegin.Checked);
+			this.SetOptionValue("filterEmploymentLastDateEndValue", this.filterEmploymentLastDateEnd.Value);
+			this.SetOptionValue("filterEmploymentLastDateEnd", this.filterEmploymentLastDateEnd.Checked);
+
+			this.SetOptionValue("filterEmploymentOldestFirstDateBeginValue", this.filterEmploymentOldestFirstDateBegin.Value);
+			this.SetOptionValue("filterEmploymentOldestFirstDateBegin", this.filterEmploymentOldestFirstDateBegin.Checked);
+			this.SetOptionValue("filterEmploymentOldestFirstDateEndValue", this.filterEmploymentOldestFirstDateEnd.Value);
+			this.SetOptionValue("filterEmploymentOldestFirstDateEnd", this.filterEmploymentOldestFirstDateEnd.Checked);
+
+			this.SetOptionValue("filterEmploymentJubileeDateBeginValue", this.filterEmploymentJubileeDateBegin.Value);
+			this.SetOptionValue("filterEmploymentJubileeDateBegin", this.filterEmploymentJubileeDateBegin.Checked);
+			this.SetOptionValue("filterEmploymentJubileeDateEndValue", this.filterEmploymentJubileeDateEnd.Value);
+			this.SetOptionValue("filterEmploymentJubileeDateEnd", this.filterEmploymentJubileeDateEnd.Checked);
+
+			this.SetOptionValue("filterHistoryActiveFromDateBeginValue", this.filterHistoryActiveFromDateBegin.Value);
+			this.SetOptionValue("filterHistoryActiveFromDateBegin", this.filterHistoryActiveFromDateBegin.Checked);
+			this.SetOptionValue("filterHistoryActiveFromDateEndValue", this.filterHistoryActiveFromDateEnd.Value);
+			this.SetOptionValue("filterHistoryActiveFromDateEnd", this.filterHistoryActiveFromDateEnd.Checked);
+
+			this.SetOptionValue("filterHistoryActiveToDateBeginValue", this.filterHistoryActiveToDateBegin.Value);
+			this.SetOptionValue("filterHistoryActiveToDateBegin", this.filterHistoryActiveToDateBegin.Checked);
+			this.SetOptionValue("filterHistoryActiveToDateEndValue", this.filterHistoryActiveToDateEnd.Value);
+			this.SetOptionValue("filterHistoryActiveToDateEnd", this.filterHistoryActiveToDateEnd.Checked);
+
+			this.SetOptionValue("filterHistoryChangedDateBeginValue", this.filterHistoryChangedDateBegin.Value);
+			this.SetOptionValue("filterHistoryChangedDateBegin", this.filterHistoryChangedDateBegin.Checked);
+			this.SetOptionValue("filterHistoryChangedDateEndValue", this.filterHistoryChangedDateEnd.Value);
+			this.SetOptionValue("filterHistoryChangedDateEnd", this.filterHistoryChangedDateEnd.Checked);
 
 			// Invoke base method.
 			e.Cancel = false;
@@ -259,6 +326,12 @@ namespace NDK.SofdViewer {
 					employeeFilters.Add(new SofdEmployeeFilter_ForNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
 					employeeFilters.Add(new SofdEmployeeFilter_EfterNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
 					employeeFilters.Add(new SofdEmployeeFilter_KaldeNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+					employeeFilters.Add(new SofdEmployeeFilter_TelefonNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+					employeeFilters.Add(new SofdEmployeeFilter_MobilNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+					employeeFilters.Add(new SofdEmployeeFilter_MobilNummer2(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+					employeeFilters.Add(new SofdEmployeeFilter_Epost(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+					employeeFilters.Add(new SofdEmployeeFilter_AdBrugerNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+					employeeFilters.Add(new SofdEmployeeFilter_CprNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
 					employeeFilters.Add(new SqlWhereFilterEndGroup());
 				}
 
@@ -282,6 +355,55 @@ namespace NDK.SofdViewer {
 						break;
 				}
 
+				// Add filter dates.
+				if (this.filterEmploymentFirstDateBegin.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AnsaettelsesDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.filterEmploymentFirstDateBegin.Value));
+				}
+				if (this.filterEmploymentFirstDateEnd.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AnsaettelsesDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.filterEmploymentFirstDateEnd.Value));
+				}
+
+				if (this.filterEmploymentLastDateBegin.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AnsaettelsesOphoersDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.filterEmploymentLastDateBegin.Value));
+				}
+				if (this.filterEmploymentLastDateEnd.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AnsaettelsesOphoersDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.filterEmploymentLastDateEnd.Value));
+				}
+
+				if (this.filterEmploymentOldestFirstDateBegin.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_FoersteAnsaettelsesDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.filterEmploymentOldestFirstDateBegin.Value));
+				}
+				if (this.filterEmploymentOldestFirstDateEnd.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_FoersteAnsaettelsesDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.filterEmploymentOldestFirstDateEnd.Value));
+				}
+
+				if (this.filterEmploymentJubileeDateBegin.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_JubilaeumsAncinnitetsDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.filterEmploymentJubileeDateBegin.Value));
+				}
+				if (this.filterEmploymentJubileeDateEnd.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_JubilaeumsAncinnitetsDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.filterEmploymentJubileeDateEnd.Value));
+				}
+
+				if (this.filterHistoryActiveFromDateBegin.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AktivFra(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.filterHistoryActiveFromDateBegin.Value));
+				}
+				if (this.filterHistoryActiveFromDateEnd.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AktivFra(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.filterHistoryActiveFromDateEnd.Value));
+				}
+
+				if (this.filterHistoryActiveToDateBegin.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AktivTil(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.filterHistoryActiveToDateBegin.Value));
+				}
+				if (this.filterHistoryActiveToDateEnd.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AktivTil(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.filterHistoryActiveToDateEnd.Value));
+				}
+
+				if (this.filterHistoryChangedDateBegin.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_SidstAendret(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.filterHistoryChangedDateBegin.Value));
+				}
+				if (this.filterHistoryChangedDateEnd.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_SidstAendret(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.filterHistoryChangedDateEnd.Value));
+				}
 
 				// Get employees.
 				List<SofdEmployee> employees = this.GetAllEmployees(employeeFilters.ToArray());
@@ -476,6 +598,7 @@ namespace NDK.SofdViewer {
 				this.propertyHistoryOpusChangedDate.Clear();
 				this.propertyAdChangedDate.Clear();
 				this.propertyAdLogonDate.Clear();
+				this.propertyAdInfo.Clear();
 
 				this.propertyHistoryList.DataSource = null;
 			} catch {}
@@ -566,6 +689,10 @@ namespace NDK.SofdViewer {
 					}
 					if ((user != null) && (user.LastLogon != null) && (user.LastLogon.Value.Year > 1900)) {
 						this.propertyAdLogonDate.Text = user.LastLogon.Value.ToString("yyyy-MM-dd  HH:mm");
+					}
+
+					if (user != null) {
+						this.propertyAdInfo.Text = user.Info;
 					}
 
 					// Get history.
