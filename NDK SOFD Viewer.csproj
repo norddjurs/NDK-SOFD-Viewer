@@ -92,9 +92,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\NDK Framework\NDK Framework.csproj">
       <Project>{9f3cc933-8f6f-4268-a971-71d100bf9fb8}</Project>
@@ -110,6 +108,29 @@
     <Compile Include="NDK SOFD Viewer - MainForm.Designer.cs">
       <DependentUpon>NDK SOFD Viewer - MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NDK SOFD Viewer - NilexExpiresBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NDK SOFD Viewer - NilexExpiresBox.designer.cs">
+      <DependentUpon>NDK SOFD Viewer - NilexExpiresBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NDK SOFD Viewer - NilexMessageBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NDK SOFD Viewer - NilexMessageBox.Designer.cs">
+      <DependentUpon>NDK SOFD Viewer - NilexMessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NDK SOFD Viewer - NilexResetBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NDK SOFD Viewer - NilexResetBox.designer.cs">
+      <DependentUpon>NDK SOFD Viewer - NilexResetBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NDK SOFD Viewer - MainForm.resx">
@@ -117,6 +138,19 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="NDK SOFD Viewer - NilexExpiresBox.resx">
+      <DependentUpon>NDK SOFD Viewer - NilexExpiresBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NDK SOFD Viewer - NilexMessageBox.resx">
+      <DependentUpon>NDK SOFD Viewer - NilexMessageBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NDK SOFD Viewer - NilexResetBox.resx">
+      <DependentUpon>NDK SOFD Viewer - NilexResetBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\NDK SOFD Viewer.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +163,21 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Circle Blank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\User Blank.png" />
+    <EmbeddedResource Include="Resources\User Blue.png" />
+    <EmbeddedResource Include="Resources\User Green.png" />
+    <EmbeddedResource Include="Resources\User Grey.png" />
+    <EmbeddedResource Include="Resources\User Orange.png" />
+    <EmbeddedResource Include="Resources\User Red.png" />
+    <EmbeddedResource Include="Resources\User Yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\User Id.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\User Search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

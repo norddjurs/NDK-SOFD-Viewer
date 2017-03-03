@@ -13,24 +13,9 @@ using NDK.Framework;
 namespace NDK.SofdViewer {
 
 	public partial class MainForm : PluginForm {
-		private DataGridViewImageColumn resultListAdStatus;
-		private DataGridViewTextBoxColumn resultListFirstName;
-		private DataGridViewTextBoxColumn resultListLastName;
-		private DataGridViewTextBoxColumn resultListDisplayName;
-		private DataGridViewTextBoxColumn resultListCprNumber;
-		private DataGridViewTextBoxColumn resultListAdUserid;
-		private DataGridViewTextBoxColumn resultListOpusUserid;
-		private DataGridViewTextBoxColumn resultListPhone;
-		private DataGridViewTextBoxColumn resultListMobile;
-		private DataGridViewTextBoxColumn resultListEMail;
-
-		private Button actionProperties;
-		private Button actionAdEnableUser;
-		private Button actionAdDisableUser;
-
-		private System.Windows.Forms.Timer searchThreadTimer = null;
-		private ManualResetEvent searchThreadShutdownEvent = null;
-		private Thread searchThread = null;
+		private System.Windows.Forms.Timer employeeSearchThreadTimer = null;
+		private ManualResetEvent employeeSearchThreadShutdownEvent = null;
+		private Thread employeeSearchThread = null;
 
 		#region Constructors.
 		public MainForm() {
@@ -43,276 +28,485 @@ namespace NDK.SofdViewer {
 		/// Initialize the application and form.
 		/// </summary>
 		protected override void OnLoad(EventArgs e) {
-			// Invoke base method.
-			base.OnLoad(e);
+			try {
+				// Invoke base method.
+				base.OnLoad(e);
 
-			// Hide tabs.
-			tabControl1.Appearance = TabAppearance.FlatButtons;
-			tabControl1.ItemSize = new Size(0, 1);
-			tabControl1.SizeMode = TabSizeMode.Fixed;
+				// Hide tabs.
+				this.MainFormPages.Appearance = TabAppearance.FlatButtons;
+				this.MainFormPages.ItemSize = new Size(0, 1);
+				this.MainFormPages.SizeMode = TabSizeMode.Fixed;
 
-			// Initialize result list columns.
-			this.resultList.AutoGenerateColumns = false;
+				// Show the employee search tab.
+				this.MainFormPages.SelectTab(this.employeeListPage);
 
-			this.resultListAdStatus = new DataGridViewImageColumn();
-			this.resultListAdStatus.Name = "resultListAdStatus";
-			this.resultListAdStatus.HeaderText = "";
-			this.resultListAdStatus.Image = this.GetResourceImage("Circle Blank.png");
-			this.resultListAdStatus.ImageLayout = DataGridViewImageCellLayout.Zoom;
-			this.resultListAdStatus.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-			this.resultListAdStatus.MinimumWidth = 25;
-			this.resultListAdStatus.Width = 25;
-			this.resultListAdStatus.Visible = this.GetOptionValue("resultListAdStatus", true);
-			this.resultList.Columns.Add(this.resultListAdStatus);
+				// Initialize action buttons.
+				this.actionEmployeeList.Image = this.GetResourceImage("User Search.png");
+				this.actionEmployeeProperties.Image = this.GetResourceImage("User Id.png");
+				this.actionActiveDirectoryEnableUser.Image = this.GetResourceImage("User Green.png");
+				this.actionActiveDirectoryDisableUser.Image = this.GetResourceImage("User Red.png");
+				this.actionActiveDirectoryExpireUser.Image = this.GetResourceImage("User Orange.png");
+				this.actionActiveDirectoryResetUser.Image = this.GetResourceImage("User Yellow.png");
 
-			this.resultListFirstName = new DataGridViewTextBoxColumn();
-			this.resultListFirstName.DataPropertyName = "ForNavn";
-			this.resultListFirstName.HeaderText = "First name";
-			this.resultListFirstName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-			this.resultListFirstName.MinimumWidth = 100;
-			this.resultListFirstName.Visible = this.GetOptionValue("resultListFirstName", true);
-			this.resultList.Columns.Add(this.resultListFirstName);
+				// Initialize result list columns.
+				this.employeeList.AutoGenerateColumns = false;
 
-			this.resultListLastName = new DataGridViewTextBoxColumn();
-			this.resultListLastName.DataPropertyName = "EfterNavn";
-			this.resultListLastName.HeaderText = "Last name";
-			this.resultListLastName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-			this.resultListLastName.MinimumWidth = 100;
-			this.resultListLastName.Visible = this.GetOptionValue("resultListLastName", true);
-			this.resultList.Columns.Add(this.resultListLastName);
+				this.employeeListAdStatus.Image = this.GetResourceImage("Circle Blank.png");
+				this.employeeListAdStatus.Visible = this.GetOptionValue("EmployeeListAdStatus", true);
+				this.employeeListFirstName.Visible = this.GetOptionValue("EmployeeListFirstName", true);
+				this.employeeListLastName.Visible = this.GetOptionValue("EmployeeListLastName", true);
+				this.employeeListDisplayName.Visible = this.GetOptionValue("EmployeeListDisplayName", true);
+				this.employeeListCprNumber.Visible = this.GetOptionValue("EmployeeListCprNumber", true);
+				this.employeeListAdUserName.Visible = this.GetOptionValue("EmployeeListAdUserName", true);
+				this.employeeListOpusUserName.Visible = this.GetOptionValue("EmployeeListOpusUserName", true);
+				this.employeeListPhone.Visible = this.GetOptionValue("EmployeeListPhone", true);
+				this.employeeListMobile.Visible = this.GetOptionValue("EmployeeListMobile", true);
+				this.employeeListMail.Visible = this.GetOptionValue("EmployeeListMail", true);
 
-			this.resultListDisplayName = new DataGridViewTextBoxColumn();
-			this.resultListDisplayName.DataPropertyName = "KaldeNavn";
-			this.resultListDisplayName.HeaderText = "Display name";
-			this.resultListDisplayName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-			this.resultListDisplayName.MinimumWidth = 150;
-			this.resultListDisplayName.Visible = this.GetOptionValue("resultListDisplayName", true);
-			this.resultList.Columns.Add(this.resultListDisplayName);
+				// Initialize filters.
+				this.employeeFilterText.Text = this.GetOptionValue("EmployeeFilterText", Environment.UserName);
+				this.employeeFilterTextAutoWildcards.Checked = this.GetOptionValue("EmployeeFilterTextAutoWildcards", true);
+				this.employeeFilterActive.CheckState = (CheckState)this.GetOptionValue("EmployeeFilterActive", (Int32)CheckState.Checked);
+				this.employeeFilterAd.CheckState = (CheckState)this.GetOptionValue("EmployeeFilterAd", (Int32)CheckState.Checked);
 
-			this.resultListCprNumber = new DataGridViewTextBoxColumn();
-			this.resultListCprNumber.DataPropertyName = "CprNummer";
-			this.resultListCprNumber.HeaderText = "CPR";
-			this.resultListCprNumber.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-			this.resultListCprNumber.MinimumWidth = 70;
-			this.resultListCprNumber.Visible = this.GetOptionValue("resultListCprNumber", true);
-			this.resultList.Columns.Add(this.resultListCprNumber);
+				this.employeeFilterEmploymentFirstDateBegin.Value = this.GetOptionValue("EmployeeFilterEmploymentFirstDateBeginValue", DateTime.Now);
+				this.employeeFilterEmploymentFirstDateBegin.Checked = this.GetOptionValue("EmployeeFilterEmploymentFirstDateBegin", false);
+				this.employeeFilterEmploymentFirstDateEnd.Value = this.GetOptionValue("EmployeeFilterEmploymentFirstDateEndValue", DateTime.Now);
+				this.employeeFilterEmploymentFirstDateEnd.Checked = this.GetOptionValue("EmployeeFilterEmploymentFirstDateEnd", false);
 
-			this.resultListAdUserid = new DataGridViewTextBoxColumn();
-			this.resultListAdUserid.DataPropertyName = "AdBrugerNavn";
-			this.resultListAdUserid.HeaderText = "AD";
-			this.resultListAdUserid.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-			this.resultListAdUserid.MinimumWidth = 100;
-			this.resultListAdUserid.Visible = this.GetOptionValue("resultListAdUserid", true);
-			this.resultList.Columns.Add(this.resultListAdUserid);
+				this.employeeFilterEmploymentLastDateBegin.Value = this.GetOptionValue("EmployeeFilterEmploymentLastDateBeginValue", DateTime.Now);
+				this.employeeFilterEmploymentLastDateBegin.Checked = this.GetOptionValue("EmployeeFilterEmploymentLastDateBegin", false);
+				this.employeeFilterEmploymentLastDateEnd.Value = this.GetOptionValue("EmployeeFilterEmploymentLastDateEndValue", DateTime.Now);
+				this.employeeFilterEmploymentLastDateEnd.Checked = this.GetOptionValue("EmployeeFilterEmploymentLastDateEnd", false);
 
-			this.resultListOpusUserid = new DataGridViewTextBoxColumn();
-			this.resultListOpusUserid.DataPropertyName = "OpusBrugerNavn";
-			this.resultListOpusUserid.HeaderText = "Opus";
-			this.resultListOpusUserid.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-			this.resultListOpusUserid.MinimumWidth = 100;
-			this.resultListOpusUserid.Visible = this.GetOptionValue("resultListOpusUserid", true);
-			this.resultList.Columns.Add(this.resultListOpusUserid);
+				this.employeeFilterEmploymentOldestFirstDateBegin.Value = this.GetOptionValue("EmployeeFilterEmploymentOldestFirstDateBeginValue", DateTime.Now);
+				this.employeeFilterEmploymentOldestFirstDateBegin.Checked = this.GetOptionValue("EmployeeFilterEmploymentOldestFirstDateBegin", false);
+				this.employeeFilterEmploymentOldestFirstDateEnd.Value = this.GetOptionValue("EmployeeFilterEmploymentOldestFirstDateEndValue", DateTime.Now);
+				this.employeeFilterEmploymentOldestFirstDateEnd.Checked = this.GetOptionValue("EmployeeFilterEmploymentOldestFirstDateEnd", false);
 
-			this.resultListPhone = new DataGridViewTextBoxColumn();
-			this.resultListPhone.DataPropertyName = "TelefonNummer";
-			this.resultListPhone.HeaderText = "Phone";
-			this.resultListPhone.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-			this.resultListPhone.MinimumWidth = 100;
-			this.resultListPhone.Visible = this.GetOptionValue("resultListPhone", true);
-			this.resultList.Columns.Add(this.resultListPhone);
+				this.employeeFilterEmploymentJubileeDateBegin.Value = this.GetOptionValue("EmployeeFilterEmploymentJubileeDateBeginValue", DateTime.Now);
+				this.employeeFilterEmploymentJubileeDateBegin.Checked = this.GetOptionValue("EmployeeFilterEmploymentJubileeDateBegin", false);
+				this.employeeFilterEmploymentJubileeDateEnd.Value = this.GetOptionValue("EmployeeFilterEmploymentJubileeDateEndValue", DateTime.Now);
+				this.employeeFilterEmploymentJubileeDateEnd.Checked = this.GetOptionValue("EmployeeFilterEmploymentJubileeDateEnd", false);
 
-			this.resultListMobile = new DataGridViewTextBoxColumn();
-			this.resultListMobile.DataPropertyName = "MobilNummer";
-			this.resultListMobile.HeaderText = "Mobile";
-			this.resultListMobile.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-			this.resultListMobile.MinimumWidth = 100;
-			this.resultListMobile.Visible = this.GetOptionValue("resultListMobile", true);
-			this.resultList.Columns.Add(this.resultListMobile);
+				this.employeeFilterHistoryActiveFromDateBegin.Value = this.GetOptionValue("EmployeeFilterHistoryActiveFromDateBeginValue", DateTime.Now);
+				this.employeeFilterHistoryActiveFromDateBegin.Checked = this.GetOptionValue("EmployeeFilterHistoryActiveFromDateBegin", false);
+				this.employeeFilterHistoryActiveFromDateEnd.Value = this.GetOptionValue("EmployeeFilterHistoryActiveFromDateEndValue", DateTime.Now);
+				this.employeeFilterHistoryActiveFromDateEnd.Checked = this.GetOptionValue("EmployeeFilterHistoryActiveFromDateEnd", false);
 
-			this.resultListEMail = new DataGridViewTextBoxColumn();
-			this.resultListEMail.DataPropertyName = "Epost";
-			this.resultListEMail.HeaderText = "E-mail";
-			this.resultListEMail.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-			this.resultListEMail.MinimumWidth = 100;
-			this.resultListEMail.Visible = this.GetOptionValue("resultListEMail", true);
-			this.resultList.Columns.Add(this.resultListEMail);
+				this.employeeFilterHistoryActiveToDateBegin.Value = this.GetOptionValue("EmployeeFilterHistoryActiveToDateBeginValue", DateTime.Now);
+				this.employeeFilterHistoryActiveToDateBegin.Checked = this.GetOptionValue("EmployeeFilterHistoryActiveToDateBegin", false);
+				this.employeeFilterHistoryActiveToDateEnd.Value = this.GetOptionValue("EmployeeFilterHistoryActiveToDateEndValue", DateTime.Now);
+				this.employeeFilterHistoryActiveToDateEnd.Checked = this.GetOptionValue("EmployeeFilterHistoryActiveToDateEnd", false);
 
-			// Initialize action properties.
-			this.actionProperties = new Button();
-			this.actionProperties.Text = "Show properties";
-			//this.actionProperties.Image =
-			this.actionProperties.Enabled = false;
-			this.actionProperties.Visible = true;
-			this.actionProperties.Click += this.ActionPropertiesClick;
-			this.actionPanel.Controls.Add(this.actionProperties);
+				this.employeeFilterChangedDateBegin.Value = this.GetOptionValue("EmployeeFilterChangedDateBeginValue", DateTime.Now);
+				this.employeeFilterChangedDateBegin.Checked = this.GetOptionValue("EmployeeFilterChangedDateBegin", false);
+				this.employeeFilterChangedDateEnd.Value = this.GetOptionValue("EmployeeFilterChangedDateEndValue", DateTime.Now);
+				this.employeeFilterChangedDateEnd.Checked = this.GetOptionValue("EmployeeFilterChangedDateEnd", false);
 
-			this.actionAdEnableUser = new Button();
-			this.actionAdEnableUser.Text = "Enable user AD account";
-			//this.actionAdEnableUser.Image =
-			this.actionAdEnableUser.Enabled = false;
-			this.actionAdEnableUser.Visible = true;
-			this.actionAdEnableUser.Click += this.ActionAdEnableUserClick;
-			this.actionPanel.Controls.Add(this.actionAdEnableUser);
-
-			this.actionAdDisableUser = new Button();
-			this.actionAdDisableUser.Text = "Disable user AD account";
-			//this.actionAdDisableUser.Image =
-			this.actionAdDisableUser.Enabled = false;
-			this.actionAdDisableUser.Visible = true;
-			this.actionAdDisableUser.Click += this.ActionAdDisableUserClick;
-			this.actionPanel.Controls.Add(this.actionAdDisableUser);
-
-			// Initialize filters.
-			this.filterText.Text = this.GetOptionValue("filterText", Environment.UserName);
-			this.filterTextAutoWildcards.Checked = this.GetOptionValue("filterTextAutoWildcards", true);
-			this.filterActive.CheckState = (CheckState)this.GetOptionValue("filterActive", (Int32)CheckState.Checked);
-			this.filterAd.CheckState = (CheckState)this.GetOptionValue("filterAd", (Int32)CheckState.Checked);
-
-			this.filterEmploymentFirstDateBegin.Value = this.GetOptionValue("filterEmploymentFirstDateBeginValue", DateTime.Now);
-			this.filterEmploymentFirstDateBegin.Checked = this.GetOptionValue("filterEmploymentFirstDateBegin", false);
-			this.filterEmploymentFirstDateEnd.Value = this.GetOptionValue("filterEmploymentFirstDateEndValue", DateTime.Now);
-			this.filterEmploymentFirstDateEnd.Checked = this.GetOptionValue("filterEmploymentFirstDateEnd", false);
-
-			this.filterEmploymentLastDateBegin.Value = this.GetOptionValue("filterEmploymentLastDateBeginValue", DateTime.Now);
-			this.filterEmploymentLastDateBegin.Checked = this.GetOptionValue("filterEmploymentLastDateBegin", false);
-			this.filterEmploymentLastDateEnd.Value = this.GetOptionValue("filterEmploymentLastDateEndValue", DateTime.Now);
-			this.filterEmploymentLastDateEnd.Checked = this.GetOptionValue("filterEmploymentLastDateEnd", false);
-
-			this.filterEmploymentOldestFirstDateBegin.Value = this.GetOptionValue("filterEmploymentOldestFirstDateBeginValue", DateTime.Now);
-			this.filterEmploymentOldestFirstDateBegin.Checked = this.GetOptionValue("filterEmploymentOldestFirstDateBegin", false);
-			this.filterEmploymentOldestFirstDateEnd.Value = this.GetOptionValue("filterEmploymentOldestFirstDateEndValue", DateTime.Now);
-			this.filterEmploymentOldestFirstDateEnd.Checked = this.GetOptionValue("filterEmploymentOldestFirstDateEnd", false);
-
-			this.filterEmploymentJubileeDateBegin.Value = this.GetOptionValue("filterEmploymentJubileeDateBeginValue", DateTime.Now);
-			this.filterEmploymentJubileeDateBegin.Checked = this.GetOptionValue("filterEmploymentJubileeDateBegin", false);
-			this.filterEmploymentJubileeDateEnd.Value = this.GetOptionValue("filterEmploymentJubileeDateEndValue", DateTime.Now);
-			this.filterEmploymentJubileeDateEnd.Checked = this.GetOptionValue("filterEmploymentJubileeDateEnd", false);
-
-			this.filterHistoryActiveFromDateBegin.Value = this.GetOptionValue("filterHistoryActiveFromDateBeginValue", DateTime.Now);
-			this.filterHistoryActiveFromDateBegin.Checked = this.GetOptionValue("filterHistoryActiveFromDateBegin", false);
-			this.filterHistoryActiveFromDateEnd.Value = this.GetOptionValue("filterHistoryActiveFromDateEndValue", DateTime.Now);
-			this.filterHistoryActiveFromDateEnd.Checked = this.GetOptionValue("filterHistoryActiveFromDateEnd", false);
-
-			this.filterHistoryActiveToDateBegin.Value = this.GetOptionValue("filterHistoryActiveToDateBeginValue", DateTime.Now);
-			this.filterHistoryActiveToDateBegin.Checked = this.GetOptionValue("filterHistoryActiveToDateBegin", false);
-			this.filterHistoryActiveToDateEnd.Value = this.GetOptionValue("filterHistoryActiveToDateEndValue", DateTime.Now);
-			this.filterHistoryActiveToDateEnd.Checked = this.GetOptionValue("filterHistoryActiveToDateEnd", false);
-
-			this.filterHistoryChangedDateBegin.Value = this.GetOptionValue("filterHistoryChangedDateBeginValue", DateTime.Now);
-			this.filterHistoryChangedDateBegin.Checked = this.GetOptionValue("filterHistoryChangedDateBegin", false);
-			this.filterHistoryChangedDateEnd.Value = this.GetOptionValue("filterHistoryChangedDateEndValue", DateTime.Now);
-			this.filterHistoryChangedDateEnd.Checked = this.GetOptionValue("filterHistoryChangedDateEnd", false);
-
-			// Search.
-			this.SearchStartTimer(this, e);
+				// Search.
+				this.EmployeeSearchStartThread(this, e);
+			} catch (Exception exception) {
+				// Log and show the error.
+				this.LogError(exception);
+				MessageBox.Show(exception.Message, "Action Employee Properties Click", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		} // OnLoad
 
 		protected override void OnClosing(CancelEventArgs e) {
-			// Save result list column states.
-			this.SetOptionValue("resultListFirstName", this.resultListFirstName.Visible);
-			this.SetOptionValue("resultListLastName", this.resultListLastName.Visible);
-			this.SetOptionValue("resultListDisplayName", this.resultListDisplayName.Visible);
-			this.SetOptionValue("resultListCprNumber", this.resultListCprNumber.Visible);
-			this.SetOptionValue("resultListAdUserid", this.resultListAdUserid.Visible);
-			this.SetOptionValue("resultListOpusUserid", this.resultListOpusUserid.Visible);
-			this.SetOptionValue("resultListPhone", this.resultListPhone.Visible);
-			this.SetOptionValue("resultListMobile", this.resultListMobile.Visible);
-			this.SetOptionValue("resultListEMail", this.resultListEMail.Visible);
+			try {
+				// Save result list column states.
+				this.SetOptionValue("EmployeeListFirstName", this.employeeListFirstName.Visible);
+				this.SetOptionValue("EmployeeListLastName", this.employeeListLastName.Visible);
+				this.SetOptionValue("EmployeeListDisplayName", this.employeeListDisplayName.Visible);
+				this.SetOptionValue("EmployeeListCprNumber", this.employeeListCprNumber.Visible);
+				this.SetOptionValue("EmployeeListAdUserName", this.employeeListAdUserName.Visible);
+				this.SetOptionValue("EmployeeListOpusUserName", this.employeeListOpusUserName.Visible);
+				this.SetOptionValue("EmployeeListPhone", this.employeeListPhone.Visible);
+				this.SetOptionValue("EmployeeListMobile", this.employeeListMobile.Visible);
+				this.SetOptionValue("EmployeeListMail", this.employeeListMail.Visible);
 
-			// Save filter states.
-			this.SetOptionValues("filterText", this.filterText.Text);
-			this.SetOptionValue("filterTextAutoWildcards", this.filterTextAutoWildcards.Checked);
-			this.SetOptionValue("filterActive", (Int32)this.filterActive.CheckState);
-			this.SetOptionValue("filterAd", (Int32)this.filterAd.CheckState);
+				// Save filter states.
+				this.SetOptionValues("EmployeeFilterText", this.employeeFilterText.Text);
+				this.SetOptionValue("EmployeeFilterTextAutoWildcards", this.employeeFilterTextAutoWildcards.Checked);
+				this.SetOptionValue("EmployeeFilterActive", (Int32)this.employeeFilterActive.CheckState);
+				this.SetOptionValue("EmployeeFilterAd", (Int32)this.employeeFilterAd.CheckState);
 
-			this.SetOptionValue("filterEmploymentFirstDateBeginValue", this.filterEmploymentFirstDateBegin.Value);
-			this.SetOptionValue("filterEmploymentFirstDateBegin", this.filterEmploymentFirstDateBegin.Checked);
-			this.SetOptionValue("filterEmploymentFirstDateEndValue", this.filterEmploymentFirstDateEnd.Value);
-			this.SetOptionValue("filterEmploymentFirstDateEnd", this.filterEmploymentFirstDateEnd.Checked);
+				this.SetOptionValue("EmployeeFilterEmploymentFirstDateBeginValue", this.employeeFilterEmploymentFirstDateBegin.Value);
+				this.SetOptionValue("EmployeeFilterEmploymentFirstDateBegin", this.employeeFilterEmploymentFirstDateBegin.Checked);
+				this.SetOptionValue("EmployeeFilterEmploymentFirstDateEndValue", this.employeeFilterEmploymentFirstDateEnd.Value);
+				this.SetOptionValue("EmployeeFilterEmploymentFirstDateEnd", this.employeeFilterEmploymentFirstDateEnd.Checked);
 
-			this.SetOptionValue("filterEmploymentLastDateBeginValue", this.filterEmploymentLastDateBegin.Value);
-			this.SetOptionValue("filterEmploymentLastDateBegin", this.filterEmploymentLastDateBegin.Checked);
-			this.SetOptionValue("filterEmploymentLastDateEndValue", this.filterEmploymentLastDateEnd.Value);
-			this.SetOptionValue("filterEmploymentLastDateEnd", this.filterEmploymentLastDateEnd.Checked);
+				this.SetOptionValue("EmployeeFilterEmploymentLastDateBeginValue", this.employeeFilterEmploymentLastDateBegin.Value);
+				this.SetOptionValue("EmployeeFilterEmploymentLastDateBegin", this.employeeFilterEmploymentLastDateBegin.Checked);
+				this.SetOptionValue("EmployeeFilterEmploymentLastDateEndValue", this.employeeFilterEmploymentLastDateEnd.Value);
+				this.SetOptionValue("EmployeeFilterEmploymentLastDateEnd", this.employeeFilterEmploymentLastDateEnd.Checked);
 
-			this.SetOptionValue("filterEmploymentOldestFirstDateBeginValue", this.filterEmploymentOldestFirstDateBegin.Value);
-			this.SetOptionValue("filterEmploymentOldestFirstDateBegin", this.filterEmploymentOldestFirstDateBegin.Checked);
-			this.SetOptionValue("filterEmploymentOldestFirstDateEndValue", this.filterEmploymentOldestFirstDateEnd.Value);
-			this.SetOptionValue("filterEmploymentOldestFirstDateEnd", this.filterEmploymentOldestFirstDateEnd.Checked);
+				this.SetOptionValue("EmployeeFilterEmploymentOldestFirstDateBeginValue", this.employeeFilterEmploymentOldestFirstDateBegin.Value);
+				this.SetOptionValue("EmployeeFilterEmploymentOldestFirstDateBegin", this.employeeFilterEmploymentOldestFirstDateBegin.Checked);
+				this.SetOptionValue("EmployeeFilterEmploymentOldestFirstDateEndValue", this.employeeFilterEmploymentOldestFirstDateEnd.Value);
+				this.SetOptionValue("EmployeeFilterEmploymentOldestFirstDateEnd", this.employeeFilterEmploymentOldestFirstDateEnd.Checked);
 
-			this.SetOptionValue("filterEmploymentJubileeDateBeginValue", this.filterEmploymentJubileeDateBegin.Value);
-			this.SetOptionValue("filterEmploymentJubileeDateBegin", this.filterEmploymentJubileeDateBegin.Checked);
-			this.SetOptionValue("filterEmploymentJubileeDateEndValue", this.filterEmploymentJubileeDateEnd.Value);
-			this.SetOptionValue("filterEmploymentJubileeDateEnd", this.filterEmploymentJubileeDateEnd.Checked);
+				this.SetOptionValue("EmployeeFilterEmploymentJubileeDateBeginValue", this.employeeFilterEmploymentJubileeDateBegin.Value);
+				this.SetOptionValue("EmployeeFilterEmploymentJubileeDateBegin", this.employeeFilterEmploymentJubileeDateBegin.Checked);
+				this.SetOptionValue("EmployeeFilterEmploymentJubileeDateEndValue", this.employeeFilterEmploymentJubileeDateEnd.Value);
+				this.SetOptionValue("EmployeeFilterEmploymentJubileeDateEnd", this.employeeFilterEmploymentJubileeDateEnd.Checked);
 
-			this.SetOptionValue("filterHistoryActiveFromDateBeginValue", this.filterHistoryActiveFromDateBegin.Value);
-			this.SetOptionValue("filterHistoryActiveFromDateBegin", this.filterHistoryActiveFromDateBegin.Checked);
-			this.SetOptionValue("filterHistoryActiveFromDateEndValue", this.filterHistoryActiveFromDateEnd.Value);
-			this.SetOptionValue("filterHistoryActiveFromDateEnd", this.filterHistoryActiveFromDateEnd.Checked);
+				this.SetOptionValue("EmployeeFilterHistoryActiveFromDateBeginValue", this.employeeFilterHistoryActiveFromDateBegin.Value);
+				this.SetOptionValue("EmployeeFilterHistoryActiveFromDateBegin", this.employeeFilterHistoryActiveFromDateBegin.Checked);
+				this.SetOptionValue("EmployeeFilterHistoryActiveFromDateEndValue", this.employeeFilterHistoryActiveFromDateEnd.Value);
+				this.SetOptionValue("EmployeeFilterHistoryActiveFromDateEnd", this.employeeFilterHistoryActiveFromDateEnd.Checked);
 
-			this.SetOptionValue("filterHistoryActiveToDateBeginValue", this.filterHistoryActiveToDateBegin.Value);
-			this.SetOptionValue("filterHistoryActiveToDateBegin", this.filterHistoryActiveToDateBegin.Checked);
-			this.SetOptionValue("filterHistoryActiveToDateEndValue", this.filterHistoryActiveToDateEnd.Value);
-			this.SetOptionValue("filterHistoryActiveToDateEnd", this.filterHistoryActiveToDateEnd.Checked);
+				this.SetOptionValue("EmployeeFilterHistoryActiveToDateBeginValue", this.employeeFilterHistoryActiveToDateBegin.Value);
+				this.SetOptionValue("EmployeeFilterHistoryActiveToDateBegin", this.employeeFilterHistoryActiveToDateBegin.Checked);
+				this.SetOptionValue("EmployeeFilterHistoryActiveToDateEndValue", this.employeeFilterHistoryActiveToDateEnd.Value);
+				this.SetOptionValue("EmployeeFilterHistoryActiveToDateEnd", this.employeeFilterHistoryActiveToDateEnd.Checked);
 
-			this.SetOptionValue("filterHistoryChangedDateBeginValue", this.filterHistoryChangedDateBegin.Value);
-			this.SetOptionValue("filterHistoryChangedDateBegin", this.filterHistoryChangedDateBegin.Checked);
-			this.SetOptionValue("filterHistoryChangedDateEndValue", this.filterHistoryChangedDateEnd.Value);
-			this.SetOptionValue("filterHistoryChangedDateEnd", this.filterHistoryChangedDateEnd.Checked);
-
-			// Invoke base method.
-			e.Cancel = false;
-			base.OnClosing(e);
+				this.SetOptionValue("EmployeeFilterChangedDateBeginValue", this.employeeFilterChangedDateBegin.Value);
+				this.SetOptionValue("EmployeeFilterChangedDateBegin", this.employeeFilterChangedDateBegin.Checked);
+				this.SetOptionValue("EmployeeFilterChangedDateEndValue", this.employeeFilterChangedDateEnd.Value);
+				this.SetOptionValue("EmployeeFilterChangedDateEnd", this.employeeFilterChangedDateEnd.Checked);
+			} catch (Exception exception) {
+				// Log and show the error.
+				this.LogError(exception);
+				MessageBox.Show(exception.Message, "Action Employee Properties Click", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			} finally {
+				// Invoke base method.
+				e.Cancel = false;
+				base.OnClosing(e);
+			}
 		} // OnClosing
 		#endregion
 
-		#region Filter and search methods.
-		private void SearchStartTimer(Object sender, EventArgs e) {
-			// Initialize the timer.
-			if (this.searchThreadTimer == null) {
-				this.searchThreadTimer = new System.Windows.Forms.Timer();
-				this.searchThreadTimer.Interval = 1000;
-				this.searchThreadTimer.Tick += this.SearchStartThread;
+		#region Action methods.
+		private void ActionUpdate(Object sender, EventArgs e) {
+			try {
+				// Get the employee selection count.
+				Int32 employeeListSelectionCount = this.employeeList.SelectedRows.Count;
+
+				// Get the SOFD employee.
+				SofdEmployee employee = (employeeListSelectionCount != 1) ? null : (SofdEmployee)this.employeeList.SelectedRows[0].DataBoundItem;
+
+				// Get the AD user.
+				Person user = (employee == null) ? null : this.GetUser(employee.AdBrugerNavn);
+
+				// Enable buttons.
+				this.actionEmployeeList.Enabled = (this.MainFormPages.SelectedTab == this.employeePropertyPage);
+				this.actionEmployeeProperties.Enabled = ((this.MainFormPages.SelectedTab == this.employeeListPage) && (employeeListSelectionCount == 1));
+				this.actionActiveDirectoryEnableUser.Enabled = ((user != null) && (user.Enabled == false));
+				this.actionActiveDirectoryDisableUser.Enabled = ((user != null) && (user.Enabled == true));
+				this.actionActiveDirectoryExpireUser.Enabled = ((user != null) && (user.Enabled == true));
+				this.actionActiveDirectoryResetUser.Enabled = (user != null);
+
+
+			} catch (Exception exception) {
+				// Log.
+				this.LogError(exception);
 			}
+		} // ActionUpdate
 
-			// Start the timer.
-			this.searchThreadTimer.Stop();
-			this.searchThreadTimer.Start();
-		} // SearchStartTimer
+		private void ActionEmployeeShowListClick(Object sender, EventArgs e) {
+			try {
+				// Show the employee search tab.
+				this.MainFormPages.SelectTab(this.employeeListPage);
+			} catch (Exception exception) {
+				// Log and show the error.
+				this.LogError(exception);
+				MessageBox.Show(exception.Message, "Action Employee Show List", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		} // ActionEmployeeShowListClick
 
-		private void SearchStartThread(Object sender, EventArgs e) {
+		private void ActionEmployeeShowPropertiesClick(Object sender, EventArgs e) {
+			try {
+				if (this.employeeList.SelectedRows.Count == 1) {
+					// Clear the employee properties.
+					this.EmployeePropertyClear();
+
+					// Get the SOFD employee.
+					SofdEmployee employee = (SofdEmployee)this.employeeList.SelectedRows[0].DataBoundItem;
+
+					// Populate the employee properties.
+					this.EmployeePropertyPopulate(employee);
+
+					// Show the enployee properties tab.
+					this.MainFormPages.SelectTab(this.employeePropertyPage);
+
+					// Update.
+					this.ActionUpdate(sender, e);
+				}
+			} catch (Exception exception) {
+				// Log and show the error.
+				this.LogError(exception);
+				MessageBox.Show(exception.Message, "Action Employee Show Properties", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		} // ActionEmployeeShowPropertiesClick
+
+		private void ActionEnableActiveDirectoryUserClick(Object sender, EventArgs e) {
+			try {
+				if (this.employeeList.SelectedRows.Count == 1) {
+					// Get the SOFD employee.
+					SofdEmployee employee = (SofdEmployee)this.employeeList.SelectedRows[0].DataBoundItem;
+
+					// Get the AD user.
+					Person user = this.GetUser(employee.AdBrugerNavn);
+					if (user == null) {
+						throw new Exception("The user was not found in Active Directory.");
+					}
+
+					// Build dialog text.
+					StringBuilder dialogText = new StringBuilder();
+					dialogText.AppendLine("Do you want to enable the selected user in the Active Directory ?");
+					dialogText.AppendLine();
+					dialogText.AppendFormat("{0}\t{1}", user.SamAccountName, user.DisplayName);
+
+					// Show dialog.
+					NilexMessageBox dialog = new NilexMessageBox();
+					dialog.Text = "Action Enable Active Directory User";
+					dialog.Message = dialogText.ToString();
+					if (dialog.ShowDialog(this) == DialogResult.OK) {
+						// Enable the user.
+						user.Enabled = true;
+						user.InsertInfo("Account Enabled.");
+						user.Save();
+
+						// Send message.
+					}
+
+					// Update the selected row.
+					this.EmployeeListUpdateRow(this.employeeList.SelectedRows[0].Index);
+
+					// Update.
+					this.ActionUpdate(sender, e);
+				}
+			} catch (Exception exception) {
+				// Log and show the error.
+				this.LogError(exception);
+				MessageBox.Show(exception.Message, "Action Enable Active Directory User", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		} // ActionEnableActiveDirectoryUserClick
+
+		private void ActionDisableActiveDirectoryUserClick(Object sender, EventArgs e) {
+			try {
+				if (this.employeeList.SelectedRows.Count == 1) {
+					// Get the SOFD employee.
+					SofdEmployee employee = (SofdEmployee)this.employeeList.SelectedRows[0].DataBoundItem;
+
+					// Get the AD user.
+					Person user = this.GetUser(employee.AdBrugerNavn);
+					if (user == null) {
+						throw new Exception("The user was not found in Active Directory.");
+					}
+
+					// Build dialog text.
+					StringBuilder dialogText = new StringBuilder();
+					dialogText.AppendLine("Do you want to disable the selected user in the Active Directory ?");
+					dialogText.AppendLine();
+					dialogText.AppendFormat("{0}\t{1}", user.SamAccountName, user.DisplayName);
+
+					// Show dialog.
+					NilexMessageBox dialog = new NilexMessageBox();
+					dialog.Text = "Action Disable Active Directory User";
+					dialog.Message = dialogText.ToString();
+					if (dialog.ShowDialog(this) == DialogResult.OK) {
+						// Disable the user.
+						user.Enabled = false;
+						user.InsertInfo("Account Disabled.");
+						user.Save();
+
+						// Send message.
+					}
+
+					// Update the selected row.
+					this.EmployeeListUpdateRow(this.employeeList.SelectedRows[0].Index);
+
+					// Update.
+					this.ActionUpdate(sender, e);
+				}
+			} catch (Exception exception) {
+				// Log and show the error.
+				this.LogError(exception);
+				MessageBox.Show(exception.Message, "Action Disable Active Directory User", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		} // ActionDisableActiveDirectoryUserClick
+
+		private void ActionExpireActiveDirectoryUserClick(Object sender, EventArgs e) {
+			try {
+				if (this.employeeList.SelectedRows.Count == 1) {
+					// Get the SOFD employee.
+					SofdEmployee employee = (SofdEmployee)this.employeeList.SelectedRows[0].DataBoundItem;
+
+					// Get the AD user.
+					Person user = this.GetUser(employee.AdBrugerNavn);
+					if (user == null) {
+						throw new Exception("The user was not found in Active Directory.");
+					}
+
+					// Build dialog text.
+					StringBuilder dialogText = new StringBuilder();
+					dialogText.AppendLine("Do you want to expire the selected user in the Active Directory ?");
+					dialogText.AppendLine();
+					dialogText.AppendFormat("{0}\t{1}", user.SamAccountName, user.DisplayName);
+
+					// Show dialog.
+					NilexExpiresBox dialog = new NilexExpiresBox();
+					dialog.Text = "Action Expire Active Directory User";
+					dialog.Message = dialogText.ToString();
+					dialog.Date = DateTime.Now.AddDays(10);
+					if (dialog.ShowDialog(this) == DialogResult.OK) {
+						// Expire the user.
+						user.AccountExpirationDate = dialog.Date;
+						user.InsertInfo(String.Format("Account Expires {0:dd.MM.yy}.", dialog.Date));
+						user.Save();
+
+						// Send message.
+					}
+
+					// Update the selected row.
+					this.EmployeeListUpdateRow(this.employeeList.SelectedRows[0].Index);
+
+					// Update.
+					this.ActionUpdate(sender, e);
+				}
+			} catch (Exception exception) {
+				// Log and show the error.
+				this.LogError(exception);
+				MessageBox.Show(exception.Message, "Action Expire Active Directory User", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		} // ActionExpireActiveDirectoryUserClick
+
+		private void ActionResetActiveDirectoryUserClick(Object sender, EventArgs e) {
+			try {
+				if (this.employeeList.SelectedRows.Count == 1) {
+					// Get the SOFD employee.
+					SofdEmployee employee = (SofdEmployee)this.employeeList.SelectedRows[0].DataBoundItem;
+
+					// Get the AD user.
+					Person user = this.GetUser(employee.AdBrugerNavn);
+					if (user == null) {
+						throw new Exception("The user was not found in Active Directory.");
+					}
+
+					// Generate random password.
+					Random random = new Random();
+					List<String> passwordWords = new List<String>();
+					passwordWords.Add("London");
+					passwordWords.Add("Oslo");
+					passwordWords.Add("Fjellerup");
+					passwordWords.Add("Madrid");
+					passwordWords.Add("Orebro");
+
+					// Build dialog text.
+					StringBuilder dialogText = new StringBuilder();
+					dialogText.AppendLine("Do you want to reset the selected user in the Active Directory ?");
+					dialogText.AppendLine();
+					dialogText.AppendFormat("{0}\t{1}", user.SamAccountName, user.DisplayName);
+					dialogText.AppendLine();
+					dialogText.AppendLine();
+					dialogText.AppendLine("The user account is enabled, if disabled.");
+					dialogText.AppendLine("The user account is unlocked, if locked.");
+					dialogText.AppendLine("The password is reset, if one is speficied.");
+					dialogText.AppendLine("The user must change the password at next logon, if speficied.");
+
+					// Show dialog.
+					NilexResetBox dialog = new NilexResetBox();
+					dialog.Text = "Action Reset Active Directory User";
+					dialog.Message = dialogText.ToString();
+					dialog.Password = passwordWords[random.Next(0, passwordWords.Count)] + random.Next(10, 99);
+					if (dialog.ShowDialog(this) == DialogResult.OK) {
+						// Unlock the user.
+						user.UnlockAccount();
+
+						// Reset the user password.
+						if (dialog.Password.Length > 0) {
+							user.SetPassword(dialog.Password);
+						}
+
+						// Expire the user password (the user must change at next logon).
+						if (dialog.ExpirePassword == true) {
+							user.ExpirePasswordNow();
+						} else {
+							user.RefreshExpiredPassword();
+						}
+
+						// Enable the user.
+						user.Enabled = true;
+						user.InsertInfo("Account Reset");
+						user.Save();
+
+						// Send message.
+					}
+
+					// Update the selected row.
+					this.EmployeeListUpdateRow(this.employeeList.SelectedRows[0].Index);
+
+					// Update.
+					this.ActionUpdate(sender, e);
+				}
+			} catch (Exception exception) {
+				// Log and show the error.
+				this.LogError(exception);
+				MessageBox.Show(exception.Message, "Action Reset Active Directory User", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		} // ActionResetActiveDirectoryUserClick
+		#endregion
+
+
+
+		#region Employee filter and search methods.
+		private void EmployeeSearchStartTimer(Object sender, EventArgs e) {
+			try {
+				// Initialize the timer.
+				if (this.employeeSearchThreadTimer == null) {
+					this.employeeSearchThreadTimer = new System.Windows.Forms.Timer();
+					this.employeeSearchThreadTimer.Interval = 1000;
+					this.employeeSearchThreadTimer.Tick += this.EmployeeSearchStartThread;
+				}
+
+				// Start the timer.
+				this.employeeSearchThreadTimer.Stop();
+				this.employeeSearchThreadTimer.Start();
+			} catch (Exception exception) {
+				// Log.
+				this.LogError(exception);
+			}
+		} // EmployeeSearchStartTimer
+
+		private void EmployeeSearchStartThread(Object sender, EventArgs e) {
 			try {
 				// Stop timer.
-				if (this.searchThreadTimer != null) {
-					this.searchThreadTimer.Stop();
+				if (this.employeeSearchThreadTimer != null) {
+					this.employeeSearchThreadTimer.Stop();
 				}
 
 				// Stop existing thread.
-				if (this.searchThread != null) {
-					this.searchThreadShutdownEvent.Set();
-					this.searchThread.Abort();
-					this.searchThread = null;
+				if (this.employeeSearchThread != null) {
+					this.employeeSearchThreadShutdownEvent.Set();
+					this.employeeSearchThread.Abort();
+					this.employeeSearchThread = null;
 				}
 
 				// Start new thread.
-				this.searchThreadShutdownEvent = new ManualResetEvent(false);
-				this.searchThread = new Thread(this.SearchRunThread);
-				this.searchThread.IsBackground = true;
-				this.searchThread.Start();
-			} catch {}
-		} // SearchStartThread
+				this.employeeSearchThreadShutdownEvent = new ManualResetEvent(false);
+				this.employeeSearchThread = new Thread(this.EmployeeSearchRunThread);
+				this.employeeSearchThread.IsBackground = true;
+				this.employeeSearchThread.Start();
+			} catch (Exception exception) {
+				// Log.
+				this.LogError(exception);
+			}
+		} // EmployeeSearchStartThread
 
-		private void SearchRunThread() {
+		private void EmployeeSearchRunThread() {
 			try {
 				// Status.
-				this.resultListStatus.Text = String.Format("{0} employees found - Searching Sofd Directory...", this.resultList.RowCount);
+				this.employeeListStatus.Text = String.Format("{0} employees found - Searching Sofd Directory...", this.employeeList.RowCount);
 
 				// Build employee filters.
 				List<SqlWhereFilterBase> employeeFilters = new List<SqlWhereFilterBase>();
 
 				// Add filter text.
-				String filterText = this.filterText.Text.Trim();
-				if ((filterText != String.Empty) && (this.filterTextAutoWildcards.Checked == true)) {
+				String filterText = this.employeeFilterText.Text.Trim();
+				if ((filterText != String.Empty) && (this.employeeFilterTextAutoWildcards.Checked == true)) {
 					if (filterText.StartsWith("*") == false) {
 						filterText = "*" + filterText;
 					}
@@ -336,7 +530,7 @@ namespace NDK.SofdViewer {
 				}
 
 				// Add filter Active.
-				switch (this.filterActive.CheckState) {
+				switch (this.employeeFilterActive.CheckState) {
 					case CheckState.Checked:
 						employeeFilters.Add(new SofdEmployeeFilter_Aktiv(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.Equals, true));
 						break;
@@ -346,7 +540,7 @@ namespace NDK.SofdViewer {
 				}
 
 				// Add filter AD.
-				switch (this.filterAd.CheckState) {
+				switch (this.employeeFilterAd.CheckState) {
 					case CheckState.Checked:
 						employeeFilters.Add(new SofdEmployeeFilter_AdBrugerNavn(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.Like, "*"));
 						break;
@@ -356,387 +550,308 @@ namespace NDK.SofdViewer {
 				}
 
 				// Add filter dates.
-				if (this.filterEmploymentFirstDateBegin.Checked == true) {
-					employeeFilters.Add(new SofdEmployeeFilter_AnsaettelsesDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.filterEmploymentFirstDateBegin.Value));
+				if (this.employeeFilterEmploymentFirstDateBegin.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AnsaettelsesDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.employeeFilterEmploymentFirstDateBegin.Value));
 				}
-				if (this.filterEmploymentFirstDateEnd.Checked == true) {
-					employeeFilters.Add(new SofdEmployeeFilter_AnsaettelsesDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.filterEmploymentFirstDateEnd.Value));
-				}
-
-				if (this.filterEmploymentLastDateBegin.Checked == true) {
-					employeeFilters.Add(new SofdEmployeeFilter_AnsaettelsesOphoersDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.filterEmploymentLastDateBegin.Value));
-				}
-				if (this.filterEmploymentLastDateEnd.Checked == true) {
-					employeeFilters.Add(new SofdEmployeeFilter_AnsaettelsesOphoersDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.filterEmploymentLastDateEnd.Value));
+				if (this.employeeFilterEmploymentFirstDateEnd.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AnsaettelsesDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.employeeFilterEmploymentFirstDateEnd.Value));
 				}
 
-				if (this.filterEmploymentOldestFirstDateBegin.Checked == true) {
-					employeeFilters.Add(new SofdEmployeeFilter_FoersteAnsaettelsesDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.filterEmploymentOldestFirstDateBegin.Value));
+				if (this.employeeFilterEmploymentLastDateBegin.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AnsaettelsesOphoersDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.employeeFilterEmploymentLastDateBegin.Value));
 				}
-				if (this.filterEmploymentOldestFirstDateEnd.Checked == true) {
-					employeeFilters.Add(new SofdEmployeeFilter_FoersteAnsaettelsesDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.filterEmploymentOldestFirstDateEnd.Value));
-				}
-
-				if (this.filterEmploymentJubileeDateBegin.Checked == true) {
-					employeeFilters.Add(new SofdEmployeeFilter_JubilaeumsAncinnitetsDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.filterEmploymentJubileeDateBegin.Value));
-				}
-				if (this.filterEmploymentJubileeDateEnd.Checked == true) {
-					employeeFilters.Add(new SofdEmployeeFilter_JubilaeumsAncinnitetsDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.filterEmploymentJubileeDateEnd.Value));
+				if (this.employeeFilterEmploymentLastDateEnd.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AnsaettelsesOphoersDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.employeeFilterEmploymentLastDateEnd.Value));
 				}
 
-				if (this.filterHistoryActiveFromDateBegin.Checked == true) {
-					employeeFilters.Add(new SofdEmployeeFilter_AktivFra(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.filterHistoryActiveFromDateBegin.Value));
+				if (this.employeeFilterEmploymentOldestFirstDateBegin.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_FoersteAnsaettelsesDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.employeeFilterEmploymentOldestFirstDateBegin.Value));
 				}
-				if (this.filterHistoryActiveFromDateEnd.Checked == true) {
-					employeeFilters.Add(new SofdEmployeeFilter_AktivFra(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.filterHistoryActiveFromDateEnd.Value));
-				}
-
-				if (this.filterHistoryActiveToDateBegin.Checked == true) {
-					employeeFilters.Add(new SofdEmployeeFilter_AktivTil(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.filterHistoryActiveToDateBegin.Value));
-				}
-				if (this.filterHistoryActiveToDateEnd.Checked == true) {
-					employeeFilters.Add(new SofdEmployeeFilter_AktivTil(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.filterHistoryActiveToDateEnd.Value));
+				if (this.employeeFilterEmploymentOldestFirstDateEnd.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_FoersteAnsaettelsesDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.employeeFilterEmploymentOldestFirstDateEnd.Value));
 				}
 
-				if (this.filterHistoryChangedDateBegin.Checked == true) {
-					employeeFilters.Add(new SofdEmployeeFilter_SidstAendret(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.filterHistoryChangedDateBegin.Value));
+				if (this.employeeFilterEmploymentJubileeDateBegin.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_JubilaeumsAncinnitetsDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.employeeFilterEmploymentJubileeDateBegin.Value));
 				}
-				if (this.filterHistoryChangedDateEnd.Checked == true) {
-					employeeFilters.Add(new SofdEmployeeFilter_SidstAendret(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.filterHistoryChangedDateEnd.Value));
+				if (this.employeeFilterEmploymentJubileeDateEnd.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_JubilaeumsAncinnitetsDato(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.employeeFilterEmploymentJubileeDateEnd.Value));
+				}
+
+				if (this.employeeFilterHistoryActiveFromDateBegin.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AktivFra(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.employeeFilterHistoryActiveFromDateBegin.Value));
+				}
+				if (this.employeeFilterHistoryActiveFromDateEnd.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AktivFra(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.employeeFilterHistoryActiveFromDateEnd.Value));
+				}
+
+				if (this.employeeFilterHistoryActiveToDateBegin.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AktivTil(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.employeeFilterHistoryActiveToDateBegin.Value));
+				}
+				if (this.employeeFilterHistoryActiveToDateEnd.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_AktivTil(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.employeeFilterHistoryActiveToDateEnd.Value));
+				}
+
+				if (this.employeeFilterChangedDateBegin.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_SidstAendret(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.GreaterThanOrEquals, this.employeeFilterChangedDateBegin.Value));
+				}
+				if (this.employeeFilterChangedDateEnd.Checked == true) {
+					employeeFilters.Add(new SofdEmployeeFilter_SidstAendret(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.LessThanOrEquals, this.employeeFilterChangedDateEnd.Value));
 				}
 
 				// Get employees.
 				List<SofdEmployee> employees = this.GetAllEmployees(employeeFilters.ToArray());
 
 				// Populate the list with the employees.
-				this.resultList.DataSource = null;
-				this.resultList.DataSource = employees;
+				this.employeeList.DataSource = null;
+				this.employeeList.DataSource = employees;
 
 				// Status.
-				this.resultListStatus.Text = String.Format("{0} employees found - Searching Active Directory...", this.resultList.RowCount);
+				this.employeeListStatus.Text = String.Format("{0} employees found - Searching Active Directory...", this.employeeList.RowCount);
 
 				// Update the list with AD data.
 				// Loop until the service is stopped.
 				Int32 employeeIndex = 0;
-				while ((this.searchThreadShutdownEvent.WaitOne(0) == false) && (employeeIndex < this.resultList.RowCount)) {
-					try {
-						// Get the current row.
-						DataGridViewRow row = this.resultList.Rows[employeeIndex];
+				while ((this.employeeSearchThreadShutdownEvent.WaitOne(0) == false) && (employeeIndex < this.employeeList.RowCount)) {
+					// Update the row.
+					this.EmployeeListUpdateRow(employeeIndex);
 
-						// Get the SOFD employee.
-						SofdEmployee employee = (SofdEmployee)row.DataBoundItem;
-
-						// Get the AD user.
-						Person user = this.GetUser(employee.AdBrugerNavn);
-
-						// Update the AD status.
-						DataGridViewImageCell resultListAdStatus = (DataGridViewImageCell)row.Cells["resultListAdStatus"];
-						if (user == null) {
-							resultListAdStatus.Value = this.GetResourceImage("Circle Grey.png");
-						} else if (user.Enabled == false) {
-							resultListAdStatus.Value = this.GetResourceImage("Circle Red.png");
-						} else if (user.IsAccountLockedOut() == true) {
-							resultListAdStatus.Value = this.GetResourceImage("Circle Yellow.png");
-						} else {
-							resultListAdStatus.Value = this.GetResourceImage("Circle Green.png");
-						}
-
-					} catch (ThreadAbortException exception) {
-						throw;
-					} catch (Exception exception) {
-					} finally {
-						// Iterate.
-						employeeIndex++;
-					}
+					// Iterate.
+					employeeIndex++;
 				}
 			} catch (ThreadAbortException exception) {
 				// The thread was aborted.
 			} catch (Exception exception) {
+				// Log.
+				this.LogError(exception);
 			} finally {
 				// Status.
-				this.resultListStatus.Text = String.Format("{0} employees found", this.resultList.RowCount);
+				this.employeeListStatus.Text = String.Format("{0} employees found", this.employeeList.RowCount);
 			}
-		} // SearchRunThread
+		} // EmployeeSearchRunThread
 
-		private void ResultListSelectionChanged(Object sender, EventArgs e) {
-			try {
-				// Get the selection count.
-				Int32 selectionCount = this.resultList.SelectedRows.Count;
-
-				// Get the SOFD employee.
-				SofdEmployee employee = (selectionCount != 1) ? null : (SofdEmployee)this.resultList.SelectedRows[0].DataBoundItem;
-
-				// Get the AD user.
-				Person user = (employee == null) ? null : this.GetUser(employee.AdBrugerNavn);
-
-				// Enable buttons.
-				this.actionProperties.Enabled = selectionCount == 1;
-				this.actionAdEnableUser.Enabled = ((user != null) && (user.Enabled == false));
-				this.actionAdDisableUser.Enabled = ((user != null) && (user.Enabled == true));
-
-			} catch { }
-		} // ResultListSelectionChanged
-
-		private void ResultListDataError(Object sender, DataGridViewDataErrorEventArgs e) {
+		private void EmployeeListDataError(Object sender, DataGridViewDataErrorEventArgs e) {
 			// Trapping errors.
 			e.Cancel = true;
 			e.ThrowException = false;
-		} // ResultListDataError
-		#endregion
+		} // EmployeeListDataError
 
-		#region Action methods.
-		private void ActionPanelControlAdded(Object sender, ControlEventArgs e) {
+		private void EmployeeListUpdateRow(Int32 rowIndex) {
 			try {
-				// Set the width of the control.
-				e.Control.Width = this.actionPanel.Width - this.actionPanel.Margin.Horizontal;
-			} catch { }
-		} // ActionPannelSizeChanged
-
-		private void ActionPropertiesClick(Object sender, EventArgs e) {
-			try {
-				if (this.resultList.SelectedRows.Count == 1) {
-					// Clear the properties.
-					this.PropertyClear();
-
+				if ((rowIndex >= 0) && (rowIndex < this.employeeList.RowCount)) {
 					// Get the SOFD employee.
-					SofdEmployee employee = (SofdEmployee)this.resultList.SelectedRows[0].DataBoundItem;
-
-					// Populate the properties.
-					this.PropertyPopulate(employee);
-
-					// Show the properties tab.
-					this.tabControl1.SelectTab(1);
-				}
-			} catch (Exception exception) {
-				this.LogError(exception);
-				MessageBox.Show(exception.Message, "Properties", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		} // ActionPropertiesClick
-
-		private void ActionAdEnableUserClick(Object sender, EventArgs e) {
-			try {
-				if (this.resultList.SelectedRows.Count == 1) {
-					// Get the SOFD employee.
-					SofdEmployee employee = (SofdEmployee)this.resultList.SelectedRows[0].DataBoundItem;
+					DataGridViewRow row = this.employeeList.Rows[rowIndex];
+					SofdEmployee employee = (SofdEmployee)row.DataBoundItem;
 
 					// Get the AD user.
 					Person user = this.GetUser(employee.AdBrugerNavn);
+
+					// Update the AD status.
+					DataGridViewImageCell employeeListAdStatus = (DataGridViewImageCell)row.Cells["employeeListAdStatus"];
 					if (user == null) {
-						throw new Exception("The user was not found in Active Directory.");
+						employeeListAdStatus.Value = this.GetResourceImage("Circle Grey.png");
+					} else if (user.Enabled == false) {
+						employeeListAdStatus.Value = this.GetResourceImage("Circle Red.png");
+					} else if (user.IsAccountExpired() == true) {
+						employeeListAdStatus.Value = this.GetResourceImage("Circle Orange.png");
+					} else if (user.IsAccountLockedOut() == true) {
+						employeeListAdStatus.Value = this.GetResourceImage("Circle Yellow.png");
+					} else {
+						employeeListAdStatus.Value = this.GetResourceImage("Circle Green.png");
 					}
-
-					// Enable the user.
-					user.Enabled = true;
-					user.Save();
-
 				}
 			} catch (Exception exception) {
+				// Log.
 				this.LogError(exception);
-				MessageBox.Show(exception.Message, "Properties", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
-		} // ActionAdEnableUserClick
-
-		private void ActionAdDisableUserClick(Object sender, EventArgs e) {
-			try {
-				if (this.resultList.SelectedRows.Count == 1) {
-					// Get the SOFD employee.
-					SofdEmployee employee = (SofdEmployee)this.resultList.SelectedRows[0].DataBoundItem;
-
-					// Get the AD user.
-					Person user = this.GetUser(employee.AdBrugerNavn);
-					if (user == null) {
-						throw new Exception("The user was not found in Active Directory.");
-					}
-
-					// Enable the user.
-					user.Enabled = false;
-					user.Save();
-
-				}
-			} catch (Exception exception) {
-				this.LogError(exception);
-				MessageBox.Show(exception.Message, "Properties", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		} // ActionAdDisableUserClick
+		} // EmployeeListUpdateRow
 		#endregion
 
-		#region Property methods.
-		private void PropertyClear() {
+		#region Employee Property methods.
+		private void EmployeePropertyClear() {
 			try {
-				this.propertyCprNumber.Clear();
-				this.propertyWorkerId.Clear();
-				this.propertyEmployeeNumber.Clear();
-				this.propertyEmployeeHistoryNumber.Clear();
-				this.propertyAdUserName.Clear();
-				this.propertyOpusName.Clear();
-				this.propertyActiveImage.Image = null;
-				this.propertyActive.Clear();
-				this.propertyAdStatusImage.Image = null;
-				this.propertyAdStatus.Clear();
+				// Clear the controls.
+				// Identifiers.
+				this.employeePropertyActiveImage.Image = null;
+				this.employeePropertyActive.Clear();
+				this.employeePropertyEmployeeHistoryNumber.Clear();
+				this.employeePropertyEmployeeNumber.Clear();
+				this.employeePropertyAdUserName.Clear();
+				this.employeePropertyOpusName.Clear();
+				this.employeePropertyCprNumber.Clear();
+				this.employeePropertyWorkerId.Clear();
 
-				this.propertyFirstName.Clear();
-				this.propertyLastName.Clear();
-				this.propertyName.Clear();
-				this.propertyDisplayName.Clear();
-				this.propertyAdDisplayName.Clear();
-				this.propertyPhone.Clear();
-				this.propertyMobile.Clear();
-				this.propertyHomeAddress.Clear();
+				// Name and addresses.
+				this.employeePropertyFirstName.Clear();
+				this.employeePropertyLastName.Clear();
+				this.employeePropertyName.Clear();
+				this.employeePropertyDisplayName.Clear();
+				this.employeePropertyPhone.Clear();
+				this.employeePropertyMobile.Clear();
+				this.employeePropertyMail.Clear();
+				this.employeePropertyHomeAddress.Clear();
 
-				this.propertyEmploymentFirstDate.Clear();
-				this.propertyEmploymentLastDate.Clear();
-				this.propertyEmploymentOldestFirstDate.Clear();
-				this.propertyEmploymentJubileeDate.Clear();
-				this.propertyTitle.Clear();
-				this.propertyOrganizationName.Clear();
-				this.propertyLeaderName.Clear();
-				this.propertyAdExpiresDate.Clear();
+				// Employment.
+				this.employeePropertyEmploymentFirstDate.Clear();
+				this.employeePropertyEmploymentLastDate.Clear();
+				this.employeePropertyEmploymentOldestFirstDate.Clear();
+				this.employeePropertyEmploymentJubileeDate.Clear();
+				this.employeePropertyTitle.Clear();
+				this.employeePropertyOrganizationName.Clear();
+				this.employeePropertyLeaderName.Clear();
 
-				this.propertyHistoryActiveFromDate.Clear();
-				this.propertyHistoryActiveToDate.Clear();
-				this.propertyHistoryChangedDate.Clear();
-				this.propertyHistoryOpusChangedDate.Clear();
-				this.propertyAdChangedDate.Clear();
-				this.propertyAdLogonDate.Clear();
-				this.propertyAdInfo.Clear();
+				// Data history.
+				this.employeePropertyHistoryActiveFromDate.Clear();
+				this.employeePropertyHistoryActiveToDate.Clear();
+				this.employeePropertyHistoryChangedDate.Clear();
+				this.employeePropertyHistoryOpusChangedDate.Clear();
+				this.employeePropertyHistoryList.DataSource = null;
 
-				this.propertyHistoryList.DataSource = null;
-			} catch {}
-		} // PropertyClear
+				// Active Directory.
+				this.employeePropertyAdStatusImage.Image = null;
+				this.employeePropertyAdStatus.Clear();
+				this.employeePropertyAdDisplayName.Clear();
+				this.employeePropertyAdChangedDate.Clear();
+				this.employeePropertyAdExpiresDate.Clear();
+				this.employeePropertyAdLogonDate.Clear();
+				this.employeePropertyAdInfo.Clear();
+			} catch (Exception exception) {
+				// Log and show the error.
+				this.LogError(exception);
+				MessageBox.Show(exception.Message, "Employee Property Clear", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		} // EmployeePropertyClear
 
-		private void PropertyPopulate(SofdEmployee employee) {
+		private void EmployeePropertyPopulate(SofdEmployee employee) {
 			try {
 				if (employee != null) {
 					// Get the AD user.
 					Person user = this.GetUser(employee.AdBrugerNavn);
 
 					// Populate the controls.
-					this.propertyCprNumber.Text = employee.CprNummer;
-					this.propertyWorkerId.Text = employee.MaNummer.ToString();
-					this.propertyEmployeeNumber.Text = employee.MedarbejderId.ToString();
-					this.propertyEmployeeHistoryNumber.Text = employee.MedarbejderHistorikId.ToString();
-					this.propertyAdUserName.Text = employee.AdBrugerNavn;
-					this.propertyOpusName.Text = employee.OpusBrugerNavn;
+					// Identifiers.
 					if (employee.Aktiv == true) {
-						this.propertyActiveImage.Image = this.GetResourceImage("Circle Green.png");
+						this.employeePropertyActiveImage.Image = this.GetResourceImage("Circle Green.png");
 					} else {
-						this.propertyActiveImage.Image = this.GetResourceImage("Circle Red.png");
+						this.employeePropertyActiveImage.Image = this.GetResourceImage("Circle Red.png");
 					}
-					this.propertyActive.Text = (employee.Aktiv == true) ? "Active" : "Not Active";
+					this.employeePropertyActive.Text = (employee.Aktiv == true) ? "Active" : "Not Active";
+					this.employeePropertyEmployeeHistoryNumber.Text = employee.MedarbejderHistorikId.ToString();
+					this.employeePropertyEmployeeNumber.Text = employee.MedarbejderId.ToString();
+					this.employeePropertyAdUserName.Text = employee.AdBrugerNavn;
+					this.employeePropertyOpusName.Text = employee.OpusBrugerNavn;
+					this.employeePropertyCprNumber.Text = employee.CprNummer;
+					this.employeePropertyWorkerId.Text = employee.MaNummer.ToString();
 
-					if (user == null) {
-						this.propertyAdStatusImage.Image = this.GetResourceImage("Circle Grey.png");
-						this.propertyAdStatus.Text = "Not found in Active Directory";
-					} else if (user.Enabled == false) {
-						this.propertyAdStatusImage.Image = this.GetResourceImage("Circle Red.png");
-						this.propertyAdStatus.Text = "This user is disabled";
-					} else if (user.IsAccountLockedOut() == true) {
-						this.propertyAdStatusImage.Image = this.GetResourceImage("Circle Yellow.png");
-						this.propertyAdStatus.Text = String.Format("Lockedout since {0:yyyy-MM-dd HH:mm}", user.AccountLockoutTime.Value);
-					} else {
-						this.propertyAdStatusImage.Image = this.GetResourceImage("Circle Green.png");
-						this.propertyAdStatus.Text = "Active";
-					}
+					// Name and addresses.
+					this.employeePropertyFirstName.Text = employee.ForNavn;
+					this.employeePropertyLastName.Text = employee.EfterNavn;
+					this.employeePropertyName.Text = employee.Navn;
+					this.employeePropertyDisplayName.Text = employee.KaldeNavn;
+					this.employeePropertyPhone.Text = employee.TelefonNummer;
+					this.employeePropertyMobile.Text = employee.MobilNummer;
+					this.employeePropertyHomeAddress.Text = employee.AdresseText;
 
-					this.propertyFirstName.Text = employee.ForNavn;
-					this.propertyLastName.Text = employee.EfterNavn;
-					this.propertyName.Text = employee.Navn;
-					this.propertyDisplayName.Text = employee.KaldeNavn;
-					if (user != null) {
-						this.propertyAdDisplayName.Text = user.DisplayName;
-					}
-					this.propertyPhone.Text = employee.TelefonNummer;
-					this.propertyMobile.Text = employee.MobilNummer;
-					this.propertyHomeAddress.Text = employee.AdresseText;
-
+					// Employment.
 					if (employee.AnsaettelsesDato.Year > 1900) {
-						this.propertyEmploymentFirstDate.Text = employee.AnsaettelsesDato.ToString("yyyy-MM-dd");
+						this.employeePropertyEmploymentFirstDate.Text = employee.AnsaettelsesDato.ToString("dd.MM.yyyy");
 					}
 					if (employee.AnsaettelsesOphoersDato.Year > 1900) {
-						this.propertyEmploymentLastDate.Text = employee.AnsaettelsesOphoersDato.ToString("yyyy-MM-dd");
+						this.employeePropertyEmploymentLastDate.Text = employee.AnsaettelsesOphoersDato.ToString("dd.MM.yyyy");
 					}
 					if (employee.FoersteAnsaettelsesDato.Year > 1900) {
-						this.propertyEmploymentOldestFirstDate.Text = employee.FoersteAnsaettelsesDato.ToString("yyyy-MM-dd");
+						this.employeePropertyEmploymentOldestFirstDate.Text = employee.FoersteAnsaettelsesDato.ToString("dd.MM.yyyy");
 					}
 					if (employee.JubilaeumsAnciennitetsDato.Year > 1900) {
-						this.propertyEmploymentJubileeDate.Text = employee.JubilaeumsAnciennitetsDato.ToString("yyyy-MM-dd");
+						this.employeePropertyEmploymentJubileeDate.Text = employee.JubilaeumsAnciennitetsDato.ToString("dd.MM.yyyy");
 					}
+					this.employeePropertyTitle.Text = employee.StillingsBetegnelse;
+					this.employeePropertyOrganizationName.Text = employee.OrganisationNavn;
+					this.employeePropertyLeaderName.Text = employee.NaermesteLederNavn;
 
-					this.propertyTitle.Text = employee.StillingsBetegnelse;
-					this.propertyOrganizationName.Text = employee.OrganisationNavn;
-					this.propertyLeaderName.Text = employee.NaermesteLederNavn;
-
-					if ((user != null) && (user.AccountExpirationDate != null) && (user.AccountExpirationDate.Value.Year > 1900)) {
-						this.propertyAdLogonDate.Text = user.AccountExpirationDate.Value.ToString("yyyy-MM-dd  HH:mm");
-					}
-
-
+					// Data history.
 					if (employee.AktivFra.Year > 1900) {
-						this.propertyHistoryActiveFromDate.Text = employee.AktivFra.ToString("yyyy-MM-dd");
+						this.employeePropertyHistoryActiveFromDate.Text = employee.AktivFra.ToString("dd.MM.yyyy");
 					}
 					if (employee.AktivTil.Year > 1900) {
-						this.propertyHistoryActiveToDate.Text = employee.AktivTil.ToString("yyyy-MM-dd");
+						this.employeePropertyHistoryActiveToDate.Text = employee.AktivTil.ToString("dd.MM.yyyy");
 					}
 					if (employee.SidstAendret.Year > 1900) {
-						this.propertyHistoryChangedDate.Text = employee.SidstAendret.ToString("yyyy-MM-dd");
+						this.employeePropertyHistoryChangedDate.Text = employee.SidstAendret.ToString("dd.MM.yyyy");
 					}
 					if (employee.OpusSidsstAendret.Year > 1900) {
-						this.propertyHistoryOpusChangedDate.Text = employee.OpusSidsstAendret.ToString("yyyy-MM-dd");
+						this.employeePropertyHistoryOpusChangedDate.Text = employee.OpusSidsstAendret.ToString("dd.MM.yyyy");
 					}
-
-					if (user != null) {
-						this.propertyAdChangedDate.Text = "";
-					}
-					if ((user != null) && (user.LastLogon != null) && (user.LastLogon.Value.Year > 1900)) {
-						this.propertyAdLogonDate.Text = user.LastLogon.Value.ToString("yyyy-MM-dd  HH:mm");
-					}
-
-					if (user != null) {
-						this.propertyAdInfo.Text = user.Info;
-					}
-
-					// Get history.
-					List<SofdEmployee> employees = this.GetAllEmployees(
-						new SofdEmployeeFilter_MedarbejderId(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.Equals, employee.MedarbejderId)
-					);
-					this.propertyHistoryList.AutoGenerateColumns = false;
-					this.propertyHistoryList.DataSource = null;
-					this.propertyHistoryList.DataSource = employees;
-					foreach (DataGridViewRow row in this.propertyHistoryList.Rows) {
+					this.employeePropertyHistoryList.AutoGenerateColumns = false;
+					this.employeePropertyHistoryList.DataSource = null;
+					this.employeePropertyHistoryList.DataSource = this.GetAllEmployees(new SofdEmployeeFilter_MedarbejderId(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.Equals, employee.MedarbejderId));
+					foreach (DataGridViewRow row in this.employeePropertyHistoryList.Rows) {
 						row.Selected = (employee.Equals(row.DataBoundItem) == true);
+					}
+
+					// Active Directory.
+					if (user == null) {
+						this.employeePropertyAdStatusImage.Image = this.GetResourceImage("Circle Grey.png");
+						this.employeePropertyAdStatus.Text = "Not found in Active Directory";
+					} else {
+						if (user.Enabled == false) {
+							this.employeePropertyAdStatusImage.Image = this.GetResourceImage("Circle Red.png");
+							this.employeePropertyAdStatus.Text = "This user is disabled";
+						} else if (user.IsAccountExpired() == true) {
+							this.employeePropertyAdStatusImage.Image = this.GetResourceImage("Circle Orange.png");
+							this.employeePropertyAdStatus.Text = String.Format("Expired since {0:dd.MM.yyyy HH:mm}", user.AccountExpirationDate.Value);
+						} else if (user.IsAccountLockedOut() == true) {
+							this.employeePropertyAdStatusImage.Image = this.GetResourceImage("Circle Yellow.png");
+							this.employeePropertyAdStatus.Text = String.Format("Lockedout since {0:dd.MM.yyyy HH:mm}", user.AccountLockoutTime.Value);
+						} else {
+							this.employeePropertyAdStatusImage.Image = this.GetResourceImage("Circle Green.png");
+							this.employeePropertyAdStatus.Text = "Active";
+						}
+						this.employeePropertyAdDisplayName.Text = user.DisplayName;
+						if ((user.AccountExpirationDate != null) && (user.AccountExpirationDate.Value.Year > 1900)) {
+							this.employeePropertyAdExpiresDate.Text = user.AccountExpirationDate.Value.ToString("dd.MM.yyyy  HH:mm");
+						}
+						//this.employeePropertyAdChangedDate.Text = "";
+						if ((user.Modified != null) && (user.Modified.Value.Year > 1900)) {
+							this.employeePropertyAdChangedDate.Text = user.Modified.Value.ToString("dd.MM.yyyy  HH:mm");
+						}
+						if ((user.LastLogon != null) && (user.LastLogon.Value.Year > 1900)) {
+							this.employeePropertyAdLogonDate.Text = user.LastLogon.Value.ToString("dd.MM.yyyy  HH:mm");
+						}
+						this.employeePropertyAdInfo.Text = user.Info;
 					}
 				}
 			} catch (Exception exception) {
+				// Log and show the error.
+				this.LogError(exception);
+				MessageBox.Show(exception.Message, "Employee Property Populate", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
-		} // PropertyPopulate
+		} // EmployeePropertyPopulate
 
-		private void PropertyHistoryListClick(Object sender, EventArgs e) {
+		private void EmployeePropertyHistoryListClick(Object sender, EventArgs e) {
 			try {
-				if ((this.propertyHistoryList.Focused == true) && (this.propertyHistoryList.SelectedRows.Count == 1)) {
+				if ((this.employeePropertyHistoryList.Focused == true) && (this.employeePropertyHistoryList.SelectedRows.Count == 1)) {
 					// Unfocus the history list.
-					this.propertyClose.Focus();
+					this.employeePropertyClose.Focus();
 
 					// Get the SOFD employee.
-					SofdEmployee employee = (SofdEmployee)this.propertyHistoryList.SelectedRows[0].DataBoundItem;
-					//MessageBox.Show(employee.MedarbejderHistorikId.ToString());
+					SofdEmployee employee = (SofdEmployee)this.employeePropertyHistoryList.SelectedRows[0].DataBoundItem;
 
-					// Clear the properties.
-					this.PropertyClear();
+					// Clear the employee properties.
+					this.EmployeePropertyClear();
 
-					// Populate the properties.
-					this.PropertyPopulate(employee);
-
-					// Show the properties tab.
-					//this.tabControl1.SelectTab(1);
+					// Populate the employee properties.
+					this.EmployeePropertyPopulate(employee);
 				}
-			} catch { }
-		} // PropertyHistoryListClick
-
-		private void PropertyCloseClick(Object sender, EventArgs e) {
-			// Show the search tab.
-			this.tabControl1.SelectTab(0);
-		} // PropertyCloseClick
+			} catch (Exception exception) {
+				// Log and show the error.
+				this.LogError(exception);
+				MessageBox.Show(exception.Message, "Employee Property History Click", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		} // EmployeePropertyHistoryListClick
 		#endregion
+
+
 
 		#region Abstract and Virtual methods.
 		/// <summary>
