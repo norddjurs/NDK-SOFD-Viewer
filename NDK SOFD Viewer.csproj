@@ -92,7 +92,11 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Copy.png" />
+    <EmbeddedResource Include="Resources\Paste.png" />
+    <EmbeddedResource Include="Resources\Refresh.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NDK Framework\NDK Framework.csproj">
       <Project>{9f3cc933-8f6f-4268-a971-71d100bf9fb8}</Project>
@@ -178,6 +182,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\User Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Book.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

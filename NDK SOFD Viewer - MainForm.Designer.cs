@@ -23,11 +23,55 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.MainFormPages = new System.Windows.Forms.TabControl();
+			this.employeeListPage = new System.Windows.Forms.TabPage();
+			this.employeeList = new NDK.SofdViewer.SafeDataGridView();
+			this.employeeListAdStatus = new System.Windows.Forms.DataGridViewImageColumn();
+			this.employeeListFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListCprNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListAdUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListOpusUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListMail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListOrganizationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListStatus = new System.Windows.Forms.Label();
+			this.employeeListPanelLeft = new System.Windows.Forms.Panel();
+			this.employeeFilterPanel = new System.Windows.Forms.GroupBox();
+			this.label38 = new System.Windows.Forms.Label();
+			this.employeeFilterChangedDateEnd = new System.Windows.Forms.DateTimePicker();
+			this.employeeFilterChangedDateBegin = new System.Windows.Forms.DateTimePicker();
+			this.label39 = new System.Windows.Forms.Label();
+			this.employeeFilterHistoryActiveToDateEnd = new System.Windows.Forms.DateTimePicker();
+			this.employeeFilterHistoryActiveToDateBegin = new System.Windows.Forms.DateTimePicker();
+			this.label40 = new System.Windows.Forms.Label();
+			this.employeeFilterHistoryActiveFromDateEnd = new System.Windows.Forms.DateTimePicker();
+			this.employeeFilterHistoryActiveFromDateBegin = new System.Windows.Forms.DateTimePicker();
+			this.label37 = new System.Windows.Forms.Label();
+			this.employeeFilterEmploymentJubileeDateEnd = new System.Windows.Forms.DateTimePicker();
+			this.employeeFilterEmploymentJubileeDateBegin = new System.Windows.Forms.DateTimePicker();
+			this.label36 = new System.Windows.Forms.Label();
+			this.employeeFilterEmploymentOldestFirstDateEnd = new System.Windows.Forms.DateTimePicker();
+			this.employeeFilterEmploymentOldestFirstDateBegin = new System.Windows.Forms.DateTimePicker();
+			this.label35 = new System.Windows.Forms.Label();
+			this.employeeFilterEmploymentLastDateEnd = new System.Windows.Forms.DateTimePicker();
+			this.employeeFilterEmploymentLastDateBegin = new System.Windows.Forms.DateTimePicker();
+			this.label34 = new System.Windows.Forms.Label();
+			this.employeeFilterEmploymentFirstDateEnd = new System.Windows.Forms.DateTimePicker();
+			this.employeeFilterEmploymentFirstDateBegin = new System.Windows.Forms.DateTimePicker();
+			this.employeeFilterAd = new System.Windows.Forms.CheckBox();
+			this.employeeFilterActive = new System.Windows.Forms.CheckBox();
+			this.employeeFilterTextPanel = new System.Windows.Forms.GroupBox();
+			this.employeeListSearchFromClipboard = new System.Windows.Forms.Button();
+			this.employeeFilterTextAutoWildcards = new System.Windows.Forms.CheckBox();
+			this.employeeListRefresh = new System.Windows.Forms.Button();
+			this.employeeFilterText = new System.Windows.Forms.TextBox();
 			this.employeePropertyPage = new System.Windows.Forms.TabPage();
 			this.employeePropertyClose = new System.Windows.Forms.Button();
 			this.employeePropertiesPanel4 = new System.Windows.Forms.GroupBox();
@@ -110,56 +154,23 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.organizationListPage = new System.Windows.Forms.TabPage();
 			this.organizationPropertyPage = new System.Windows.Forms.TabPage();
-			this.employeeListPage = new System.Windows.Forms.TabPage();
-			this.employeeList = new System.Windows.Forms.DataGridView();
-			this.employeeListAdStatus = new System.Windows.Forms.DataGridViewImageColumn();
-			this.employeeListFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListCprNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListAdUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListOpusUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListMail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListStatus = new System.Windows.Forms.Label();
-			this.employeeListPanelLeft = new System.Windows.Forms.Panel();
-			this.employeeFilterPanel = new System.Windows.Forms.GroupBox();
-			this.label38 = new System.Windows.Forms.Label();
-			this.employeeFilterChangedDateEnd = new System.Windows.Forms.DateTimePicker();
-			this.employeeFilterChangedDateBegin = new System.Windows.Forms.DateTimePicker();
-			this.label39 = new System.Windows.Forms.Label();
-			this.employeeFilterHistoryActiveToDateEnd = new System.Windows.Forms.DateTimePicker();
-			this.employeeFilterHistoryActiveToDateBegin = new System.Windows.Forms.DateTimePicker();
-			this.label40 = new System.Windows.Forms.Label();
-			this.employeeFilterHistoryActiveFromDateEnd = new System.Windows.Forms.DateTimePicker();
-			this.employeeFilterHistoryActiveFromDateBegin = new System.Windows.Forms.DateTimePicker();
-			this.label37 = new System.Windows.Forms.Label();
-			this.employeeFilterEmploymentJubileeDateEnd = new System.Windows.Forms.DateTimePicker();
-			this.employeeFilterEmploymentJubileeDateBegin = new System.Windows.Forms.DateTimePicker();
-			this.label36 = new System.Windows.Forms.Label();
-			this.employeeFilterEmploymentOldestFirstDateEnd = new System.Windows.Forms.DateTimePicker();
-			this.employeeFilterEmploymentOldestFirstDateBegin = new System.Windows.Forms.DateTimePicker();
-			this.label35 = new System.Windows.Forms.Label();
-			this.employeeFilterEmploymentLastDateEnd = new System.Windows.Forms.DateTimePicker();
-			this.employeeFilterEmploymentLastDateBegin = new System.Windows.Forms.DateTimePicker();
-			this.label34 = new System.Windows.Forms.Label();
-			this.employeeFilterEmploymentFirstDateEnd = new System.Windows.Forms.DateTimePicker();
-			this.employeeFilterEmploymentFirstDateBegin = new System.Windows.Forms.DateTimePicker();
-			this.employeeFilterAd = new System.Windows.Forms.CheckBox();
-			this.employeeFilterActive = new System.Windows.Forms.CheckBox();
-			this.employeeFilterTextPanel = new System.Windows.Forms.GroupBox();
-			this.employeeFilterTextAutoWildcards = new System.Windows.Forms.CheckBox();
-			this.employeeListRefresh = new System.Windows.Forms.Button();
-			this.employeeFilterText = new System.Windows.Forms.TextBox();
 			this.MainFormToolStrip = new System.Windows.Forms.ToolStrip();
 			this.actionEmployeeList = new System.Windows.Forms.ToolStripButton();
 			this.actionEmployeeProperties = new System.Windows.Forms.ToolStripButton();
-			this.actionActiveDirectoryEnableUser = new System.Windows.Forms.ToolStripButton();
-			this.actionActiveDirectoryDisableUser = new System.Windows.Forms.ToolStripButton();
-			this.actionActiveDirectoryExpireUser = new System.Windows.Forms.ToolStripButton();
-			this.actionActiveDirectoryResetUser = new System.Windows.Forms.ToolStripButton();
+			this.actionEmployeeCopyProperties = new System.Windows.Forms.ToolStripButton();
+			this.actionActiveDirectory = new System.Windows.Forms.ToolStripDropDownButton();
+			this.actionActiveDirectoryEnableUser = new System.Windows.Forms.ToolStripMenuItem();
+			this.actionActiveDirectoryDisableUser = new System.Windows.Forms.ToolStripMenuItem();
+			this.actionActiveDirectoryExpireUser = new System.Windows.Forms.ToolStripMenuItem();
+			this.actionActiveDirectoryResetUser = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.actionActiveDirectoryShowUser = new System.Windows.Forms.ToolStripMenuItem();
 			this.MainFormPages.SuspendLayout();
+			this.employeeListPage.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.employeeList)).BeginInit();
+			this.employeeListPanelLeft.SuspendLayout();
+			this.employeeFilterPanel.SuspendLayout();
+			this.employeeFilterTextPanel.SuspendLayout();
 			this.employeePropertyPage.SuspendLayout();
 			this.employeePropertiesPanel4.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.employeePropertyHistoryList)).BeginInit();
@@ -169,11 +180,6 @@
 			this.employeePropertiesPanel2.SuspendLayout();
 			this.employeePropertiesPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.employeePropertyActiveImage)).BeginInit();
-			this.employeeListPage.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.employeeList)).BeginInit();
-			this.employeeListPanelLeft.SuspendLayout();
-			this.employeeFilterPanel.SuspendLayout();
-			this.employeeFilterTextPanel.SuspendLayout();
 			this.MainFormToolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -191,6 +197,525 @@
 			this.MainFormPages.TabIndex = 1;
 			this.MainFormPages.TabStop = false;
 			this.MainFormPages.SelectedIndexChanged += new System.EventHandler(this.ActionUpdate);
+			// 
+			// employeeListPage
+			// 
+			this.employeeListPage.Controls.Add(this.employeeList);
+			this.employeeListPage.Controls.Add(this.employeeListStatus);
+			this.employeeListPage.Controls.Add(this.employeeListPanelLeft);
+			this.employeeListPage.Location = new System.Drawing.Point(4, 25);
+			this.employeeListPage.Name = "employeeListPage";
+			this.employeeListPage.Padding = new System.Windows.Forms.Padding(3);
+			this.employeeListPage.Size = new System.Drawing.Size(1226, 604);
+			this.employeeListPage.TabIndex = 0;
+			this.employeeListPage.Text = "Employees";
+			// 
+			// employeeList
+			// 
+			this.employeeList.AllowUserToAddRows = false;
+			this.employeeList.AllowUserToDeleteRows = false;
+			this.employeeList.AllowUserToResizeRows = false;
+			this.employeeList.BackgroundColor = System.Drawing.SystemColors.Control;
+			this.employeeList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.employeeList.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+			this.employeeList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.employeeList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.employeeListAdStatus,
+            this.employeeListFirstName,
+            this.employeeListLastName,
+            this.employeeListDisplayName,
+            this.employeeListCprNumber,
+            this.employeeListAdUserName,
+            this.employeeListOpusUserName,
+            this.employeeListPhone,
+            this.employeeListMobile,
+            this.employeeListMail,
+            this.employeeListOrganizationName});
+			this.employeeList.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.employeeList.Location = new System.Drawing.Point(243, 3);
+			this.employeeList.Name = "employeeList";
+			this.employeeList.ReadOnly = true;
+			this.employeeList.RowHeadersVisible = false;
+			this.employeeList.RowHeadersWidth = 22;
+			this.employeeList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+			this.employeeList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.employeeList.ShowCellErrors = false;
+			this.employeeList.ShowCellToolTips = false;
+			this.employeeList.ShowEditingIcon = false;
+			this.employeeList.ShowRowErrors = false;
+			this.employeeList.Size = new System.Drawing.Size(980, 578);
+			this.employeeList.TabIndex = 3;
+			this.employeeList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.EmployeeListDataError);
+			this.employeeList.SelectionChanged += new System.EventHandler(this.ActionUpdate);
+			this.employeeList.DoubleClick += new System.EventHandler(this.ActionEmployeeShowPropertiesClick);
+			// 
+			// employeeListAdStatus
+			// 
+			this.employeeListAdStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListAdStatus.HeaderText = "";
+			this.employeeListAdStatus.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+			this.employeeListAdStatus.MinimumWidth = 25;
+			this.employeeListAdStatus.Name = "employeeListAdStatus";
+			this.employeeListAdStatus.ReadOnly = true;
+			this.employeeListAdStatus.Width = 25;
+			// 
+			// employeeListFirstName
+			// 
+			this.employeeListFirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListFirstName.DataPropertyName = "ForNavn";
+			this.employeeListFirstName.HeaderText = "First name";
+			this.employeeListFirstName.MinimumWidth = 100;
+			this.employeeListFirstName.Name = "employeeListFirstName";
+			this.employeeListFirstName.ReadOnly = true;
+			// 
+			// employeeListLastName
+			// 
+			this.employeeListLastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListLastName.DataPropertyName = "EfterNavn";
+			this.employeeListLastName.HeaderText = "Last name";
+			this.employeeListLastName.MinimumWidth = 100;
+			this.employeeListLastName.Name = "employeeListLastName";
+			this.employeeListLastName.ReadOnly = true;
+			// 
+			// employeeListDisplayName
+			// 
+			this.employeeListDisplayName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListDisplayName.DataPropertyName = "KaldeNavn";
+			this.employeeListDisplayName.HeaderText = "Display name";
+			this.employeeListDisplayName.MinimumWidth = 150;
+			this.employeeListDisplayName.Name = "employeeListDisplayName";
+			this.employeeListDisplayName.ReadOnly = true;
+			this.employeeListDisplayName.Width = 150;
+			// 
+			// employeeListCprNumber
+			// 
+			this.employeeListCprNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListCprNumber.DataPropertyName = "CprNummer";
+			this.employeeListCprNumber.HeaderText = "CPR";
+			this.employeeListCprNumber.MinimumWidth = 70;
+			this.employeeListCprNumber.Name = "employeeListCprNumber";
+			this.employeeListCprNumber.ReadOnly = true;
+			this.employeeListCprNumber.Width = 70;
+			// 
+			// employeeListAdUserName
+			// 
+			this.employeeListAdUserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListAdUserName.DataPropertyName = "AdBrugerNavn";
+			this.employeeListAdUserName.HeaderText = "AD";
+			this.employeeListAdUserName.MinimumWidth = 100;
+			this.employeeListAdUserName.Name = "employeeListAdUserName";
+			this.employeeListAdUserName.ReadOnly = true;
+			// 
+			// employeeListOpusUserName
+			// 
+			this.employeeListOpusUserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListOpusUserName.DataPropertyName = "OpusBrugerNavn";
+			this.employeeListOpusUserName.HeaderText = "Opus";
+			this.employeeListOpusUserName.MinimumWidth = 100;
+			this.employeeListOpusUserName.Name = "employeeListOpusUserName";
+			this.employeeListOpusUserName.ReadOnly = true;
+			// 
+			// employeeListPhone
+			// 
+			this.employeeListPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListPhone.DataPropertyName = "TelefonNummer";
+			this.employeeListPhone.HeaderText = "Phone";
+			this.employeeListPhone.MinimumWidth = 100;
+			this.employeeListPhone.Name = "employeeListPhone";
+			this.employeeListPhone.ReadOnly = true;
+			// 
+			// employeeListMobile
+			// 
+			this.employeeListMobile.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListMobile.DataPropertyName = "MobilNummer";
+			this.employeeListMobile.HeaderText = "Mobile";
+			this.employeeListMobile.MinimumWidth = 100;
+			this.employeeListMobile.Name = "employeeListMobile";
+			this.employeeListMobile.ReadOnly = true;
+			// 
+			// employeeListMail
+			// 
+			this.employeeListMail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListMail.DataPropertyName = "Epost";
+			this.employeeListMail.HeaderText = "E-mail";
+			this.employeeListMail.MinimumWidth = 100;
+			this.employeeListMail.Name = "employeeListMail";
+			this.employeeListMail.ReadOnly = true;
+			// 
+			// employeeListOrganizationName
+			// 
+			this.employeeListOrganizationName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListOrganizationName.DataPropertyName = "OrganisationNavn";
+			this.employeeListOrganizationName.HeaderText = "Organization";
+			this.employeeListOrganizationName.Name = "employeeListOrganizationName";
+			this.employeeListOrganizationName.ReadOnly = true;
+			this.employeeListOrganizationName.Width = 108;
+			// 
+			// employeeListStatus
+			// 
+			this.employeeListStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.employeeListStatus.Location = new System.Drawing.Point(243, 581);
+			this.employeeListStatus.Name = "employeeListStatus";
+			this.employeeListStatus.Size = new System.Drawing.Size(980, 20);
+			this.employeeListStatus.TabIndex = 2;
+			this.employeeListStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// employeeListPanelLeft
+			// 
+			this.employeeListPanelLeft.Controls.Add(this.employeeFilterPanel);
+			this.employeeListPanelLeft.Controls.Add(this.employeeFilterTextPanel);
+			this.employeeListPanelLeft.Dock = System.Windows.Forms.DockStyle.Left;
+			this.employeeListPanelLeft.Location = new System.Drawing.Point(3, 3);
+			this.employeeListPanelLeft.Name = "employeeListPanelLeft";
+			this.employeeListPanelLeft.Size = new System.Drawing.Size(240, 598);
+			this.employeeListPanelLeft.TabIndex = 1;
+			// 
+			// employeeFilterPanel
+			// 
+			this.employeeFilterPanel.Controls.Add(this.label38);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterChangedDateEnd);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterChangedDateBegin);
+			this.employeeFilterPanel.Controls.Add(this.label39);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterHistoryActiveToDateEnd);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterHistoryActiveToDateBegin);
+			this.employeeFilterPanel.Controls.Add(this.label40);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterHistoryActiveFromDateEnd);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterHistoryActiveFromDateBegin);
+			this.employeeFilterPanel.Controls.Add(this.label37);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentJubileeDateEnd);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentJubileeDateBegin);
+			this.employeeFilterPanel.Controls.Add(this.label36);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentOldestFirstDateEnd);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentOldestFirstDateBegin);
+			this.employeeFilterPanel.Controls.Add(this.label35);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentLastDateEnd);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentLastDateBegin);
+			this.employeeFilterPanel.Controls.Add(this.label34);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentFirstDateEnd);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentFirstDateBegin);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterAd);
+			this.employeeFilterPanel.Controls.Add(this.employeeFilterActive);
+			this.employeeFilterPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.employeeFilterPanel.Location = new System.Drawing.Point(0, 84);
+			this.employeeFilterPanel.Name = "employeeFilterPanel";
+			this.employeeFilterPanel.Size = new System.Drawing.Size(240, 514);
+			this.employeeFilterPanel.TabIndex = 1;
+			this.employeeFilterPanel.TabStop = false;
+			this.employeeFilterPanel.Text = "Filters";
+			// 
+			// label38
+			// 
+			this.label38.AutoSize = true;
+			this.label38.Location = new System.Drawing.Point(9, 334);
+			this.label38.Name = "label38";
+			this.label38.Size = new System.Drawing.Size(98, 16);
+			this.label38.TabIndex = 22;
+			this.label38.Text = "Changed Date:";
+			// 
+			// employeeFilterChangedDateEnd
+			// 
+			this.employeeFilterChangedDateEnd.Checked = false;
+			this.employeeFilterChangedDateEnd.CustomFormat = "dd-MM-yy";
+			this.employeeFilterChangedDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.employeeFilterChangedDateEnd.Location = new System.Drawing.Point(113, 353);
+			this.employeeFilterChangedDateEnd.Name = "employeeFilterChangedDateEnd";
+			this.employeeFilterChangedDateEnd.ShowCheckBox = true;
+			this.employeeFilterChangedDateEnd.Size = new System.Drawing.Size(95, 22);
+			this.employeeFilterChangedDateEnd.TabIndex = 21;
+			this.employeeFilterChangedDateEnd.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// employeeFilterChangedDateBegin
+			// 
+			this.employeeFilterChangedDateBegin.Checked = false;
+			this.employeeFilterChangedDateBegin.CustomFormat = "dd-MM-yy";
+			this.employeeFilterChangedDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.employeeFilterChangedDateBegin.Location = new System.Drawing.Point(12, 353);
+			this.employeeFilterChangedDateBegin.Name = "employeeFilterChangedDateBegin";
+			this.employeeFilterChangedDateBegin.ShowCheckBox = true;
+			this.employeeFilterChangedDateBegin.Size = new System.Drawing.Size(95, 22);
+			this.employeeFilterChangedDateBegin.TabIndex = 20;
+			this.employeeFilterChangedDateBegin.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// label39
+			// 
+			this.label39.AutoSize = true;
+			this.label39.Location = new System.Drawing.Point(9, 290);
+			this.label39.Name = "label39";
+			this.label39.Size = new System.Drawing.Size(100, 16);
+			this.label39.TabIndex = 19;
+			this.label39.Text = "Active To Date:";
+			// 
+			// employeeFilterHistoryActiveToDateEnd
+			// 
+			this.employeeFilterHistoryActiveToDateEnd.Checked = false;
+			this.employeeFilterHistoryActiveToDateEnd.CustomFormat = "dd-MM-yy";
+			this.employeeFilterHistoryActiveToDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.employeeFilterHistoryActiveToDateEnd.Location = new System.Drawing.Point(113, 309);
+			this.employeeFilterHistoryActiveToDateEnd.Name = "employeeFilterHistoryActiveToDateEnd";
+			this.employeeFilterHistoryActiveToDateEnd.ShowCheckBox = true;
+			this.employeeFilterHistoryActiveToDateEnd.Size = new System.Drawing.Size(95, 22);
+			this.employeeFilterHistoryActiveToDateEnd.TabIndex = 18;
+			this.employeeFilterHistoryActiveToDateEnd.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// employeeFilterHistoryActiveToDateBegin
+			// 
+			this.employeeFilterHistoryActiveToDateBegin.Checked = false;
+			this.employeeFilterHistoryActiveToDateBegin.CustomFormat = "dd-MM-yy";
+			this.employeeFilterHistoryActiveToDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.employeeFilterHistoryActiveToDateBegin.Location = new System.Drawing.Point(12, 309);
+			this.employeeFilterHistoryActiveToDateBegin.Name = "employeeFilterHistoryActiveToDateBegin";
+			this.employeeFilterHistoryActiveToDateBegin.ShowCheckBox = true;
+			this.employeeFilterHistoryActiveToDateBegin.Size = new System.Drawing.Size(95, 22);
+			this.employeeFilterHistoryActiveToDateBegin.TabIndex = 17;
+			this.employeeFilterHistoryActiveToDateBegin.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// label40
+			// 
+			this.label40.AutoSize = true;
+			this.label40.Location = new System.Drawing.Point(9, 246);
+			this.label40.Name = "label40";
+			this.label40.Size = new System.Drawing.Size(114, 16);
+			this.label40.TabIndex = 16;
+			this.label40.Text = "Active From Date:";
+			// 
+			// employeeFilterHistoryActiveFromDateEnd
+			// 
+			this.employeeFilterHistoryActiveFromDateEnd.Checked = false;
+			this.employeeFilterHistoryActiveFromDateEnd.CustomFormat = "dd-MM-yy";
+			this.employeeFilterHistoryActiveFromDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.employeeFilterHistoryActiveFromDateEnd.Location = new System.Drawing.Point(113, 265);
+			this.employeeFilterHistoryActiveFromDateEnd.Name = "employeeFilterHistoryActiveFromDateEnd";
+			this.employeeFilterHistoryActiveFromDateEnd.ShowCheckBox = true;
+			this.employeeFilterHistoryActiveFromDateEnd.Size = new System.Drawing.Size(95, 22);
+			this.employeeFilterHistoryActiveFromDateEnd.TabIndex = 15;
+			this.employeeFilterHistoryActiveFromDateEnd.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// employeeFilterHistoryActiveFromDateBegin
+			// 
+			this.employeeFilterHistoryActiveFromDateBegin.Checked = false;
+			this.employeeFilterHistoryActiveFromDateBegin.CustomFormat = "dd-MM-yy";
+			this.employeeFilterHistoryActiveFromDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.employeeFilterHistoryActiveFromDateBegin.Location = new System.Drawing.Point(12, 265);
+			this.employeeFilterHistoryActiveFromDateBegin.Name = "employeeFilterHistoryActiveFromDateBegin";
+			this.employeeFilterHistoryActiveFromDateBegin.ShowCheckBox = true;
+			this.employeeFilterHistoryActiveFromDateBegin.Size = new System.Drawing.Size(95, 22);
+			this.employeeFilterHistoryActiveFromDateBegin.TabIndex = 14;
+			this.employeeFilterHistoryActiveFromDateBegin.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// label37
+			// 
+			this.label37.AutoSize = true;
+			this.label37.Location = new System.Drawing.Point(9, 202);
+			this.label37.Name = "label37";
+			this.label37.Size = new System.Drawing.Size(165, 16);
+			this.label37.TabIndex = 13;
+			this.label37.Text = "Employment Jubilee Date:";
+			// 
+			// employeeFilterEmploymentJubileeDateEnd
+			// 
+			this.employeeFilterEmploymentJubileeDateEnd.Checked = false;
+			this.employeeFilterEmploymentJubileeDateEnd.CustomFormat = "dd-MM-yy";
+			this.employeeFilterEmploymentJubileeDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.employeeFilterEmploymentJubileeDateEnd.Location = new System.Drawing.Point(113, 221);
+			this.employeeFilterEmploymentJubileeDateEnd.Name = "employeeFilterEmploymentJubileeDateEnd";
+			this.employeeFilterEmploymentJubileeDateEnd.ShowCheckBox = true;
+			this.employeeFilterEmploymentJubileeDateEnd.Size = new System.Drawing.Size(95, 22);
+			this.employeeFilterEmploymentJubileeDateEnd.TabIndex = 12;
+			this.employeeFilterEmploymentJubileeDateEnd.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// employeeFilterEmploymentJubileeDateBegin
+			// 
+			this.employeeFilterEmploymentJubileeDateBegin.Checked = false;
+			this.employeeFilterEmploymentJubileeDateBegin.CustomFormat = "dd-MM-yy";
+			this.employeeFilterEmploymentJubileeDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.employeeFilterEmploymentJubileeDateBegin.Location = new System.Drawing.Point(12, 221);
+			this.employeeFilterEmploymentJubileeDateBegin.Name = "employeeFilterEmploymentJubileeDateBegin";
+			this.employeeFilterEmploymentJubileeDateBegin.ShowCheckBox = true;
+			this.employeeFilterEmploymentJubileeDateBegin.Size = new System.Drawing.Size(95, 22);
+			this.employeeFilterEmploymentJubileeDateBegin.TabIndex = 11;
+			this.employeeFilterEmploymentJubileeDateBegin.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// label36
+			// 
+			this.label36.AutoSize = true;
+			this.label36.Location = new System.Drawing.Point(9, 158);
+			this.label36.Name = "label36";
+			this.label36.Size = new System.Drawing.Size(160, 16);
+			this.label36.TabIndex = 10;
+			this.label36.Text = "Employment Oldest Date:";
+			// 
+			// employeeFilterEmploymentOldestFirstDateEnd
+			// 
+			this.employeeFilterEmploymentOldestFirstDateEnd.Checked = false;
+			this.employeeFilterEmploymentOldestFirstDateEnd.CustomFormat = "dd-MM-yy";
+			this.employeeFilterEmploymentOldestFirstDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.employeeFilterEmploymentOldestFirstDateEnd.Location = new System.Drawing.Point(113, 177);
+			this.employeeFilterEmploymentOldestFirstDateEnd.Name = "employeeFilterEmploymentOldestFirstDateEnd";
+			this.employeeFilterEmploymentOldestFirstDateEnd.ShowCheckBox = true;
+			this.employeeFilterEmploymentOldestFirstDateEnd.Size = new System.Drawing.Size(95, 22);
+			this.employeeFilterEmploymentOldestFirstDateEnd.TabIndex = 9;
+			this.employeeFilterEmploymentOldestFirstDateEnd.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// employeeFilterEmploymentOldestFirstDateBegin
+			// 
+			this.employeeFilterEmploymentOldestFirstDateBegin.Checked = false;
+			this.employeeFilterEmploymentOldestFirstDateBegin.CustomFormat = "dd-MM-yy";
+			this.employeeFilterEmploymentOldestFirstDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.employeeFilterEmploymentOldestFirstDateBegin.Location = new System.Drawing.Point(12, 177);
+			this.employeeFilterEmploymentOldestFirstDateBegin.Name = "employeeFilterEmploymentOldestFirstDateBegin";
+			this.employeeFilterEmploymentOldestFirstDateBegin.ShowCheckBox = true;
+			this.employeeFilterEmploymentOldestFirstDateBegin.Size = new System.Drawing.Size(95, 22);
+			this.employeeFilterEmploymentOldestFirstDateBegin.TabIndex = 8;
+			this.employeeFilterEmploymentOldestFirstDateBegin.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// label35
+			// 
+			this.label35.AutoSize = true;
+			this.label35.Location = new System.Drawing.Point(9, 114);
+			this.label35.Name = "label35";
+			this.label35.Size = new System.Drawing.Size(146, 16);
+			this.label35.TabIndex = 7;
+			this.label35.Text = "Employment Last Date:";
+			// 
+			// employeeFilterEmploymentLastDateEnd
+			// 
+			this.employeeFilterEmploymentLastDateEnd.Checked = false;
+			this.employeeFilterEmploymentLastDateEnd.CustomFormat = "dd-MM-yy";
+			this.employeeFilterEmploymentLastDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.employeeFilterEmploymentLastDateEnd.Location = new System.Drawing.Point(113, 133);
+			this.employeeFilterEmploymentLastDateEnd.Name = "employeeFilterEmploymentLastDateEnd";
+			this.employeeFilterEmploymentLastDateEnd.ShowCheckBox = true;
+			this.employeeFilterEmploymentLastDateEnd.Size = new System.Drawing.Size(95, 22);
+			this.employeeFilterEmploymentLastDateEnd.TabIndex = 6;
+			this.employeeFilterEmploymentLastDateEnd.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// employeeFilterEmploymentLastDateBegin
+			// 
+			this.employeeFilterEmploymentLastDateBegin.Checked = false;
+			this.employeeFilterEmploymentLastDateBegin.CustomFormat = "dd-MM-yy";
+			this.employeeFilterEmploymentLastDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.employeeFilterEmploymentLastDateBegin.Location = new System.Drawing.Point(12, 133);
+			this.employeeFilterEmploymentLastDateBegin.Name = "employeeFilterEmploymentLastDateBegin";
+			this.employeeFilterEmploymentLastDateBegin.ShowCheckBox = true;
+			this.employeeFilterEmploymentLastDateBegin.Size = new System.Drawing.Size(95, 22);
+			this.employeeFilterEmploymentLastDateBegin.TabIndex = 5;
+			this.employeeFilterEmploymentLastDateBegin.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// label34
+			// 
+			this.label34.AutoSize = true;
+			this.label34.Location = new System.Drawing.Point(9, 70);
+			this.label34.Name = "label34";
+			this.label34.Size = new System.Drawing.Size(146, 16);
+			this.label34.TabIndex = 4;
+			this.label34.Text = "Employment First Date:";
+			// 
+			// employeeFilterEmploymentFirstDateEnd
+			// 
+			this.employeeFilterEmploymentFirstDateEnd.Checked = false;
+			this.employeeFilterEmploymentFirstDateEnd.CustomFormat = "dd-MM-yy";
+			this.employeeFilterEmploymentFirstDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.employeeFilterEmploymentFirstDateEnd.Location = new System.Drawing.Point(113, 89);
+			this.employeeFilterEmploymentFirstDateEnd.Name = "employeeFilterEmploymentFirstDateEnd";
+			this.employeeFilterEmploymentFirstDateEnd.ShowCheckBox = true;
+			this.employeeFilterEmploymentFirstDateEnd.Size = new System.Drawing.Size(95, 22);
+			this.employeeFilterEmploymentFirstDateEnd.TabIndex = 3;
+			this.employeeFilterEmploymentFirstDateEnd.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// employeeFilterEmploymentFirstDateBegin
+			// 
+			this.employeeFilterEmploymentFirstDateBegin.Checked = false;
+			this.employeeFilterEmploymentFirstDateBegin.CustomFormat = "dd-MM-yy";
+			this.employeeFilterEmploymentFirstDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+			this.employeeFilterEmploymentFirstDateBegin.Location = new System.Drawing.Point(12, 89);
+			this.employeeFilterEmploymentFirstDateBegin.Name = "employeeFilterEmploymentFirstDateBegin";
+			this.employeeFilterEmploymentFirstDateBegin.ShowCheckBox = true;
+			this.employeeFilterEmploymentFirstDateBegin.Size = new System.Drawing.Size(95, 22);
+			this.employeeFilterEmploymentFirstDateBegin.TabIndex = 2;
+			this.employeeFilterEmploymentFirstDateBegin.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// employeeFilterAd
+			// 
+			this.employeeFilterAd.AutoSize = true;
+			this.employeeFilterAd.Location = new System.Drawing.Point(12, 47);
+			this.employeeFilterAd.Name = "employeeFilterAd";
+			this.employeeFilterAd.Size = new System.Drawing.Size(157, 20);
+			this.employeeFilterAd.TabIndex = 1;
+			this.employeeFilterAd.Text = "Active Directory users";
+			this.employeeFilterAd.ThreeState = true;
+			this.employeeFilterAd.UseVisualStyleBackColor = true;
+			this.employeeFilterAd.CheckedChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// employeeFilterActive
+			// 
+			this.employeeFilterActive.AutoSize = true;
+			this.employeeFilterActive.Location = new System.Drawing.Point(12, 21);
+			this.employeeFilterActive.Name = "employeeFilterActive";
+			this.employeeFilterActive.Size = new System.Drawing.Size(100, 20);
+			this.employeeFilterActive.TabIndex = 0;
+			this.employeeFilterActive.Text = "Active users";
+			this.employeeFilterActive.ThreeState = true;
+			this.employeeFilterActive.UseVisualStyleBackColor = true;
+			this.employeeFilterActive.Click += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// employeeFilterTextPanel
+			// 
+			this.employeeFilterTextPanel.Controls.Add(this.employeeListSearchFromClipboard);
+			this.employeeFilterTextPanel.Controls.Add(this.employeeFilterTextAutoWildcards);
+			this.employeeFilterTextPanel.Controls.Add(this.employeeListRefresh);
+			this.employeeFilterTextPanel.Controls.Add(this.employeeFilterText);
+			this.employeeFilterTextPanel.Dock = System.Windows.Forms.DockStyle.Top;
+			this.employeeFilterTextPanel.Location = new System.Drawing.Point(0, 0);
+			this.employeeFilterTextPanel.Name = "employeeFilterTextPanel";
+			this.employeeFilterTextPanel.Size = new System.Drawing.Size(240, 84);
+			this.employeeFilterTextPanel.TabIndex = 0;
+			this.employeeFilterTextPanel.TabStop = false;
+			this.employeeFilterTextPanel.Text = "Search text";
+			// 
+			// employeeListSearchFromClipboard
+			// 
+			this.employeeListSearchFromClipboard.AccessibleName = "Search from clipboard";
+			this.employeeListSearchFromClipboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.employeeListSearchFromClipboard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.employeeListSearchFromClipboard.Location = new System.Drawing.Point(202, 47);
+			this.employeeListSearchFromClipboard.Name = "employeeListSearchFromClipboard";
+			this.employeeListSearchFromClipboard.Size = new System.Drawing.Size(25, 23);
+			this.employeeListSearchFromClipboard.TabIndex = 3;
+			this.employeeListSearchFromClipboard.UseVisualStyleBackColor = true;
+			this.employeeListSearchFromClipboard.Click += new System.EventHandler(this.EmployeeSearchStartThreadFromClipboard);
+			// 
+			// employeeFilterTextAutoWildcards
+			// 
+			this.employeeFilterTextAutoWildcards.AutoSize = true;
+			this.employeeFilterTextAutoWildcards.Location = new System.Drawing.Point(12, 49);
+			this.employeeFilterTextAutoWildcards.Name = "employeeFilterTextAutoWildcards";
+			this.employeeFilterTextAutoWildcards.Size = new System.Drawing.Size(127, 20);
+			this.employeeFilterTextAutoWildcards.TabIndex = 2;
+			this.employeeFilterTextAutoWildcards.Text = "Auto Wildcard (*)";
+			this.employeeFilterTextAutoWildcards.UseVisualStyleBackColor = true;
+			this.employeeFilterTextAutoWildcards.CheckedChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			// 
+			// employeeListRefresh
+			// 
+			this.employeeListRefresh.AccessibleName = "Refresh";
+			this.employeeListRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.employeeListRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.employeeListRefresh.Location = new System.Drawing.Point(202, 20);
+			this.employeeListRefresh.Name = "employeeListRefresh";
+			this.employeeListRefresh.Size = new System.Drawing.Size(25, 23);
+			this.employeeListRefresh.TabIndex = 1;
+			this.employeeListRefresh.UseVisualStyleBackColor = true;
+			this.employeeListRefresh.Click += new System.EventHandler(this.EmployeeSearchStartThreadFromFilterText);
+			// 
+			// employeeFilterText
+			// 
+			this.employeeFilterText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.employeeFilterText.Location = new System.Drawing.Point(12, 21);
+			this.employeeFilterText.Name = "employeeFilterText";
+			this.employeeFilterText.Size = new System.Drawing.Size(184, 22);
+			this.employeeFilterText.TabIndex = 0;
+			this.employeeFilterText.TextChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
 			// 
 			// employeePropertyPage
 			// 
@@ -330,8 +855,8 @@
 			// 
 			this.employeePropertyHistoryListActiveFromDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.employeePropertyHistoryListActiveFromDate.DataPropertyName = "AktivFra";
-			dataGridViewCellStyle1.Format = "dd.MM.yyyy";
-			this.employeePropertyHistoryListActiveFromDate.DefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle4.Format = "dd.MM.yyyy";
+			this.employeePropertyHistoryListActiveFromDate.DefaultCellStyle = dataGridViewCellStyle4;
 			this.employeePropertyHistoryListActiveFromDate.HeaderText = "From:";
 			this.employeePropertyHistoryListActiveFromDate.Name = "employeePropertyHistoryListActiveFromDate";
 			this.employeePropertyHistoryListActiveFromDate.ReadOnly = true;
@@ -341,8 +866,8 @@
 			// 
 			this.employeePropertyHistoryListActiveToDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.employeePropertyHistoryListActiveToDate.DataPropertyName = "AktivTil";
-			dataGridViewCellStyle2.Format = "dd.MM.yyyy";
-			this.employeePropertyHistoryListActiveToDate.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle5.Format = "dd.MM.yyyy";
+			this.employeePropertyHistoryListActiveToDate.DefaultCellStyle = dataGridViewCellStyle5;
 			this.employeePropertyHistoryListActiveToDate.HeaderText = "To:";
 			this.employeePropertyHistoryListActiveToDate.Name = "employeePropertyHistoryListActiveToDate";
 			this.employeePropertyHistoryListActiveToDate.ReadOnly = true;
@@ -352,9 +877,9 @@
 			// 
 			this.employeePropertyHistoryListChangedDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.employeePropertyHistoryListChangedDate.DataPropertyName = "SidstAendret";
-			dataGridViewCellStyle3.Format = "dd.MM.yyyy";
-			dataGridViewCellStyle3.NullValue = null;
-			this.employeePropertyHistoryListChangedDate.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle6.Format = "dd.MM.yyyy";
+			dataGridViewCellStyle6.NullValue = null;
+			this.employeePropertyHistoryListChangedDate.DefaultCellStyle = dataGridViewCellStyle6;
 			this.employeePropertyHistoryListChangedDate.HeaderText = "Changed";
 			this.employeePropertyHistoryListChangedDate.Name = "employeePropertyHistoryListChangedDate";
 			this.employeePropertyHistoryListChangedDate.ReadOnly = true;
@@ -1175,501 +1700,6 @@
 			this.organizationPropertyPage.TabIndex = 3;
 			this.organizationPropertyPage.Text = "Organization Properties";
 			// 
-			// employeeListPage
-			// 
-			this.employeeListPage.Controls.Add(this.employeeList);
-			this.employeeListPage.Controls.Add(this.employeeListStatus);
-			this.employeeListPage.Controls.Add(this.employeeListPanelLeft);
-			this.employeeListPage.Location = new System.Drawing.Point(4, 25);
-			this.employeeListPage.Name = "employeeListPage";
-			this.employeeListPage.Padding = new System.Windows.Forms.Padding(3);
-			this.employeeListPage.Size = new System.Drawing.Size(1226, 604);
-			this.employeeListPage.TabIndex = 0;
-			this.employeeListPage.Text = "Employees";
-			// 
-			// employeeList
-			// 
-			this.employeeList.AllowUserToAddRows = false;
-			this.employeeList.AllowUserToDeleteRows = false;
-			this.employeeList.AllowUserToResizeRows = false;
-			this.employeeList.BackgroundColor = System.Drawing.SystemColors.Control;
-			this.employeeList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.employeeList.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-			this.employeeList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.employeeList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.employeeListAdStatus,
-            this.employeeListFirstName,
-            this.employeeListLastName,
-            this.employeeListDisplayName,
-            this.employeeListCprNumber,
-            this.employeeListAdUserName,
-            this.employeeListOpusUserName,
-            this.employeeListPhone,
-            this.employeeListMobile,
-            this.employeeListMail});
-			this.employeeList.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.employeeList.Location = new System.Drawing.Point(243, 3);
-			this.employeeList.Name = "employeeList";
-			this.employeeList.ReadOnly = true;
-			this.employeeList.RowHeadersVisible = false;
-			this.employeeList.RowHeadersWidth = 22;
-			this.employeeList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-			this.employeeList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.employeeList.ShowCellErrors = false;
-			this.employeeList.ShowCellToolTips = false;
-			this.employeeList.ShowEditingIcon = false;
-			this.employeeList.ShowRowErrors = false;
-			this.employeeList.Size = new System.Drawing.Size(980, 578);
-			this.employeeList.TabIndex = 0;
-			this.employeeList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.EmployeeListDataError);
-			this.employeeList.SelectionChanged += new System.EventHandler(this.ActionUpdate);
-			this.employeeList.DoubleClick += new System.EventHandler(this.ActionEmployeeShowPropertiesClick);
-			// 
-			// employeeListAdStatus
-			// 
-			this.employeeListAdStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListAdStatus.HeaderText = "";
-			this.employeeListAdStatus.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-			this.employeeListAdStatus.MinimumWidth = 25;
-			this.employeeListAdStatus.Name = "employeeListAdStatus";
-			this.employeeListAdStatus.ReadOnly = true;
-			this.employeeListAdStatus.Width = 25;
-			// 
-			// employeeListFirstName
-			// 
-			this.employeeListFirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListFirstName.DataPropertyName = "ForNavn";
-			this.employeeListFirstName.HeaderText = "First name";
-			this.employeeListFirstName.MinimumWidth = 100;
-			this.employeeListFirstName.Name = "employeeListFirstName";
-			this.employeeListFirstName.ReadOnly = true;
-			// 
-			// employeeListLastName
-			// 
-			this.employeeListLastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListLastName.DataPropertyName = "EfterNavn";
-			this.employeeListLastName.HeaderText = "Last name";
-			this.employeeListLastName.MinimumWidth = 100;
-			this.employeeListLastName.Name = "employeeListLastName";
-			this.employeeListLastName.ReadOnly = true;
-			// 
-			// employeeListDisplayName
-			// 
-			this.employeeListDisplayName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListDisplayName.DataPropertyName = "KaldeNavn";
-			this.employeeListDisplayName.HeaderText = "Display name";
-			this.employeeListDisplayName.MinimumWidth = 150;
-			this.employeeListDisplayName.Name = "employeeListDisplayName";
-			this.employeeListDisplayName.ReadOnly = true;
-			this.employeeListDisplayName.Width = 150;
-			// 
-			// employeeListCprNumber
-			// 
-			this.employeeListCprNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListCprNumber.DataPropertyName = "CprNummer";
-			this.employeeListCprNumber.HeaderText = "CPR";
-			this.employeeListCprNumber.MinimumWidth = 70;
-			this.employeeListCprNumber.Name = "employeeListCprNumber";
-			this.employeeListCprNumber.ReadOnly = true;
-			this.employeeListCprNumber.Width = 70;
-			// 
-			// employeeListAdUserName
-			// 
-			this.employeeListAdUserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListAdUserName.DataPropertyName = "AdBrugerNavn";
-			this.employeeListAdUserName.HeaderText = "AD";
-			this.employeeListAdUserName.MinimumWidth = 100;
-			this.employeeListAdUserName.Name = "employeeListAdUserName";
-			this.employeeListAdUserName.ReadOnly = true;
-			// 
-			// employeeListOpusUserName
-			// 
-			this.employeeListOpusUserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListOpusUserName.DataPropertyName = "OpusBrugerNavn";
-			this.employeeListOpusUserName.HeaderText = "Opus";
-			this.employeeListOpusUserName.MinimumWidth = 100;
-			this.employeeListOpusUserName.Name = "employeeListOpusUserName";
-			this.employeeListOpusUserName.ReadOnly = true;
-			// 
-			// employeeListPhone
-			// 
-			this.employeeListPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListPhone.DataPropertyName = "TelefonNummer";
-			this.employeeListPhone.HeaderText = "Phone";
-			this.employeeListPhone.MinimumWidth = 100;
-			this.employeeListPhone.Name = "employeeListPhone";
-			this.employeeListPhone.ReadOnly = true;
-			// 
-			// employeeListMobile
-			// 
-			this.employeeListMobile.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListMobile.DataPropertyName = "MobilNummer";
-			this.employeeListMobile.HeaderText = "Mobile";
-			this.employeeListMobile.MinimumWidth = 100;
-			this.employeeListMobile.Name = "employeeListMobile";
-			this.employeeListMobile.ReadOnly = true;
-			// 
-			// employeeListMail
-			// 
-			this.employeeListMail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListMail.DataPropertyName = "Epost";
-			this.employeeListMail.HeaderText = "E-mail";
-			this.employeeListMail.MinimumWidth = 100;
-			this.employeeListMail.Name = "employeeListMail";
-			this.employeeListMail.ReadOnly = true;
-			// 
-			// employeeListStatus
-			// 
-			this.employeeListStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.employeeListStatus.Location = new System.Drawing.Point(243, 581);
-			this.employeeListStatus.Name = "employeeListStatus";
-			this.employeeListStatus.Size = new System.Drawing.Size(980, 20);
-			this.employeeListStatus.TabIndex = 2;
-			this.employeeListStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// employeeListPanelLeft
-			// 
-			this.employeeListPanelLeft.Controls.Add(this.employeeFilterPanel);
-			this.employeeListPanelLeft.Controls.Add(this.employeeFilterTextPanel);
-			this.employeeListPanelLeft.Dock = System.Windows.Forms.DockStyle.Left;
-			this.employeeListPanelLeft.Location = new System.Drawing.Point(3, 3);
-			this.employeeListPanelLeft.Name = "employeeListPanelLeft";
-			this.employeeListPanelLeft.Size = new System.Drawing.Size(240, 598);
-			this.employeeListPanelLeft.TabIndex = 1;
-			// 
-			// employeeFilterPanel
-			// 
-			this.employeeFilterPanel.Controls.Add(this.label38);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterChangedDateEnd);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterChangedDateBegin);
-			this.employeeFilterPanel.Controls.Add(this.label39);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterHistoryActiveToDateEnd);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterHistoryActiveToDateBegin);
-			this.employeeFilterPanel.Controls.Add(this.label40);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterHistoryActiveFromDateEnd);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterHistoryActiveFromDateBegin);
-			this.employeeFilterPanel.Controls.Add(this.label37);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentJubileeDateEnd);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentJubileeDateBegin);
-			this.employeeFilterPanel.Controls.Add(this.label36);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentOldestFirstDateEnd);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentOldestFirstDateBegin);
-			this.employeeFilterPanel.Controls.Add(this.label35);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentLastDateEnd);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentLastDateBegin);
-			this.employeeFilterPanel.Controls.Add(this.label34);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentFirstDateEnd);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterEmploymentFirstDateBegin);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterAd);
-			this.employeeFilterPanel.Controls.Add(this.employeeFilterActive);
-			this.employeeFilterPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.employeeFilterPanel.Location = new System.Drawing.Point(0, 84);
-			this.employeeFilterPanel.Name = "employeeFilterPanel";
-			this.employeeFilterPanel.Size = new System.Drawing.Size(240, 514);
-			this.employeeFilterPanel.TabIndex = 1;
-			this.employeeFilterPanel.TabStop = false;
-			this.employeeFilterPanel.Text = "Filters";
-			// 
-			// label38
-			// 
-			this.label38.AutoSize = true;
-			this.label38.Location = new System.Drawing.Point(9, 334);
-			this.label38.Name = "label38";
-			this.label38.Size = new System.Drawing.Size(98, 16);
-			this.label38.TabIndex = 22;
-			this.label38.Text = "Changed Date:";
-			// 
-			// employeeFilterChangedDateEnd
-			// 
-			this.employeeFilterChangedDateEnd.Checked = false;
-			this.employeeFilterChangedDateEnd.CustomFormat = "dd-MM-yy";
-			this.employeeFilterChangedDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.employeeFilterChangedDateEnd.Location = new System.Drawing.Point(113, 353);
-			this.employeeFilterChangedDateEnd.Name = "employeeFilterChangedDateEnd";
-			this.employeeFilterChangedDateEnd.ShowCheckBox = true;
-			this.employeeFilterChangedDateEnd.Size = new System.Drawing.Size(95, 22);
-			this.employeeFilterChangedDateEnd.TabIndex = 21;
-			this.employeeFilterChangedDateEnd.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// employeeFilterChangedDateBegin
-			// 
-			this.employeeFilterChangedDateBegin.Checked = false;
-			this.employeeFilterChangedDateBegin.CustomFormat = "dd-MM-yy";
-			this.employeeFilterChangedDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.employeeFilterChangedDateBegin.Location = new System.Drawing.Point(12, 353);
-			this.employeeFilterChangedDateBegin.Name = "employeeFilterChangedDateBegin";
-			this.employeeFilterChangedDateBegin.ShowCheckBox = true;
-			this.employeeFilterChangedDateBegin.Size = new System.Drawing.Size(95, 22);
-			this.employeeFilterChangedDateBegin.TabIndex = 20;
-			this.employeeFilterChangedDateBegin.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// label39
-			// 
-			this.label39.AutoSize = true;
-			this.label39.Location = new System.Drawing.Point(9, 290);
-			this.label39.Name = "label39";
-			this.label39.Size = new System.Drawing.Size(100, 16);
-			this.label39.TabIndex = 19;
-			this.label39.Text = "Active To Date:";
-			// 
-			// employeeFilterHistoryActiveToDateEnd
-			// 
-			this.employeeFilterHistoryActiveToDateEnd.Checked = false;
-			this.employeeFilterHistoryActiveToDateEnd.CustomFormat = "dd-MM-yy";
-			this.employeeFilterHistoryActiveToDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.employeeFilterHistoryActiveToDateEnd.Location = new System.Drawing.Point(113, 309);
-			this.employeeFilterHistoryActiveToDateEnd.Name = "employeeFilterHistoryActiveToDateEnd";
-			this.employeeFilterHistoryActiveToDateEnd.ShowCheckBox = true;
-			this.employeeFilterHistoryActiveToDateEnd.Size = new System.Drawing.Size(95, 22);
-			this.employeeFilterHistoryActiveToDateEnd.TabIndex = 18;
-			this.employeeFilterHistoryActiveToDateEnd.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// employeeFilterHistoryActiveToDateBegin
-			// 
-			this.employeeFilterHistoryActiveToDateBegin.Checked = false;
-			this.employeeFilterHistoryActiveToDateBegin.CustomFormat = "dd-MM-yy";
-			this.employeeFilterHistoryActiveToDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.employeeFilterHistoryActiveToDateBegin.Location = new System.Drawing.Point(12, 309);
-			this.employeeFilterHistoryActiveToDateBegin.Name = "employeeFilterHistoryActiveToDateBegin";
-			this.employeeFilterHistoryActiveToDateBegin.ShowCheckBox = true;
-			this.employeeFilterHistoryActiveToDateBegin.Size = new System.Drawing.Size(95, 22);
-			this.employeeFilterHistoryActiveToDateBegin.TabIndex = 17;
-			this.employeeFilterHistoryActiveToDateBegin.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// label40
-			// 
-			this.label40.AutoSize = true;
-			this.label40.Location = new System.Drawing.Point(9, 246);
-			this.label40.Name = "label40";
-			this.label40.Size = new System.Drawing.Size(114, 16);
-			this.label40.TabIndex = 16;
-			this.label40.Text = "Active From Date:";
-			// 
-			// employeeFilterHistoryActiveFromDateEnd
-			// 
-			this.employeeFilterHistoryActiveFromDateEnd.Checked = false;
-			this.employeeFilterHistoryActiveFromDateEnd.CustomFormat = "dd-MM-yy";
-			this.employeeFilterHistoryActiveFromDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.employeeFilterHistoryActiveFromDateEnd.Location = new System.Drawing.Point(113, 265);
-			this.employeeFilterHistoryActiveFromDateEnd.Name = "employeeFilterHistoryActiveFromDateEnd";
-			this.employeeFilterHistoryActiveFromDateEnd.ShowCheckBox = true;
-			this.employeeFilterHistoryActiveFromDateEnd.Size = new System.Drawing.Size(95, 22);
-			this.employeeFilterHistoryActiveFromDateEnd.TabIndex = 15;
-			this.employeeFilterHistoryActiveFromDateEnd.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// employeeFilterHistoryActiveFromDateBegin
-			// 
-			this.employeeFilterHistoryActiveFromDateBegin.Checked = false;
-			this.employeeFilterHistoryActiveFromDateBegin.CustomFormat = "dd-MM-yy";
-			this.employeeFilterHistoryActiveFromDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.employeeFilterHistoryActiveFromDateBegin.Location = new System.Drawing.Point(12, 265);
-			this.employeeFilterHistoryActiveFromDateBegin.Name = "employeeFilterHistoryActiveFromDateBegin";
-			this.employeeFilterHistoryActiveFromDateBegin.ShowCheckBox = true;
-			this.employeeFilterHistoryActiveFromDateBegin.Size = new System.Drawing.Size(95, 22);
-			this.employeeFilterHistoryActiveFromDateBegin.TabIndex = 14;
-			this.employeeFilterHistoryActiveFromDateBegin.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// label37
-			// 
-			this.label37.AutoSize = true;
-			this.label37.Location = new System.Drawing.Point(9, 202);
-			this.label37.Name = "label37";
-			this.label37.Size = new System.Drawing.Size(165, 16);
-			this.label37.TabIndex = 13;
-			this.label37.Text = "Employment Jubilee Date:";
-			// 
-			// employeeFilterEmploymentJubileeDateEnd
-			// 
-			this.employeeFilterEmploymentJubileeDateEnd.Checked = false;
-			this.employeeFilterEmploymentJubileeDateEnd.CustomFormat = "dd-MM-yy";
-			this.employeeFilterEmploymentJubileeDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.employeeFilterEmploymentJubileeDateEnd.Location = new System.Drawing.Point(113, 221);
-			this.employeeFilterEmploymentJubileeDateEnd.Name = "employeeFilterEmploymentJubileeDateEnd";
-			this.employeeFilterEmploymentJubileeDateEnd.ShowCheckBox = true;
-			this.employeeFilterEmploymentJubileeDateEnd.Size = new System.Drawing.Size(95, 22);
-			this.employeeFilterEmploymentJubileeDateEnd.TabIndex = 12;
-			this.employeeFilterEmploymentJubileeDateEnd.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// employeeFilterEmploymentJubileeDateBegin
-			// 
-			this.employeeFilterEmploymentJubileeDateBegin.Checked = false;
-			this.employeeFilterEmploymentJubileeDateBegin.CustomFormat = "dd-MM-yy";
-			this.employeeFilterEmploymentJubileeDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.employeeFilterEmploymentJubileeDateBegin.Location = new System.Drawing.Point(12, 221);
-			this.employeeFilterEmploymentJubileeDateBegin.Name = "employeeFilterEmploymentJubileeDateBegin";
-			this.employeeFilterEmploymentJubileeDateBegin.ShowCheckBox = true;
-			this.employeeFilterEmploymentJubileeDateBegin.Size = new System.Drawing.Size(95, 22);
-			this.employeeFilterEmploymentJubileeDateBegin.TabIndex = 11;
-			this.employeeFilterEmploymentJubileeDateBegin.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// label36
-			// 
-			this.label36.AutoSize = true;
-			this.label36.Location = new System.Drawing.Point(9, 158);
-			this.label36.Name = "label36";
-			this.label36.Size = new System.Drawing.Size(160, 16);
-			this.label36.TabIndex = 10;
-			this.label36.Text = "Employment Oldest Date:";
-			// 
-			// employeeFilterEmploymentOldestFirstDateEnd
-			// 
-			this.employeeFilterEmploymentOldestFirstDateEnd.Checked = false;
-			this.employeeFilterEmploymentOldestFirstDateEnd.CustomFormat = "dd-MM-yy";
-			this.employeeFilterEmploymentOldestFirstDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.employeeFilterEmploymentOldestFirstDateEnd.Location = new System.Drawing.Point(113, 177);
-			this.employeeFilterEmploymentOldestFirstDateEnd.Name = "employeeFilterEmploymentOldestFirstDateEnd";
-			this.employeeFilterEmploymentOldestFirstDateEnd.ShowCheckBox = true;
-			this.employeeFilterEmploymentOldestFirstDateEnd.Size = new System.Drawing.Size(95, 22);
-			this.employeeFilterEmploymentOldestFirstDateEnd.TabIndex = 9;
-			this.employeeFilterEmploymentOldestFirstDateEnd.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// employeeFilterEmploymentOldestFirstDateBegin
-			// 
-			this.employeeFilterEmploymentOldestFirstDateBegin.Checked = false;
-			this.employeeFilterEmploymentOldestFirstDateBegin.CustomFormat = "dd-MM-yy";
-			this.employeeFilterEmploymentOldestFirstDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.employeeFilterEmploymentOldestFirstDateBegin.Location = new System.Drawing.Point(12, 177);
-			this.employeeFilterEmploymentOldestFirstDateBegin.Name = "employeeFilterEmploymentOldestFirstDateBegin";
-			this.employeeFilterEmploymentOldestFirstDateBegin.ShowCheckBox = true;
-			this.employeeFilterEmploymentOldestFirstDateBegin.Size = new System.Drawing.Size(95, 22);
-			this.employeeFilterEmploymentOldestFirstDateBegin.TabIndex = 8;
-			this.employeeFilterEmploymentOldestFirstDateBegin.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// label35
-			// 
-			this.label35.AutoSize = true;
-			this.label35.Location = new System.Drawing.Point(9, 114);
-			this.label35.Name = "label35";
-			this.label35.Size = new System.Drawing.Size(146, 16);
-			this.label35.TabIndex = 7;
-			this.label35.Text = "Employment Last Date:";
-			// 
-			// employeeFilterEmploymentLastDateEnd
-			// 
-			this.employeeFilterEmploymentLastDateEnd.Checked = false;
-			this.employeeFilterEmploymentLastDateEnd.CustomFormat = "dd-MM-yy";
-			this.employeeFilterEmploymentLastDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.employeeFilterEmploymentLastDateEnd.Location = new System.Drawing.Point(113, 133);
-			this.employeeFilterEmploymentLastDateEnd.Name = "employeeFilterEmploymentLastDateEnd";
-			this.employeeFilterEmploymentLastDateEnd.ShowCheckBox = true;
-			this.employeeFilterEmploymentLastDateEnd.Size = new System.Drawing.Size(95, 22);
-			this.employeeFilterEmploymentLastDateEnd.TabIndex = 6;
-			this.employeeFilterEmploymentLastDateEnd.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// employeeFilterEmploymentLastDateBegin
-			// 
-			this.employeeFilterEmploymentLastDateBegin.Checked = false;
-			this.employeeFilterEmploymentLastDateBegin.CustomFormat = "dd-MM-yy";
-			this.employeeFilterEmploymentLastDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.employeeFilterEmploymentLastDateBegin.Location = new System.Drawing.Point(12, 133);
-			this.employeeFilterEmploymentLastDateBegin.Name = "employeeFilterEmploymentLastDateBegin";
-			this.employeeFilterEmploymentLastDateBegin.ShowCheckBox = true;
-			this.employeeFilterEmploymentLastDateBegin.Size = new System.Drawing.Size(95, 22);
-			this.employeeFilterEmploymentLastDateBegin.TabIndex = 5;
-			this.employeeFilterEmploymentLastDateBegin.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// label34
-			// 
-			this.label34.AutoSize = true;
-			this.label34.Location = new System.Drawing.Point(9, 70);
-			this.label34.Name = "label34";
-			this.label34.Size = new System.Drawing.Size(146, 16);
-			this.label34.TabIndex = 4;
-			this.label34.Text = "Employment First Date:";
-			// 
-			// employeeFilterEmploymentFirstDateEnd
-			// 
-			this.employeeFilterEmploymentFirstDateEnd.Checked = false;
-			this.employeeFilterEmploymentFirstDateEnd.CustomFormat = "dd-MM-yy";
-			this.employeeFilterEmploymentFirstDateEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.employeeFilterEmploymentFirstDateEnd.Location = new System.Drawing.Point(113, 89);
-			this.employeeFilterEmploymentFirstDateEnd.Name = "employeeFilterEmploymentFirstDateEnd";
-			this.employeeFilterEmploymentFirstDateEnd.ShowCheckBox = true;
-			this.employeeFilterEmploymentFirstDateEnd.Size = new System.Drawing.Size(95, 22);
-			this.employeeFilterEmploymentFirstDateEnd.TabIndex = 3;
-			this.employeeFilterEmploymentFirstDateEnd.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// employeeFilterEmploymentFirstDateBegin
-			// 
-			this.employeeFilterEmploymentFirstDateBegin.Checked = false;
-			this.employeeFilterEmploymentFirstDateBegin.CustomFormat = "dd-MM-yy";
-			this.employeeFilterEmploymentFirstDateBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-			this.employeeFilterEmploymentFirstDateBegin.Location = new System.Drawing.Point(12, 89);
-			this.employeeFilterEmploymentFirstDateBegin.Name = "employeeFilterEmploymentFirstDateBegin";
-			this.employeeFilterEmploymentFirstDateBegin.ShowCheckBox = true;
-			this.employeeFilterEmploymentFirstDateBegin.Size = new System.Drawing.Size(95, 22);
-			this.employeeFilterEmploymentFirstDateBegin.TabIndex = 2;
-			this.employeeFilterEmploymentFirstDateBegin.ValueChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// employeeFilterAd
-			// 
-			this.employeeFilterAd.AutoSize = true;
-			this.employeeFilterAd.Location = new System.Drawing.Point(12, 47);
-			this.employeeFilterAd.Name = "employeeFilterAd";
-			this.employeeFilterAd.Size = new System.Drawing.Size(157, 20);
-			this.employeeFilterAd.TabIndex = 1;
-			this.employeeFilterAd.Text = "Active Directory users";
-			this.employeeFilterAd.ThreeState = true;
-			this.employeeFilterAd.UseVisualStyleBackColor = true;
-			this.employeeFilterAd.CheckedChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// employeeFilterActive
-			// 
-			this.employeeFilterActive.AutoSize = true;
-			this.employeeFilterActive.Location = new System.Drawing.Point(12, 21);
-			this.employeeFilterActive.Name = "employeeFilterActive";
-			this.employeeFilterActive.Size = new System.Drawing.Size(100, 20);
-			this.employeeFilterActive.TabIndex = 0;
-			this.employeeFilterActive.Text = "Active users";
-			this.employeeFilterActive.ThreeState = true;
-			this.employeeFilterActive.UseVisualStyleBackColor = true;
-			this.employeeFilterActive.Click += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// employeeFilterTextPanel
-			// 
-			this.employeeFilterTextPanel.Controls.Add(this.employeeFilterTextAutoWildcards);
-			this.employeeFilterTextPanel.Controls.Add(this.employeeListRefresh);
-			this.employeeFilterTextPanel.Controls.Add(this.employeeFilterText);
-			this.employeeFilterTextPanel.Dock = System.Windows.Forms.DockStyle.Top;
-			this.employeeFilterTextPanel.Location = new System.Drawing.Point(0, 0);
-			this.employeeFilterTextPanel.Name = "employeeFilterTextPanel";
-			this.employeeFilterTextPanel.Size = new System.Drawing.Size(240, 84);
-			this.employeeFilterTextPanel.TabIndex = 0;
-			this.employeeFilterTextPanel.TabStop = false;
-			this.employeeFilterTextPanel.Text = "Search text";
-			// 
-			// employeeFilterTextAutoWildcards
-			// 
-			this.employeeFilterTextAutoWildcards.AutoSize = true;
-			this.employeeFilterTextAutoWildcards.Location = new System.Drawing.Point(12, 49);
-			this.employeeFilterTextAutoWildcards.Name = "employeeFilterTextAutoWildcards";
-			this.employeeFilterTextAutoWildcards.Size = new System.Drawing.Size(127, 20);
-			this.employeeFilterTextAutoWildcards.TabIndex = 2;
-			this.employeeFilterTextAutoWildcards.Text = "Auto Wildcard (*)";
-			this.employeeFilterTextAutoWildcards.UseVisualStyleBackColor = true;
-			this.employeeFilterTextAutoWildcards.CheckedChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
-			// employeeListRefresh
-			// 
-			this.employeeListRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.employeeListRefresh.Location = new System.Drawing.Point(202, 20);
-			this.employeeListRefresh.Name = "employeeListRefresh";
-			this.employeeListRefresh.Size = new System.Drawing.Size(25, 23);
-			this.employeeListRefresh.TabIndex = 1;
-			this.employeeListRefresh.Text = "R";
-			this.employeeListRefresh.UseVisualStyleBackColor = true;
-			this.employeeListRefresh.Click += new System.EventHandler(this.EmployeeSearchStartThread);
-			// 
-			// employeeFilterText
-			// 
-			this.employeeFilterText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.employeeFilterText.Location = new System.Drawing.Point(12, 21);
-			this.employeeFilterText.Name = "employeeFilterText";
-			this.employeeFilterText.Size = new System.Drawing.Size(184, 22);
-			this.employeeFilterText.TabIndex = 0;
-			this.employeeFilterText.TextChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
-			// 
 			// MainFormToolStrip
 			// 
 			this.MainFormToolStrip.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1677,10 +1707,8 @@
 			this.MainFormToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.actionEmployeeList,
             this.actionEmployeeProperties,
-            this.actionActiveDirectoryEnableUser,
-            this.actionActiveDirectoryDisableUser,
-            this.actionActiveDirectoryExpireUser,
-            this.actionActiveDirectoryResetUser});
+            this.actionEmployeeCopyProperties,
+            this.actionActiveDirectory});
 			this.MainFormToolStrip.Location = new System.Drawing.Point(0, 0);
 			this.MainFormToolStrip.Name = "MainFormToolStrip";
 			this.MainFormToolStrip.Size = new System.Drawing.Size(1234, 28);
@@ -1708,42 +1736,75 @@
 			this.actionEmployeeProperties.Text = "Show employee properties";
 			this.actionEmployeeProperties.Click += new System.EventHandler(this.ActionEmployeeShowPropertiesClick);
 			// 
+			// actionEmployeeCopyProperties
+			// 
+			this.actionEmployeeCopyProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.actionEmployeeCopyProperties.Image = ((System.Drawing.Image)(resources.GetObject("actionEmployeeCopyProperties.Image")));
+			this.actionEmployeeCopyProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.actionEmployeeCopyProperties.Name = "actionEmployeeCopyProperties";
+			this.actionEmployeeCopyProperties.Size = new System.Drawing.Size(23, 25);
+			this.actionEmployeeCopyProperties.Text = "C";
+			this.actionEmployeeCopyProperties.ToolTipText = "Copy employee properties";
+			this.actionEmployeeCopyProperties.Click += new System.EventHandler(this.ActionEmployeeCopyPropertiesClick);
+			// 
+			// actionActiveDirectory
+			// 
+			this.actionActiveDirectory.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.actionActiveDirectoryEnableUser,
+            this.actionActiveDirectoryDisableUser,
+            this.actionActiveDirectoryExpireUser,
+            this.actionActiveDirectoryResetUser,
+            this.toolStripSeparator1,
+            this.actionActiveDirectoryShowUser});
+			this.actionActiveDirectory.Image = ((System.Drawing.Image)(resources.GetObject("actionActiveDirectory.Image")));
+			this.actionActiveDirectory.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.actionActiveDirectory.Name = "actionActiveDirectory";
+			this.actionActiveDirectory.Size = new System.Drawing.Size(149, 25);
+			this.actionActiveDirectory.Text = "Active Directory";
+			// 
 			// actionActiveDirectoryEnableUser
 			// 
-			this.actionActiveDirectoryEnableUser.Image = ((System.Drawing.Image)(resources.GetObject("actionActiveDirectoryEnableUser.Image")));
-			this.actionActiveDirectoryEnableUser.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.actionActiveDirectoryEnableUser.Name = "actionActiveDirectoryEnableUser";
-			this.actionActiveDirectoryEnableUser.Size = new System.Drawing.Size(224, 25);
+			this.actionActiveDirectoryEnableUser.Size = new System.Drawing.Size(326, 26);
 			this.actionActiveDirectoryEnableUser.Text = "Enable Active Directory user";
+			this.actionActiveDirectoryEnableUser.ToolTipText = "Enable Active Directory user";
 			this.actionActiveDirectoryEnableUser.Click += new System.EventHandler(this.ActionEnableActiveDirectoryUserClick);
 			// 
 			// actionActiveDirectoryDisableUser
 			// 
-			this.actionActiveDirectoryDisableUser.Image = ((System.Drawing.Image)(resources.GetObject("actionActiveDirectoryDisableUser.Image")));
-			this.actionActiveDirectoryDisableUser.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.actionActiveDirectoryDisableUser.Name = "actionActiveDirectoryDisableUser";
-			this.actionActiveDirectoryDisableUser.Size = new System.Drawing.Size(229, 25);
+			this.actionActiveDirectoryDisableUser.Size = new System.Drawing.Size(326, 26);
 			this.actionActiveDirectoryDisableUser.Text = "Disable Active Directory user";
+			this.actionActiveDirectoryDisableUser.ToolTipText = "Disable Active Directory user";
 			this.actionActiveDirectoryDisableUser.Click += new System.EventHandler(this.ActionDisableActiveDirectoryUserClick);
 			// 
 			// actionActiveDirectoryExpireUser
 			// 
-			this.actionActiveDirectoryExpireUser.Image = ((System.Drawing.Image)(resources.GetObject("actionActiveDirectoryExpireUser.Image")));
-			this.actionActiveDirectoryExpireUser.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.actionActiveDirectoryExpireUser.Name = "actionActiveDirectoryExpireUser";
-			this.actionActiveDirectoryExpireUser.Size = new System.Drawing.Size(220, 25);
+			this.actionActiveDirectoryExpireUser.Size = new System.Drawing.Size(326, 26);
 			this.actionActiveDirectoryExpireUser.Text = "Expire Active Directory user";
+			this.actionActiveDirectoryExpireUser.ToolTipText = "Expire Active Directory user";
 			this.actionActiveDirectoryExpireUser.Click += new System.EventHandler(this.ActionExpireActiveDirectoryUserClick);
 			// 
 			// actionActiveDirectoryResetUser
 			// 
-			this.actionActiveDirectoryResetUser.Image = ((System.Drawing.Image)(resources.GetObject("actionActiveDirectoryResetUser.Image")));
-			this.actionActiveDirectoryResetUser.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.actionActiveDirectoryResetUser.Name = "actionActiveDirectoryResetUser";
-			this.actionActiveDirectoryResetUser.Size = new System.Drawing.Size(216, 25);
+			this.actionActiveDirectoryResetUser.Size = new System.Drawing.Size(326, 26);
 			this.actionActiveDirectoryResetUser.Text = "Reset Active Directory user";
 			this.actionActiveDirectoryResetUser.ToolTipText = "Unlock and reset password on Active Directory user";
 			this.actionActiveDirectoryResetUser.Click += new System.EventHandler(this.ActionResetActiveDirectoryUserClick);
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(323, 6);
+			// 
+			// actionActiveDirectoryShowUser
+			// 
+			this.actionActiveDirectoryShowUser.Name = "actionActiveDirectoryShowUser";
+			this.actionActiveDirectoryShowUser.Size = new System.Drawing.Size(326, 26);
+			this.actionActiveDirectoryShowUser.Text = "Show Active Directory user in MMC";
+			this.actionActiveDirectoryShowUser.Click += new System.EventHandler(this.ActionShowActiveDirectoryUserClick);
 			// 
 			// MainForm
 			// 
@@ -1759,6 +1820,13 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "*** Design Mode ***";
 			this.MainFormPages.ResumeLayout(false);
+			this.employeeListPage.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.employeeList)).EndInit();
+			this.employeeListPanelLeft.ResumeLayout(false);
+			this.employeeFilterPanel.ResumeLayout(false);
+			this.employeeFilterPanel.PerformLayout();
+			this.employeeFilterTextPanel.ResumeLayout(false);
+			this.employeeFilterTextPanel.PerformLayout();
 			this.employeePropertyPage.ResumeLayout(false);
 			this.employeePropertiesPanel4.ResumeLayout(false);
 			this.employeePropertiesPanel4.PerformLayout();
@@ -1773,13 +1841,6 @@
 			this.employeePropertiesPanel1.ResumeLayout(false);
 			this.employeePropertiesPanel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.employeePropertyActiveImage)).EndInit();
-			this.employeeListPage.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.employeeList)).EndInit();
-			this.employeeListPanelLeft.ResumeLayout(false);
-			this.employeeFilterPanel.ResumeLayout(false);
-			this.employeeFilterPanel.PerformLayout();
-			this.employeeFilterTextPanel.ResumeLayout(false);
-			this.employeeFilterTextPanel.PerformLayout();
 			this.MainFormToolStrip.ResumeLayout(false);
 			this.MainFormToolStrip.PerformLayout();
 			this.ResumeLayout(false);
@@ -1796,7 +1857,6 @@
 		private System.Windows.Forms.CheckBox employeeFilterActive;
 		private System.Windows.Forms.GroupBox employeeFilterTextPanel;
 		private System.Windows.Forms.TextBox employeeFilterText;
-		private System.Windows.Forms.DataGridView employeeList;
 		private System.Windows.Forms.TabPage employeePropertyPage;
 		private System.Windows.Forms.Button employeePropertyClose;
 		private System.Windows.Forms.GroupBox employeePropertiesPanel1;
@@ -1906,8 +1966,17 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeePropertyHistoryListChangedDate;
 		private System.Windows.Forms.ToolStrip MainFormToolStrip;
 		private System.Windows.Forms.ToolStripButton actionEmployeeProperties;
-		private System.Windows.Forms.ToolStripButton actionActiveDirectoryEnableUser;
-		private System.Windows.Forms.ToolStripButton actionActiveDirectoryDisableUser;
+		private System.Windows.Forms.ToolStripButton actionEmployeeList;
+		private System.Windows.Forms.Button employeeListSearchFromClipboard;
+		private System.Windows.Forms.ToolStripButton actionEmployeeCopyProperties;
+		private System.Windows.Forms.ToolStripDropDownButton actionActiveDirectory;
+		private System.Windows.Forms.ToolStripMenuItem actionActiveDirectoryEnableUser;
+		private System.Windows.Forms.ToolStripMenuItem actionActiveDirectoryDisableUser;
+		private System.Windows.Forms.ToolStripMenuItem actionActiveDirectoryExpireUser;
+		private System.Windows.Forms.ToolStripMenuItem actionActiveDirectoryResetUser;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripMenuItem actionActiveDirectoryShowUser;
+		private SafeDataGridView employeeList;
 		private System.Windows.Forms.DataGridViewImageColumn employeeListAdStatus;
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeeListFirstName;
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeeListLastName;
@@ -1918,8 +1987,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeeListPhone;
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeeListMobile;
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeeListMail;
-		private System.Windows.Forms.ToolStripButton actionEmployeeList;
-		private System.Windows.Forms.ToolStripButton actionActiveDirectoryExpireUser;
-		private System.Windows.Forms.ToolStripButton actionActiveDirectoryResetUser;
+		private System.Windows.Forms.DataGridViewTextBoxColumn employeeListOrganizationName;
 	}
 }
