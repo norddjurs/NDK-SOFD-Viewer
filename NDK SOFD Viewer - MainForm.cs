@@ -4,7 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
+using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -32,6 +33,11 @@ namespace NDK.SofdViewer {
 			try {
 				// Invoke base method.
 				base.OnLoad(e);
+
+				// Add build date to title.
+				//Assembly.GetExecutingAssembly().
+				FileInfo fileInfo = new FileInfo(Application.ExecutablePath);
+				base.Text += " (" + fileInfo.LastWriteTime.ToString("dd.MM.yy") + ")";
 
 				// Hide tabs.
 				this.MainFormPages.Appearance = TabAppearance.FlatButtons;
@@ -96,7 +102,7 @@ namespace NDK.SofdViewer {
 				this.actionEmployeeList.Enabled = (this.MainFormPages.SelectedTab == this.employeePropertyPage);
 				this.actionEmployeeProperties.Enabled = ((this.MainFormPages.SelectedTab == this.employeeListPage) && (employeeListSelectionCount == 1));
 				this.actionEmployeeCopyProperties.Enabled = (this.MainFormPages.SelectedTab == this.employeeListPage);
-				this.actionActiveDirectoryEnableUser.Enabled = ((user != null) && (user.Enabled == false));
+				this.actionActiveDirectoryEnableUser.Enabled = ((user != null) && ((user.Enabled == false) || (user.IsAccountLockedOut() == true)));
 				this.actionActiveDirectoryDisableUser.Enabled = ((user != null) && (user.Enabled == true));
 				this.actionActiveDirectoryExpireUser.Enabled = ((user != null) && (user.Enabled == true));
 				this.actionActiveDirectoryResetUser.Enabled = (user != null);
@@ -190,7 +196,7 @@ namespace NDK.SofdViewer {
 
 					// Build dialog text.
 					StringBuilder dialogText = new StringBuilder();
-					dialogText.AppendLine("Do you want to enable the selected user in the Active Directory ?");
+					dialogText.AppendLine("Do you want to enable and unlock the selected user in the Active Directory ?");
 					dialogText.AppendLine();
 					dialogText.AppendFormat("{0}\t{1}", user.SamAccountName, user.DisplayName);
 
@@ -199,9 +205,12 @@ namespace NDK.SofdViewer {
 					dialog.Text = "Action Enable Active Directory User";
 					dialog.Message = dialogText.ToString();
 					if (dialog.ShowDialog(this) == DialogResult.OK) {
+						// Unlock the user.
+						user.UnlockAccount();
+
 						// Enable the user.
 						user.Enabled = true;
-						user.InsertInfo("Account Enabled.");
+						user.InsertInfo("Account Enabled and unlocked.");
 						user.Save();
 
 						// Send message.
@@ -326,7 +335,7 @@ namespace NDK.SofdViewer {
 					List<String> passwordWords = new List<String>();
 					passwordWords.Add("London");
 					passwordWords.Add("Oslo");
-					passwordWords.Add("Fjellerup");
+					passwordWords.Add("Vivild");
 					passwordWords.Add("Madrid");
 					passwordWords.Add("Orebro");
 
@@ -346,7 +355,10 @@ namespace NDK.SofdViewer {
 					NilexResetBox dialog = new NilexResetBox();
 					dialog.Text = "Action Reset Active Directory User";
 					dialog.Message = dialogText.ToString();
-					dialog.Password = passwordWords[random.Next(0, passwordWords.Count)] + random.Next(10, 99);
+					dialog.Password = passwordWords[random.Next(0, passwordWords.Count)];
+					while (dialog.Password.Length < 10) {
+						dialog.Password += random.Next(0, 9);
+					}
 					if (dialog.ShowDialog(this) == DialogResult.OK) {
 						// Unlock the user.
 						user.UnlockAccount();
