@@ -879,6 +879,7 @@ namespace NDK.SofdViewer {
 				this.employeePropertyAdUserName.Clear();
 				this.employeePropertyOpusName.Clear();
 				this.employeePropertyCprNumber.Clear();
+				this.employeePropertyMiFareId.Clear();
 				this.employeePropertyWorkerId.Clear();
 
 				// Name and addresses.
@@ -941,6 +942,7 @@ namespace NDK.SofdViewer {
 					this.employeePropertyAdUserName.Text = employee.AdBrugerNavn;
 					this.employeePropertyOpusName.Text = employee.OpusBrugerNavn;
 					this.employeePropertyCprNumber.Text = employee.CprNummer;
+					this.employeePropertyMiFareId.Text = employee.MiFareId;
 					this.employeePropertyWorkerId.Text = employee.MaNummer.ToString();
 
 					// Name and addresses.

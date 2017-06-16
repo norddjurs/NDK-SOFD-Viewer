@@ -23,9 +23,9 @@
 		/// the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.MainFormPages = new System.Windows.Forms.TabControl();
 			this.employeeListPage = new System.Windows.Forms.TabPage();
@@ -137,6 +137,8 @@
 			this.employeePropertyFirstName = new System.Windows.Forms.TextBox();
 			this.label7 = new System.Windows.Forms.Label();
 			this.employeePropertiesPanel1 = new System.Windows.Forms.GroupBox();
+			this.employeePropertyMiFareId = new System.Windows.Forms.TextBox();
+			this.label41 = new System.Windows.Forms.Label();
 			this.employeePropertyWorkerId = new System.Windows.Forms.TextBox();
 			this.label32 = new System.Windows.Forms.Label();
 			this.employeePropertyActiveImage = new System.Windows.Forms.PictureBox();
@@ -855,8 +857,8 @@
 			// 
 			this.employeePropertyHistoryListActiveFromDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.employeePropertyHistoryListActiveFromDate.DataPropertyName = "AktivFra";
-			dataGridViewCellStyle4.Format = "dd.MM.yyyy";
-			this.employeePropertyHistoryListActiveFromDate.DefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle1.Format = "dd.MM.yyyy";
+			this.employeePropertyHistoryListActiveFromDate.DefaultCellStyle = dataGridViewCellStyle1;
 			this.employeePropertyHistoryListActiveFromDate.HeaderText = "From:";
 			this.employeePropertyHistoryListActiveFromDate.Name = "employeePropertyHistoryListActiveFromDate";
 			this.employeePropertyHistoryListActiveFromDate.ReadOnly = true;
@@ -866,8 +868,8 @@
 			// 
 			this.employeePropertyHistoryListActiveToDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.employeePropertyHistoryListActiveToDate.DataPropertyName = "AktivTil";
-			dataGridViewCellStyle5.Format = "dd.MM.yyyy";
-			this.employeePropertyHistoryListActiveToDate.DefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle2.Format = "dd.MM.yyyy";
+			this.employeePropertyHistoryListActiveToDate.DefaultCellStyle = dataGridViewCellStyle2;
 			this.employeePropertyHistoryListActiveToDate.HeaderText = "To:";
 			this.employeePropertyHistoryListActiveToDate.Name = "employeePropertyHistoryListActiveToDate";
 			this.employeePropertyHistoryListActiveToDate.ReadOnly = true;
@@ -877,9 +879,9 @@
 			// 
 			this.employeePropertyHistoryListChangedDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.employeePropertyHistoryListChangedDate.DataPropertyName = "SidstAendret";
-			dataGridViewCellStyle6.Format = "dd.MM.yyyy";
-			dataGridViewCellStyle6.NullValue = null;
-			this.employeePropertyHistoryListChangedDate.DefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle3.Format = "dd.MM.yyyy";
+			dataGridViewCellStyle3.NullValue = null;
+			this.employeePropertyHistoryListChangedDate.DefaultCellStyle = dataGridViewCellStyle3;
 			this.employeePropertyHistoryListChangedDate.HeaderText = "Changed";
 			this.employeePropertyHistoryListChangedDate.Name = "employeePropertyHistoryListChangedDate";
 			this.employeePropertyHistoryListChangedDate.ReadOnly = true;
@@ -1496,6 +1498,8 @@
 			// 
 			// employeePropertiesPanel1
 			// 
+			this.employeePropertiesPanel1.Controls.Add(this.employeePropertyMiFareId);
+			this.employeePropertiesPanel1.Controls.Add(this.label41);
 			this.employeePropertiesPanel1.Controls.Add(this.employeePropertyWorkerId);
 			this.employeePropertiesPanel1.Controls.Add(this.label32);
 			this.employeePropertiesPanel1.Controls.Add(this.employeePropertyActiveImage);
@@ -1518,6 +1522,28 @@
 			this.employeePropertiesPanel1.TabIndex = 1;
 			this.employeePropertiesPanel1.TabStop = false;
 			this.employeePropertiesPanel1.Text = "Identifiers";
+			// 
+			// employeePropertyMiFareId
+			// 
+			this.employeePropertyMiFareId.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.employeePropertyMiFareId.Cursor = System.Windows.Forms.Cursors.Default;
+			this.employeePropertyMiFareId.Location = new System.Drawing.Point(732, 43);
+			this.employeePropertyMiFareId.Name = "employeePropertyMiFareId";
+			this.employeePropertyMiFareId.ReadOnly = true;
+			this.employeePropertyMiFareId.Size = new System.Drawing.Size(168, 15);
+			this.employeePropertyMiFareId.TabIndex = 19;
+			this.employeePropertyMiFareId.TabStop = false;
+			// 
+			// label41
+			// 
+			this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label41.ForeColor = System.Drawing.Color.SteelBlue;
+			this.label41.Location = new System.Drawing.Point(304, 18);
+			this.label41.Name = "label41";
+			this.label41.Size = new System.Drawing.Size(120, 22);
+			this.label41.TabIndex = 18;
+			this.label41.Text = "CPR:";
+			this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// employeePropertyWorkerId
 			// 
@@ -1664,7 +1690,7 @@
 			// 
 			this.employeePropertyCprNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.employeePropertyCprNumber.Cursor = System.Windows.Forms.Cursors.Default;
-			this.employeePropertyCprNumber.Location = new System.Drawing.Point(732, 43);
+			this.employeePropertyCprNumber.Location = new System.Drawing.Point(430, 21);
 			this.employeePropertyCprNumber.Name = "employeePropertyCprNumber";
 			this.employeePropertyCprNumber.ReadOnly = true;
 			this.employeePropertyCprNumber.Size = new System.Drawing.Size(168, 15);
@@ -1679,7 +1705,7 @@
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(120, 22);
 			this.label1.TabIndex = 0;
-			this.label1.Text = "CPR:";
+			this.label1.Text = "MiFare Id:";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// organizationListPage
@@ -1988,5 +2014,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeeListMobile;
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeeListMail;
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeeListOrganizationName;
+		private System.Windows.Forms.TextBox employeePropertyMiFareId;
+		private System.Windows.Forms.Label label41;
 	}
 }
