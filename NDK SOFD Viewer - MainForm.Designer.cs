@@ -167,6 +167,8 @@
 			this.actionActiveDirectoryResetUser = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.actionActiveDirectoryShowUser = new System.Windows.Forms.ToolStripMenuItem();
+			this.actionSofdDirectory = new System.Windows.Forms.ToolStripDropDownButton();
+			this.actionSofdDirectoryEditEmployee = new System.Windows.Forms.ToolStripMenuItem();
 			this.MainFormPages.SuspendLayout();
 			this.employeeListPage.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.employeeList)).BeginInit();
@@ -1734,7 +1736,8 @@
             this.actionEmployeeList,
             this.actionEmployeeProperties,
             this.actionEmployeeCopyProperties,
-            this.actionActiveDirectory});
+            this.actionActiveDirectory,
+            this.actionSofdDirectory});
 			this.MainFormToolStrip.Location = new System.Drawing.Point(0, 0);
 			this.MainFormToolStrip.Name = "MainFormToolStrip";
 			this.MainFormToolStrip.Size = new System.Drawing.Size(1234, 28);
@@ -1831,6 +1834,24 @@
 			this.actionActiveDirectoryShowUser.Size = new System.Drawing.Size(326, 26);
 			this.actionActiveDirectoryShowUser.Text = "Show Active Directory user in MMC";
 			this.actionActiveDirectoryShowUser.Click += new System.EventHandler(this.ActionShowActiveDirectoryUserClick);
+			// 
+			// actionSofdDirectory
+			// 
+			this.actionSofdDirectory.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.actionSofdDirectoryEditEmployee});
+			this.actionSofdDirectory.Image = ((System.Drawing.Image)(resources.GetObject("actionSofdDirectory.Image")));
+			this.actionSofdDirectory.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.actionSofdDirectory.Name = "actionSofdDirectory";
+			this.actionSofdDirectory.Size = new System.Drawing.Size(145, 25);
+			this.actionSofdDirectory.Text = "SOFD directory";
+			// 
+			// actionSofdDirectoryEditEmployee
+			// 
+			this.actionSofdDirectoryEditEmployee.Name = "actionSofdDirectoryEditEmployee";
+			this.actionSofdDirectoryEditEmployee.Size = new System.Drawing.Size(178, 26);
+			this.actionSofdDirectoryEditEmployee.Text = "Edit employee";
+			this.actionSofdDirectoryEditEmployee.ToolTipText = "Edit properties of the selected employee";
+			this.actionSofdDirectoryEditEmployee.Click += new System.EventHandler(this.ActionEditSofdEmployeeClick);
 			// 
 			// MainForm
 			// 
@@ -2016,5 +2037,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeeListOrganizationName;
 		private System.Windows.Forms.TextBox employeePropertyMiFareId;
 		private System.Windows.Forms.Label label41;
+		private System.Windows.Forms.ToolStripDropDownButton actionSofdDirectory;
+		private System.Windows.Forms.ToolStripMenuItem actionSofdDirectoryEditEmployee;
 	}
 }

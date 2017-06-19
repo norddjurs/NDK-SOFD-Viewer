@@ -93,6 +93,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="NDK SOFD Viewer - EmployeeBox.resx">
+      <DependentUpon>NDK SOFD Viewer - EmployeeBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Copy.png" />
     <EmbeddedResource Include="Resources\Paste.png" />
     <EmbeddedResource Include="Resources\Refresh.png" />
@@ -106,6 +109,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NDK SOFD Viewer - AssemblyInfo.cs" />
+    <Compile Include="NDK SOFD Viewer - EmployeeBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NDK SOFD Viewer - EmployeeBox.designer.cs">
+      <DependentUpon>NDK SOFD Viewer - EmployeeBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="NDK SOFD Viewer - MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -54,6 +54,7 @@ namespace NDK.SofdViewer {
 				this.actionActiveDirectoryExpireUser.Image = this.GetResourceImage("User Orange.png");
 				this.actionActiveDirectoryResetUser.Image = this.GetResourceImage("User Yellow.png");
 				this.actionActiveDirectoryShowUser.Image = this.GetResourceImage("Book.png");
+				this.actionSofdDirectoryEditEmployee.Image = this.GetResourceImage("User Green.png");
 
 				// Initialize employee.
 				this.EmployeeInitialize();
@@ -107,6 +108,7 @@ namespace NDK.SofdViewer {
 				this.actionActiveDirectoryExpireUser.Enabled = ((user != null) && (user.Enabled == true));
 				this.actionActiveDirectoryResetUser.Enabled = (user != null);
 				this.actionActiveDirectoryShowUser.Enabled = (user != null);
+				this.actionSofdDirectoryEditEmployee.Enabled = ((employee != null) && (employee.Aktiv == true));
 			} catch (Exception exception) {
 				// Log.
 				this.LogError(exception);
@@ -149,7 +151,6 @@ namespace NDK.SofdViewer {
 			}
 		} // ActionEmployeeShowPropertiesClick
 
-
 		private void ActionEmployeeCopyPropertiesClick(Object sender, EventArgs e) {
 			try {
 				// Copy selected employees, if one or more employees are selected.
@@ -181,7 +182,9 @@ namespace NDK.SofdViewer {
 				MessageBox.Show(exception.Message, "Action Employee Copy Properties", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		} // ActionEmployeeCopyPropertiesClick
+		#endregion
 
+		#region Action methods (Active Directory).
 		private void ActionEnableActiveDirectoryUserClick(Object sender, EventArgs e) {
 			try {
 				if (this.employeeList.SelectedRows.Count == 1) {
@@ -424,6 +427,37 @@ namespace NDK.SofdViewer {
 				MessageBox.Show(exception.Message, "Action Show Active Directory User", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		} // ActionShowActiveDirectoryUserClick
+		#endregion
+
+		#region Action methods (SOFD Directory).
+		private void ActionEditSofdEmployeeClick(Object sender, EventArgs e) {
+			try {
+				if (this.employeeList.SelectedRows.Count == 1) {
+					// Get the SOFD employee.
+					SofdEmployee employee = (SofdEmployee)this.employeeList.SelectedRows[0].DataBoundItem;
+
+					if (employee.Aktiv == true) {
+						// Show dialog.
+						EmployeeBox dialog = new EmployeeBox();
+						dialog.SofdEmployee = employee;
+						if (dialog.ShowDialog(this) == DialogResult.OK) {
+							// Save.
+							employee.MiFareId = dialog.MiFareId;
+							employee.Save();
+
+							// Update the employee properties page.
+							if (this.MainFormPages.SelectedTab == this.employeePropertyPage) {
+								this.EmployeePropertyPopulate(employee);
+							}
+						}
+					}
+				}
+			} catch (Exception exception) {
+				// Log and show the error.
+				this.LogError(exception);
+				MessageBox.Show(exception.Message, "Action Edit Employee", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		} // ActionEditSofdEmployeeClick
 		#endregion
 
 
