@@ -54,6 +54,7 @@ namespace NDK.SofdViewer {
 				this.actionActiveDirectoryExpireUser.Image = this.GetResourceImage("User Orange.png");
 				this.actionActiveDirectoryResetUser.Image = this.GetResourceImage("User Yellow.png");
 				this.actionActiveDirectoryShowUser.Image = this.GetResourceImage("Book.png");
+				this.actionSofdDirectory.Image = this.GetResourceImage("Book.png");
 				this.actionSofdDirectoryEditEmployee.Image = this.GetResourceImage("User Green.png");
 
 				// Initialize employee.
@@ -335,12 +336,22 @@ namespace NDK.SofdViewer {
 
 					// Generate random password.
 					Random random = new Random();
-					List<String> passwordWords = new List<String>();
-					passwordWords.Add("London");
-					passwordWords.Add("Oslo");
-					passwordWords.Add("Vivild");
-					passwordWords.Add("Madrid");
-					passwordWords.Add("Orebro");
+					Int32 passwordLength = this.GetLocalValue("SuggestedPasswordLength", 8);
+					if (passwordLength < 1) {
+						passwordLength = 8;
+					}
+					List<String> passwordWords = this.GetLocalValues("SuggestedPasswords");
+					for (Int32 index = 0; index < passwordWords.Count; ) {
+						passwordWords[index] = passwordWords[index].Trim();
+						if ((passwordWords[index].Length > passwordLength) || (passwordWords[index].Length == 0)) {
+							passwordWords.RemoveAt(index);
+						} else {
+							while (passwordWords[index].Length < passwordLength) {
+								passwordWords[index] += random.Next(0, 9);
+							}
+							index++;
+						}
+					}
 
 					// Build dialog text.
 					StringBuilder dialogText = new StringBuilder();
@@ -358,9 +369,8 @@ namespace NDK.SofdViewer {
 					NilexResetBox dialog = new NilexResetBox();
 					dialog.Text = "Action Reset Active Directory User";
 					dialog.Message = dialogText.ToString();
-					dialog.Password = passwordWords[random.Next(0, passwordWords.Count)];
-					while (dialog.Password.Length < 10) {
-						dialog.Password += random.Next(0, 9);
+					if (passwordWords.Count > 0) {
+						dialog.Password = passwordWords[random.Next(0, passwordWords.Count)];   // Select random password, from the suggested passwords.
 					}
 					if (dialog.ShowDialog(this) == DialogResult.OK) {
 						// Unlock the user.
@@ -1123,6 +1133,7 @@ namespace NDK.SofdViewer {
 
 	} // MainForm
 
+	#region SafeDataGridView class
 	public class SafeDataGridView : DataGridView {
 
 		public SafeDataGridView() : base() {
@@ -1146,5 +1157,6 @@ namespace NDK.SofdViewer {
 		} // OnPaint
 
 	} // SafeDataGridView
+	#endregion
 
 } // NDK.SofdViewer
