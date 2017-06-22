@@ -453,7 +453,7 @@ namespace NDK.SofdViewer {
 						if (dialog.ShowDialog(this) == DialogResult.OK) {
 							// Save.
 							employee.MiFareId = dialog.MiFareId;
-							employee.Save();
+							employee.Save(true);
 
 							// Update the employee properties page.
 							if (this.MainFormPages.SelectedTab == this.employeePropertyPage) {
@@ -985,7 +985,7 @@ namespace NDK.SofdViewer {
 					this.employeePropertyEmployeeNumber.Text = employee.MedarbejderId.ToString();
 					this.employeePropertyAdUserName.Text = employee.AdBrugerNavn;
 					this.employeePropertyOpusName.Text = employee.OpusBrugerNavn;
-					this.employeePropertyCprNumber.Text = employee.CprNummer;
+					this.employeePropertyCprNumber.Text = employee.CprNummer.FormatStringCpr();
 					this.employeePropertyMiFareId.Text = employee.MiFareId;
 					this.employeePropertyWorkerId.Text = employee.MaNummer.ToString();
 
@@ -994,40 +994,24 @@ namespace NDK.SofdViewer {
 					this.employeePropertyLastName.Text = employee.EfterNavn;
 					this.employeePropertyName.Text = employee.Navn;
 					this.employeePropertyDisplayName.Text = employee.KaldeNavn;
-					this.employeePropertyPhone.Text = employee.TelefonNummer;
-					this.employeePropertyMobile.Text = employee.MobilNummer;
+					this.employeePropertyPhone.Text = employee.TelefonNummer.FormatStringPhone();
+					this.employeePropertyMobile.Text = employee.MobilNummer.FormatStringPhone();
 					this.employeePropertyHomeAddress.Text = employee.AdresseText;
 
 					// Employment.
-					if (employee.AnsaettelsesDato.Year > 1900) {
-						this.employeePropertyEmploymentFirstDate.Text = employee.AnsaettelsesDato.ToString("dd.MM.yyyy");
-					}
-					if (employee.AnsaettelsesOphoersDato.Year > 1900) {
-						this.employeePropertyEmploymentLastDate.Text = employee.AnsaettelsesOphoersDato.ToString("dd.MM.yyyy");
-					}
-					if (employee.FoersteAnsaettelsesDato.Year > 1900) {
-						this.employeePropertyEmploymentOldestFirstDate.Text = employee.FoersteAnsaettelsesDato.ToString("dd.MM.yyyy");
-					}
-					if (employee.JubilaeumsAnciennitetsDato.Year > 1900) {
-						this.employeePropertyEmploymentJubileeDate.Text = employee.JubilaeumsAnciennitetsDato.ToString("dd.MM.yyyy");
-					}
+					this.employeePropertyEmploymentFirstDate.Text = employee.AnsaettelsesDato.FormatStringDate();
+					this.employeePropertyEmploymentLastDate.Text = employee.AnsaettelsesOphoersDato.FormatStringDate();
+					this.employeePropertyEmploymentOldestFirstDate.Text = employee.FoersteAnsaettelsesDato.FormatStringDate();
+					this.employeePropertyEmploymentJubileeDate.Text = employee.JubilaeumsAnciennitetsDato.FormatStringDate();
 					this.employeePropertyTitle.Text = employee.StillingsBetegnelse;
 					this.employeePropertyOrganizationName.Text = employee.OrganisationNavn;
 					this.employeePropertyLeaderName.Text = employee.NaermesteLederNavn;
 
 					// Data history.
-					if (employee.AktivFra.Year > 1900) {
-						this.employeePropertyHistoryActiveFromDate.Text = employee.AktivFra.ToString("dd.MM.yyyy");
-					}
-					if (employee.AktivTil.Year > 1900) {
-						this.employeePropertyHistoryActiveToDate.Text = employee.AktivTil.ToString("dd.MM.yyyy");
-					}
-					if (employee.SidstAendret.Year > 1900) {
-						this.employeePropertyHistoryChangedDate.Text = employee.SidstAendret.ToString("dd.MM.yyyy");
-					}
-					if (employee.OpusSidsstAendret.Year > 1900) {
-						this.employeePropertyHistoryOpusChangedDate.Text = employee.OpusSidsstAendret.ToString("dd.MM.yyyy");
-					}
+					this.employeePropertyHistoryActiveFromDate.Text = employee.AktivFra.FormatStringDate();
+					this.employeePropertyHistoryActiveToDate.Text = employee.AktivTil.FormatStringDate();
+					this.employeePropertyHistoryChangedDate.Text = employee.SidstAendret.FormatStringDate();
+					this.employeePropertyHistoryOpusChangedDate.Text = employee.OpusSidsstAendret.FormatStringDate();
 					this.employeePropertyHistoryList.AutoGenerateColumns = false;
 					this.employeePropertyHistoryList.DataSource = null;
 					this.employeePropertyHistoryList.DataSource = this.GetAllEmployees(new SofdEmployeeFilter_MedarbejderId(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.Equals, employee.MedarbejderId));
@@ -1045,24 +1029,24 @@ namespace NDK.SofdViewer {
 							this.employeePropertyAdStatus.Text = "This user is disabled";
 						} else if (user.IsAccountExpired() == true) {
 							this.employeePropertyAdStatusImage.Image = this.GetResourceImage("Circle Orange.png");
-							this.employeePropertyAdStatus.Text = String.Format("Expired since {0:dd.MM.yyyy HH:mm}", user.AccountExpirationDate.Value);
+							this.employeePropertyAdStatus.Text = String.Format("Expired since {0}", user.AccountExpirationDate.Value.FormatStringDateTime());
 						} else if (user.IsAccountLockedOut() == true) {
 							this.employeePropertyAdStatusImage.Image = this.GetResourceImage("Circle Yellow.png");
-							this.employeePropertyAdStatus.Text = String.Format("Lockedout since {0:dd.MM.yyyy HH:mm}", user.AccountLockoutTime.Value);
+							this.employeePropertyAdStatus.Text = String.Format("Lockedout since {0}", user.AccountLockoutTime.Value.FormatStringDateTime());
 						} else {
 							this.employeePropertyAdStatusImage.Image = this.GetResourceImage("Circle Green.png");
 							this.employeePropertyAdStatus.Text = "Active";
 						}
 						this.employeePropertyAdDisplayName.Text = user.DisplayName;
-						if ((user.AccountExpirationDate != null) && (user.AccountExpirationDate.Value.Year > 1900)) {
-							this.employeePropertyAdExpiresDate.Text = user.AccountExpirationDate.Value.ToString("dd.MM.yyyy  HH:mm");
+						if (user.AccountExpirationDate != null) {
+							this.employeePropertyAdExpiresDate.Text = user.AccountExpirationDate.Value.FormatStringDateTime();
 						}
 						//this.employeePropertyAdChangedDate.Text = "";
-						if ((user.Modified != null) && (user.Modified.Value.Year > 1900)) {
-							this.employeePropertyAdChangedDate.Text = user.Modified.Value.ToString("dd.MM.yyyy  HH:mm");
+						if (user.Modified != null) {
+							this.employeePropertyAdChangedDate.Text = user.Modified.Value.FormatStringDateTime();
 						}
-						if ((user.LastLogon != null) && (user.LastLogon.Value.Year > 1900)) {
-							this.employeePropertyAdLogonDate.Text = user.LastLogon.Value.ToString("dd.MM.yyyy  HH:mm");
+						if (user.LastLogon != null) {
+							this.employeePropertyAdLogonDate.Text = user.LastLogon.Value.FormatStringDateTime();
 						}
 						this.employeePropertyAdInfo.Text = user.Info;
 					}
