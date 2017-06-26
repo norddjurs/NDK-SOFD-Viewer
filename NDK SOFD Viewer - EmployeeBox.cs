@@ -23,6 +23,12 @@ namespace NDK.SofdViewer {
 				this.employeePropertyName.Text = this.sofdEmployee.Navn;
 
 				this.employeePropertyMiFareId.Text = this.sofdEmployee.MiFareId;
+				this.employeePropertyPhone.Text = this.sofdEmployee.TelefonNummer.GetNotNull().FormatStringPhone();
+				this.employeePropertyMobile1.Text = this.sofdEmployee.MobilNummer.GetNotNull().FormatStringPhone();
+				this.employeePropertyMobile2.Text = this.sofdEmployee.MobilNummer2.GetNotNull().FormatStringPhone();
+				this.employeePropertyEmail.Text = this.sofdEmployee.Epost.GetNotNull();
+				this.employeePropertyIntern.Checked = this.sofdEmployee.Intern;
+				this.employeePropertyExtern.Checked = this.sofdEmployee.Ekstern;
 			}
 		} // SofdEmployee
 
@@ -36,6 +42,60 @@ namespace NDK.SofdViewer {
 				} catch { }
 			}
 		} // MiFareId
+
+		public String Phone {
+			get {
+				return this.employeePropertyPhone.Text.Trim().FormatStringPhone();
+			}
+			set {
+				this.employeePropertyPhone.Text = value.GetNotNull().FormatStringPhone();
+			}
+		} // Phone
+
+		public String Mobile1 {
+			get {
+				return this.employeePropertyMobile1.Text.Trim().FormatStringPhone();
+			}
+			set {
+				this.employeePropertyMobile1.Text = value.GetNotNull().FormatStringPhone();
+			}
+		} // Mobile1
+
+		public String Mobile2 {
+			get {
+				return this.employeePropertyMobile2.Text.Trim().FormatStringPhone();
+			}
+			set {
+				this.employeePropertyMobile2.Text = value.GetNotNull().FormatStringPhone();
+			}
+		} // Mobile2
+
+		public String Email {
+			get {
+				return this.employeePropertyEmail.Text.Trim();
+			}
+			set {
+				this.employeePropertyEmail.Text = value.GetNotNull();
+			}
+		} // Email
+
+		public Boolean Intern {
+			get {
+				return this.employeePropertyIntern.Checked;
+			}
+			set {
+				this.employeePropertyIntern.Checked = value;
+			}
+		} // Intern
+
+		public Boolean Extern {
+			get {
+				return this.employeePropertyExtern.Checked;
+			}
+			set {
+				this.employeePropertyExtern.Checked = value;
+			}
+		} // Extern
 
 	} // EmployeeBox
 

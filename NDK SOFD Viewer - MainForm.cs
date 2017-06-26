@@ -453,12 +453,21 @@ namespace NDK.SofdViewer {
 						if (dialog.ShowDialog(this) == DialogResult.OK) {
 							// Save.
 							employee.MiFareId = dialog.MiFareId;
+							employee.TelefonNummer = (dialog.Phone.IsNullOrWhiteSpace() == false) ? dialog.Phone : null;
+							employee.MobilNummer = (dialog.Mobile1.IsNullOrWhiteSpace() == false) ? dialog.Mobile1 : null;
+							employee.MobilNummer2 = (dialog.Mobile2.IsNullOrWhiteSpace() == false) ? dialog.Mobile2 : null;
+							employee.Epost = (dialog.Email.IsNullOrWhiteSpace() == false) ? dialog.Email : null;
+							employee.Intern = dialog.Intern;
+							employee.Ekstern = dialog.Extern;
 							employee.Save(true);
 
 							// Update the employee properties page.
 							if (this.MainFormPages.SelectedTab == this.employeePropertyPage) {
 								this.EmployeePropertyPopulate(employee);
 							}
+
+							// Update the employee list.
+							this.employeeList.Refresh();
 						}
 					}
 				}
@@ -935,6 +944,7 @@ namespace NDK.SofdViewer {
 				this.employeePropertyMobile.Clear();
 				this.employeePropertyMail.Clear();
 				this.employeePropertyHomeAddress.Clear();
+				this.employeePropertyWorkAddress.Clear();
 
 				// Employment.
 				this.employeePropertyEmploymentFirstDate.Clear();
@@ -944,6 +954,7 @@ namespace NDK.SofdViewer {
 				this.employeePropertyTitle.Clear();
 				this.employeePropertyOrganizationName.Clear();
 				this.employeePropertyLeaderName.Clear();
+				this.employeePropertyInternExtern.Clear();
 
 				// Data history.
 				this.employeePropertyHistoryActiveFromDate.Clear();
@@ -997,6 +1008,7 @@ namespace NDK.SofdViewer {
 					this.employeePropertyPhone.Text = employee.TelefonNummer.FormatStringPhone();
 					this.employeePropertyMobile.Text = employee.MobilNummer.FormatStringPhone();
 					this.employeePropertyHomeAddress.Text = employee.AdresseText;
+					this.employeePropertyWorkAddress.Text = (employee.GetOrganisation() != null) ? employee.GetOrganisation().AdresseText : String.Empty;
 
 					// Employment.
 					this.employeePropertyEmploymentFirstDate.Text = employee.AnsaettelsesDato.FormatStringDate();
@@ -1006,6 +1018,15 @@ namespace NDK.SofdViewer {
 					this.employeePropertyTitle.Text = employee.StillingsBetegnelse;
 					this.employeePropertyOrganizationName.Text = employee.OrganisationNavn;
 					this.employeePropertyLeaderName.Text = employee.NaermesteLederNavn;
+					if ((employee.Intern == false) && (employee.Ekstern == false)) {
+						this.employeePropertyInternExtern.Text = "No";
+					} else if ((employee.Intern == true) && (employee.Ekstern == false)) {
+						this.employeePropertyInternExtern.Text = "Intern";
+					} else if ((employee.Intern == false) && (employee.Ekstern == true)) {
+						this.employeePropertyInternExtern.Text = "Extern";
+					} else {
+						this.employeePropertyInternExtern.Text = "Intern and Extern";
+					}
 
 					// Data history.
 					this.employeePropertyHistoryActiveFromDate.Text = employee.AktivFra.FormatStringDate();

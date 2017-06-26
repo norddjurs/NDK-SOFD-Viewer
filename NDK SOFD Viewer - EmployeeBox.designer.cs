@@ -37,6 +37,16 @@
 			this.label9 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.employeePropertyMiFareId = new System.Windows.Forms.TextBox();
+			this.employeePropertyIntern = new System.Windows.Forms.CheckBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.employeePropertyExtern = new System.Windows.Forms.CheckBox();
+			this.employeePropertyPhone = new System.Windows.Forms.TextBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.employeePropertyMobile1 = new System.Windows.Forms.TextBox();
+			this.label6 = new System.Windows.Forms.Label();
+			this.employeePropertyEmail = new System.Windows.Forms.TextBox();
+			this.label7 = new System.Windows.Forms.Label();
+			this.employeePropertyMobile2 = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// buttonOk
@@ -46,7 +56,7 @@
 			this.buttonOk.Location = new System.Drawing.Point(185, 324);
 			this.buttonOk.Name = "buttonOk";
 			this.buttonOk.Size = new System.Drawing.Size(100, 25);
-			this.buttonOk.TabIndex = 2;
+			this.buttonOk.TabIndex = 100;
 			this.buttonOk.Text = "&Ok";
 			this.buttonOk.UseVisualStyleBackColor = true;
 			// 
@@ -57,7 +67,7 @@
 			this.buttonCancel.Location = new System.Drawing.Point(305, 324);
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.Size = new System.Drawing.Size(100, 25);
-			this.buttonCancel.TabIndex = 3;
+			this.buttonCancel.TabIndex = 101;
 			this.buttonCancel.Text = "&Cancel";
 			this.buttonCancel.UseVisualStyleBackColor = true;
 			// 
@@ -189,6 +199,98 @@
 			this.employeePropertyMiFareId.Size = new System.Drawing.Size(434, 22);
 			this.employeePropertyMiFareId.TabIndex = 1;
 			// 
+			// employeePropertyIntern
+			// 
+			this.employeePropertyIntern.AutoSize = true;
+			this.employeePropertyIntern.Location = new System.Drawing.Point(138, 255);
+			this.employeePropertyIntern.Name = "employeePropertyIntern";
+			this.employeePropertyIntern.Size = new System.Drawing.Size(59, 20);
+			this.employeePropertyIntern.TabIndex = 6;
+			this.employeePropertyIntern.Text = "Intern";
+			this.employeePropertyIntern.UseVisualStyleBackColor = true;
+			// 
+			// label1
+			// 
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label1.ForeColor = System.Drawing.Color.SteelBlue;
+			this.label1.Location = new System.Drawing.Point(12, 253);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(120, 22);
+			this.label1.TabIndex = 30;
+			this.label1.Text = "Intern/Extern:";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// employeePropertyExtern
+			// 
+			this.employeePropertyExtern.AutoSize = true;
+			this.employeePropertyExtern.Location = new System.Drawing.Point(210, 255);
+			this.employeePropertyExtern.Name = "employeePropertyExtern";
+			this.employeePropertyExtern.Size = new System.Drawing.Size(64, 20);
+			this.employeePropertyExtern.TabIndex = 7;
+			this.employeePropertyExtern.Text = "Extern";
+			this.employeePropertyExtern.UseVisualStyleBackColor = true;
+			// 
+			// employeePropertyPhone
+			// 
+			this.employeePropertyPhone.Location = new System.Drawing.Point(138, 171);
+			this.employeePropertyPhone.Name = "employeePropertyPhone";
+			this.employeePropertyPhone.Size = new System.Drawing.Size(150, 22);
+			this.employeePropertyPhone.TabIndex = 2;
+			// 
+			// label2
+			// 
+			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label2.ForeColor = System.Drawing.Color.SteelBlue;
+			this.label2.Location = new System.Drawing.Point(12, 171);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(120, 22);
+			this.label2.TabIndex = 103;
+			this.label2.Text = "Phone:";
+			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// employeePropertyMobile1
+			// 
+			this.employeePropertyMobile1.Location = new System.Drawing.Point(138, 199);
+			this.employeePropertyMobile1.Name = "employeePropertyMobile1";
+			this.employeePropertyMobile1.Size = new System.Drawing.Size(150, 22);
+			this.employeePropertyMobile1.TabIndex = 3;
+			// 
+			// label6
+			// 
+			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label6.ForeColor = System.Drawing.Color.SteelBlue;
+			this.label6.Location = new System.Drawing.Point(12, 199);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(120, 22);
+			this.label6.TabIndex = 105;
+			this.label6.Text = "Mobile:";
+			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// employeePropertyEmail
+			// 
+			this.employeePropertyEmail.Location = new System.Drawing.Point(138, 227);
+			this.employeePropertyEmail.Name = "employeePropertyEmail";
+			this.employeePropertyEmail.Size = new System.Drawing.Size(434, 22);
+			this.employeePropertyEmail.TabIndex = 5;
+			// 
+			// label7
+			// 
+			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label7.ForeColor = System.Drawing.Color.SteelBlue;
+			this.label7.Location = new System.Drawing.Point(12, 227);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(120, 22);
+			this.label7.TabIndex = 107;
+			this.label7.Text = "E-mail:";
+			this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// employeePropertyMobile2
+			// 
+			this.employeePropertyMobile2.Location = new System.Drawing.Point(294, 199);
+			this.employeePropertyMobile2.Name = "employeePropertyMobile2";
+			this.employeePropertyMobile2.Size = new System.Drawing.Size(150, 22);
+			this.employeePropertyMobile2.TabIndex = 4;
+			// 
 			// EmployeeBox
 			// 
 			this.AcceptButton = this.buttonOk;
@@ -197,6 +299,16 @@
 			this.CancelButton = this.buttonCancel;
 			this.ClientSize = new System.Drawing.Size(584, 361);
 			this.ControlBox = false;
+			this.Controls.Add(this.employeePropertyMobile2);
+			this.Controls.Add(this.employeePropertyEmail);
+			this.Controls.Add(this.label7);
+			this.Controls.Add(this.employeePropertyMobile1);
+			this.Controls.Add(this.label6);
+			this.Controls.Add(this.employeePropertyPhone);
+			this.Controls.Add(this.label2);
+			this.Controls.Add(this.employeePropertyExtern);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.employeePropertyIntern);
 			this.Controls.Add(this.employeePropertyMiFareId);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.employeePropertyName);
@@ -242,5 +354,15 @@
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.TextBox employeePropertyMiFareId;
+		private System.Windows.Forms.CheckBox employeePropertyIntern;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.CheckBox employeePropertyExtern;
+		private System.Windows.Forms.TextBox employeePropertyPhone;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.TextBox employeePropertyMobile1;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.TextBox employeePropertyEmail;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.TextBox employeePropertyMobile2;
 	}
 }
