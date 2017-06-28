@@ -456,7 +456,7 @@ namespace NDK.SofdViewer {
 							employee.TelefonNummer = (dialog.Phone.IsNullOrWhiteSpace() == false) ? dialog.Phone : null;
 							employee.MobilNummer = (dialog.Mobile1.IsNullOrWhiteSpace() == false) ? dialog.Mobile1 : null;
 							employee.MobilNummer2 = (dialog.Mobile2.IsNullOrWhiteSpace() == false) ? dialog.Mobile2 : null;
-							employee.Epost = (dialog.Email.IsNullOrWhiteSpace() == false) ? dialog.Email : null;
+							employee.Epost = (dialog.Email.IsNullOrWhiteSpace() == false) ? dialog.Email.ToUpper() : null;
 							employee.Intern = dialog.Intern;
 							employee.Ekstern = dialog.Extern;
 							employee.Save(true);
@@ -1007,6 +1007,7 @@ namespace NDK.SofdViewer {
 					this.employeePropertyDisplayName.Text = employee.KaldeNavn;
 					this.employeePropertyPhone.Text = employee.TelefonNummer.FormatStringPhone();
 					this.employeePropertyMobile.Text = employee.MobilNummer.FormatStringPhone();
+					this.employeePropertyMail.Text = employee.Epost.ToUpper();
 					this.employeePropertyHomeAddress.Text = employee.AdresseText;
 					this.employeePropertyWorkAddress.Text = (employee.GetOrganisation() != null) ? employee.GetOrganisation().AdresseText : String.Empty;
 
@@ -1016,7 +1017,7 @@ namespace NDK.SofdViewer {
 					this.employeePropertyEmploymentOldestFirstDate.Text = employee.FoersteAnsaettelsesDato.FormatStringDate();
 					this.employeePropertyEmploymentJubileeDate.Text = employee.JubilaeumsAnciennitetsDato.FormatStringDate();
 					this.employeePropertyTitle.Text = employee.StillingsBetegnelse;
-					this.employeePropertyOrganizationName.Text = employee.OrganisationNavn;
+					this.employeePropertyOrganizationName.Text = employee.OrganisationNavn + " ("+ employee.OrganisationId + ")";
 					this.employeePropertyLeaderName.Text = employee.NaermesteLederNavn;
 					if ((employee.Intern == false) && (employee.Ekstern == false)) {
 						this.employeePropertyInternExtern.Text = "No";

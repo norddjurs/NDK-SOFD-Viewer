@@ -122,6 +122,8 @@
 			this.employeePropertyEmploymentFirstDate = new System.Windows.Forms.TextBox();
 			this.label15 = new System.Windows.Forms.Label();
 			this.employeePropertiesPanel2 = new System.Windows.Forms.GroupBox();
+			this.employeePropertyWorkAddress = new System.Windows.Forms.TextBox();
+			this.label43 = new System.Windows.Forms.Label();
 			this.employeePropertyMail = new System.Windows.Forms.TextBox();
 			this.label16 = new System.Windows.Forms.Label();
 			this.employeePropertyMobile = new System.Windows.Forms.TextBox();
@@ -171,8 +173,6 @@
 			this.actionActiveDirectoryShowUser = new System.Windows.Forms.ToolStripMenuItem();
 			this.actionSofdDirectory = new System.Windows.Forms.ToolStripDropDownButton();
 			this.actionSofdDirectoryEditEmployee = new System.Windows.Forms.ToolStripMenuItem();
-			this.employeePropertyWorkAddress = new System.Windows.Forms.TextBox();
-			this.label43 = new System.Windows.Forms.Label();
 			this.MainFormPages.SuspendLayout();
 			this.employeeListPage.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.employeeList)).BeginInit();
@@ -753,8 +753,6 @@
 			// 
 			// employeePropertiesPanel4
 			// 
-			this.employeePropertiesPanel4.Controls.Add(this.employeePropertyAdInfo);
-			this.employeePropertiesPanel4.Controls.Add(this.label33);
 			this.employeePropertiesPanel4.Controls.Add(this.label31);
 			this.employeePropertiesPanel4.Controls.Add(this.employeePropertyHistoryList);
 			this.employeePropertiesPanel4.Controls.Add(this.employeePropertyHistoryOpusChangedDate);
@@ -766,9 +764,9 @@
 			this.employeePropertiesPanel4.Controls.Add(this.label24);
 			this.employeePropertiesPanel4.Controls.Add(this.employeePropertyHistoryActiveFromDate);
 			this.employeePropertiesPanel4.Dock = System.Windows.Forms.DockStyle.Top;
-			this.employeePropertiesPanel4.Location = new System.Drawing.Point(3, 395);
+			this.employeePropertiesPanel4.Location = new System.Drawing.Point(3, 418);
 			this.employeePropertiesPanel4.Name = "employeePropertiesPanel4";
-			this.employeePropertiesPanel4.Size = new System.Drawing.Size(1220, 183);
+			this.employeePropertiesPanel4.Size = new System.Drawing.Size(1220, 149);
 			this.employeePropertiesPanel4.TabIndex = 4;
 			this.employeePropertiesPanel4.TabStop = false;
 			this.employeePropertiesPanel4.Text = "Data history:";
@@ -777,12 +775,12 @@
 			// 
 			this.employeePropertyAdInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.employeePropertyAdInfo.Cursor = System.Windows.Forms.Cursors.Default;
-			this.employeePropertyAdInfo.Location = new System.Drawing.Point(130, 65);
+			this.employeePropertyAdInfo.Location = new System.Drawing.Point(730, 21);
 			this.employeePropertyAdInfo.Multiline = true;
 			this.employeePropertyAdInfo.Name = "employeePropertyAdInfo";
 			this.employeePropertyAdInfo.ReadOnly = true;
 			this.employeePropertyAdInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.employeePropertyAdInfo.Size = new System.Drawing.Size(468, 110);
+			this.employeePropertyAdInfo.Size = new System.Drawing.Size(468, 85);
 			this.employeePropertyAdInfo.TabIndex = 21;
 			this.employeePropertyAdInfo.TabStop = false;
 			this.employeePropertyAdInfo.WordWrap = false;
@@ -791,7 +789,7 @@
 			// 
 			this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label33.ForeColor = System.Drawing.Color.SteelBlue;
-			this.label33.Location = new System.Drawing.Point(6, 62);
+			this.label33.Location = new System.Drawing.Point(606, 18);
 			this.label33.Name = "label33";
 			this.label33.Size = new System.Drawing.Size(120, 22);
 			this.label33.TabIndex = 20;
@@ -836,7 +834,7 @@
 			this.employeePropertyHistoryList.ShowCellToolTips = false;
 			this.employeePropertyHistoryList.ShowEditingIcon = false;
 			this.employeePropertyHistoryList.ShowRowErrors = false;
-			this.employeePropertyHistoryList.Size = new System.Drawing.Size(468, 157);
+			this.employeePropertyHistoryList.Size = new System.Drawing.Size(468, 125);
 			this.employeePropertyHistoryList.TabIndex = 38;
 			this.employeePropertyHistoryList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.EmployeeListDataError);
 			this.employeePropertyHistoryList.SelectionChanged += new System.EventHandler(this.EmployeePropertyHistoryListClick);
@@ -982,7 +980,9 @@
 			// 
 			// employeePropertiesPanel5
 			// 
+			this.employeePropertiesPanel5.Controls.Add(this.employeePropertyAdInfo);
 			this.employeePropertiesPanel5.Controls.Add(this.employeePropertyAdExpiresDate);
+			this.employeePropertiesPanel5.Controls.Add(this.label33);
 			this.employeePropertiesPanel5.Controls.Add(this.employeePropertyAdStatusImage);
 			this.employeePropertiesPanel5.Controls.Add(this.employeePropertyAdDisplayName);
 			this.employeePropertiesPanel5.Controls.Add(this.employeePropertyAdChangedDate);
@@ -996,7 +996,7 @@
 			this.employeePropertiesPanel5.Dock = System.Windows.Forms.DockStyle.Top;
 			this.employeePropertiesPanel5.Location = new System.Drawing.Point(3, 302);
 			this.employeePropertiesPanel5.Name = "employeePropertiesPanel5";
-			this.employeePropertiesPanel5.Size = new System.Drawing.Size(1220, 93);
+			this.employeePropertiesPanel5.Size = new System.Drawing.Size(1220, 116);
 			this.employeePropertiesPanel5.TabIndex = 5;
 			this.employeePropertiesPanel5.TabStop = false;
 			this.employeePropertiesPanel5.Text = "Active Directory";
@@ -1091,7 +1091,7 @@
 			// 
 			this.employeePropertyAdLogonDate.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.employeePropertyAdLogonDate.Cursor = System.Windows.Forms.Cursors.Default;
-			this.employeePropertyAdLogonDate.Location = new System.Drawing.Point(732, 65);
+			this.employeePropertyAdLogonDate.Location = new System.Drawing.Point(132, 87);
 			this.employeePropertyAdLogonDate.Name = "employeePropertyAdLogonDate";
 			this.employeePropertyAdLogonDate.ReadOnly = true;
 			this.employeePropertyAdLogonDate.Size = new System.Drawing.Size(168, 15);
@@ -1102,7 +1102,7 @@
 			// 
 			this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label28.ForeColor = System.Drawing.Color.SteelBlue;
-			this.label28.Location = new System.Drawing.Point(606, 62);
+			this.label28.Location = new System.Drawing.Point(6, 84);
 			this.label28.Name = "label28";
 			this.label28.Size = new System.Drawing.Size(120, 22);
 			this.label28.TabIndex = 34;
@@ -1349,6 +1349,30 @@
 			this.employeePropertiesPanel2.TabIndex = 2;
 			this.employeePropertiesPanel2.TabStop = false;
 			this.employeePropertiesPanel2.Text = "Name and addresses";
+			// 
+			// employeePropertyWorkAddress
+			// 
+			this.employeePropertyWorkAddress.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.employeePropertyWorkAddress.Cursor = System.Windows.Forms.Cursors.Default;
+			this.employeePropertyWorkAddress.Location = new System.Drawing.Point(732, 87);
+			this.employeePropertyWorkAddress.Multiline = true;
+			this.employeePropertyWorkAddress.Name = "employeePropertyWorkAddress";
+			this.employeePropertyWorkAddress.ReadOnly = true;
+			this.employeePropertyWorkAddress.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+			this.employeePropertyWorkAddress.Size = new System.Drawing.Size(468, 44);
+			this.employeePropertyWorkAddress.TabIndex = 21;
+			this.employeePropertyWorkAddress.TabStop = false;
+			// 
+			// label43
+			// 
+			this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label43.ForeColor = System.Drawing.Color.SteelBlue;
+			this.label43.Location = new System.Drawing.Point(606, 84);
+			this.label43.Name = "label43";
+			this.label43.Size = new System.Drawing.Size(120, 22);
+			this.label43.TabIndex = 20;
+			this.label43.Text = "Work Address:";
+			this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// employeePropertyMail
 			// 
@@ -1882,30 +1906,6 @@
 			this.actionSofdDirectoryEditEmployee.Text = "Edit employee";
 			this.actionSofdDirectoryEditEmployee.ToolTipText = "Edit properties of the selected employee";
 			this.actionSofdDirectoryEditEmployee.Click += new System.EventHandler(this.ActionEditSofdEmployeeClick);
-			// 
-			// employeePropertyWorkAddress
-			// 
-			this.employeePropertyWorkAddress.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.employeePropertyWorkAddress.Cursor = System.Windows.Forms.Cursors.Default;
-			this.employeePropertyWorkAddress.Location = new System.Drawing.Point(732, 87);
-			this.employeePropertyWorkAddress.Multiline = true;
-			this.employeePropertyWorkAddress.Name = "employeePropertyWorkAddress";
-			this.employeePropertyWorkAddress.ReadOnly = true;
-			this.employeePropertyWorkAddress.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.employeePropertyWorkAddress.Size = new System.Drawing.Size(468, 44);
-			this.employeePropertyWorkAddress.TabIndex = 21;
-			this.employeePropertyWorkAddress.TabStop = false;
-			// 
-			// label43
-			// 
-			this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label43.ForeColor = System.Drawing.Color.SteelBlue;
-			this.label43.Location = new System.Drawing.Point(606, 84);
-			this.label43.Name = "label43";
-			this.label43.Size = new System.Drawing.Size(120, 22);
-			this.label43.TabIndex = 20;
-			this.label43.Text = "Work Address:";
-			this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// MainForm
 			// 
