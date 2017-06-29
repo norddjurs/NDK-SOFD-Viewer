@@ -1272,8 +1272,10 @@ namespace NDK.SofdViewer {
 					this.employeePropertyHistoryList.AutoGenerateColumns = false;
 					this.employeePropertyHistoryList.DataSource = null;
 					this.employeePropertyHistoryList.DataSource = this.GetAllEmployees(new SofdEmployeeFilter_MedarbejderId(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.Equals, employee.MedarbejderId));
-					foreach (DataGridViewRow row in this.employeePropertyHistoryList.Rows) {
-						row.Selected = (employee.Equals(row.DataBoundItem) == true);
+					for (Int32 index = 0; index < this.employeePropertyHistoryList.Rows.Count; index++) {
+						if (employee.MedarbejderHistorikId.Equals(((SofdEmployee)this.employeePropertyHistoryList.Rows[index].DataBoundItem).MedarbejderHistorikId) == true) {
+							this.employeePropertyHistoryList.Rows[index].Selected = true;
+						}
 					}
 
 					// Active Directory.
@@ -1769,8 +1771,10 @@ namespace NDK.SofdViewer {
 					this.organizationPropertyHistoryList.AutoGenerateColumns = false;
 					this.organizationPropertyHistoryList.DataSource = null;
 					this.organizationPropertyHistoryList.DataSource = this.GetAllOrganizations(new SofdOrganizationFilter_OrganisationId(SqlWhereFilterOperator.AND, SqlWhereFilterValueOperator.Equals, organization.OrganisationId));
-					foreach (DataGridViewRow row in this.organizationPropertyHistoryList.Rows) {
-						row.Selected = (organization.Equals(row.DataBoundItem) == true);
+					for (Int32 index = 0; index < this.organizationPropertyHistoryList.Rows.Count; index++) {
+						if (organization.OrganisationHistorikId.Equals(((SofdOrganization)this.organizationPropertyHistoryList.Rows[index].DataBoundItem).OrganisationHistorikId) == true) {
+							this.organizationPropertyHistoryList.Rows[index].Selected = true;
+						}
 					}
 				}
 			} catch (Exception exception) {

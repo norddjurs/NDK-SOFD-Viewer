@@ -24,12 +24,12 @@
 		/// </summary>
 		private void InitializeComponent() {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.actionActiveDirectory = new System.Windows.Forms.ToolStripDropDownButton();
 			this.actionActiveDirectoryEnableUser = new System.Windows.Forms.ToolStripMenuItem();
 			this.actionActiveDirectoryDisableUser = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,6 +45,7 @@
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.actionSofdDirectoryShowLeader = new System.Windows.Forms.ToolStripMenuItem();
 			this.actionSofdDirectoryShowOrganization = new System.Windows.Forms.ToolStripMenuItem();
+			this.actionSofdDirectoryListEmployees = new System.Windows.Forms.ToolStripMenuItem();
 			this.organizationFilterActive = new System.Windows.Forms.CheckBox();
 			this.employeeFilterActive = new System.Windows.Forms.CheckBox();
 			this.employeeFilterAd = new System.Windows.Forms.CheckBox();
@@ -260,7 +261,6 @@
 			this.MainFormToolStrip = new System.Windows.Forms.ToolStrip();
 			this.actionOrganizationList = new System.Windows.Forms.ToolStripButton();
 			this.actionOrganizationProperties = new System.Windows.Forms.ToolStripButton();
-			this.actionSofdDirectoryListEmployees = new System.Windows.Forms.ToolStripMenuItem();
 			this.employeeFilterPanel.SuspendLayout();
 			this.employeeFilterTextPanel.SuspendLayout();
 			this.employeeListPage.SuspendLayout();
@@ -422,6 +422,13 @@
 			this.actionSofdDirectoryShowOrganization.Size = new System.Drawing.Size(210, 26);
 			this.actionSofdDirectoryShowOrganization.Text = "Show organization";
 			this.actionSofdDirectoryShowOrganization.Click += new System.EventHandler(this.ActionSofdDirectoryShowActiveOrganizationClick);
+			// 
+			// actionSofdDirectoryListEmployees
+			// 
+			this.actionSofdDirectoryListEmployees.Name = "actionSofdDirectoryListEmployees";
+			this.actionSofdDirectoryListEmployees.Size = new System.Drawing.Size(210, 26);
+			this.actionSofdDirectoryListEmployees.Text = "List employees";
+			this.actionSofdDirectoryListEmployees.Click += new System.EventHandler(this.ActionSofdDirectoryListEmployeesClick);
 			// 
 			// organizationFilterActive
 			// 
@@ -1696,8 +1703,8 @@
 			// 
 			this.employeePropertyHistoryListActiveFromDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.employeePropertyHistoryListActiveFromDate.DataPropertyName = "AktivFra";
-			dataGridViewCellStyle7.Format = "dd.MM.yyyy";
-			this.employeePropertyHistoryListActiveFromDate.DefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle1.Format = "dd.MM.yyyy";
+			this.employeePropertyHistoryListActiveFromDate.DefaultCellStyle = dataGridViewCellStyle1;
 			this.employeePropertyHistoryListActiveFromDate.HeaderText = "From:";
 			this.employeePropertyHistoryListActiveFromDate.Name = "employeePropertyHistoryListActiveFromDate";
 			this.employeePropertyHistoryListActiveFromDate.ReadOnly = true;
@@ -1707,8 +1714,8 @@
 			// 
 			this.employeePropertyHistoryListActiveToDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.employeePropertyHistoryListActiveToDate.DataPropertyName = "AktivTil";
-			dataGridViewCellStyle8.Format = "dd.MM.yyyy";
-			this.employeePropertyHistoryListActiveToDate.DefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle2.Format = "dd.MM.yyyy";
+			this.employeePropertyHistoryListActiveToDate.DefaultCellStyle = dataGridViewCellStyle2;
 			this.employeePropertyHistoryListActiveToDate.HeaderText = "To:";
 			this.employeePropertyHistoryListActiveToDate.Name = "employeePropertyHistoryListActiveToDate";
 			this.employeePropertyHistoryListActiveToDate.ReadOnly = true;
@@ -1718,9 +1725,9 @@
 			// 
 			this.employeePropertyHistoryListChangedDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.employeePropertyHistoryListChangedDate.DataPropertyName = "SidstAendret";
-			dataGridViewCellStyle9.Format = "dd.MM.yyyy";
-			dataGridViewCellStyle9.NullValue = null;
-			this.employeePropertyHistoryListChangedDate.DefaultCellStyle = dataGridViewCellStyle9;
+			dataGridViewCellStyle3.Format = "dd.MM.yyyy";
+			dataGridViewCellStyle3.NullValue = null;
+			this.employeePropertyHistoryListChangedDate.DefaultCellStyle = dataGridViewCellStyle3;
 			this.employeePropertyHistoryListChangedDate.HeaderText = "Changed";
 			this.employeePropertyHistoryListChangedDate.Name = "employeePropertyHistoryListChangedDate";
 			this.employeePropertyHistoryListChangedDate.ReadOnly = true;
@@ -2451,8 +2458,8 @@
 			// 
 			this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.dataGridViewTextBoxColumn2.DataPropertyName = "AktivFra";
-			dataGridViewCellStyle10.Format = "dd.MM.yyyy";
-			this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle10;
+			dataGridViewCellStyle4.Format = "dd.MM.yyyy";
+			this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle4;
 			this.dataGridViewTextBoxColumn2.HeaderText = "From:";
 			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
 			this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -2462,8 +2469,8 @@
 			// 
 			this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
 			this.dataGridViewTextBoxColumn3.DataPropertyName = "AktivTil";
-			dataGridViewCellStyle11.Format = "dd.MM.yyyy";
-			this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle11;
+			dataGridViewCellStyle5.Format = "dd.MM.yyyy";
+			this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle5;
 			this.dataGridViewTextBoxColumn3.HeaderText = "To:";
 			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
 			this.dataGridViewTextBoxColumn3.ReadOnly = true;
@@ -2473,9 +2480,9 @@
 			// 
 			this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.dataGridViewTextBoxColumn4.DataPropertyName = "SidstAendret";
-			dataGridViewCellStyle12.Format = "dd.MM.yyyy";
-			dataGridViewCellStyle12.NullValue = null;
-			this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle12;
+			dataGridViewCellStyle6.Format = "dd.MM.yyyy";
+			dataGridViewCellStyle6.NullValue = null;
+			this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle6;
 			this.dataGridViewTextBoxColumn4.HeaderText = "Changed";
 			this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
 			this.dataGridViewTextBoxColumn4.ReadOnly = true;
@@ -3007,13 +3014,6 @@
 			this.actionOrganizationProperties.Size = new System.Drawing.Size(23, 25);
 			this.actionOrganizationProperties.Text = "toolStripButton1";
 			this.actionOrganizationProperties.Click += new System.EventHandler(this.ActionOrganizationShowPropertiesClick);
-			// 
-			// actionSofdDirectoryListEmployees
-			// 
-			this.actionSofdDirectoryListEmployees.Name = "actionSofdDirectoryListEmployees";
-			this.actionSofdDirectoryListEmployees.Size = new System.Drawing.Size(210, 26);
-			this.actionSofdDirectoryListEmployees.Text = "List employees";
-			this.actionSofdDirectoryListEmployees.Click += new System.EventHandler(this.ActionSofdDirectoryListEmployeesClick);
 			// 
 			// MainForm
 			// 
