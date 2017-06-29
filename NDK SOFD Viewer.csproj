@@ -195,6 +195,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Book.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Org Blank.png" />
+    <EmbeddedResource Include="Resources\Org Blue.png" />
+    <EmbeddedResource Include="Resources\Org Green.png" />
+    <EmbeddedResource Include="Resources\Org Grey.png" />
+    <EmbeddedResource Include="Resources\Org Orange.png" />
+    <EmbeddedResource Include="Resources\Org Red.png" />
+    <EmbeddedResource Include="Resources\Org Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Org Id.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
