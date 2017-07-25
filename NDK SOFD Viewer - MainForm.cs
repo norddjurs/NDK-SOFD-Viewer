@@ -701,6 +701,16 @@ namespace NDK.SofdViewer {
 			this.employeeFilterTextAutoWildcards.Checked = this.GetOptionValue("EmployeeFilterTextAutoWildcards", true);
 			this.employeeFilterActive.CheckState = (CheckState)this.GetOptionValue("EmployeeFilterActive", (Int32)CheckState.Checked);
 			this.employeeFilterAd.CheckState = (CheckState)this.GetOptionValue("EmployeeFilterAd", (Int32)CheckState.Checked);
+			this.employeeFilterFirstName.Checked = this.GetOptionValue("EmployeeFilterFirstName", true);
+			this.employeeFilterLastName.Checked = this.GetOptionValue("EmployeeFilterLastName", true);
+			this.employeeFilterName.Checked = this.GetOptionValue("EmployeeFilterName", true);
+			this.employeeFilterDisplayName.Checked = this.GetOptionValue("EmployeeFilterDisplayName", true);
+			this.employeeFilterPhoneNumber.Checked = this.GetOptionValue("EmployeeFilterPhone", true);
+			this.employeeFilterMail.Checked = this.GetOptionValue("EmployeeFilterMail", true);
+			this.employeeFilterTitle.Checked = this.GetOptionValue("EmployeeFilterTitle", true);
+			this.employeeFilterIdentifier.Checked = this.GetOptionValue("EmployeeFilterIdentifier", true);
+			this.employeeFilterOrganization.Checked = this.GetOptionValue("EmployeeFilterOrganization", false);
+			this.employeeFilterLeader.Checked = this.GetOptionValue("EmployeeFilterLeader", false);
 
 			this.employeeFilterEmploymentFirstDateBegin.Value = this.GetOptionValue("EmployeeFilterEmploymentFirstDateBeginValue", DateTime.Now);
 			this.employeeFilterEmploymentFirstDateBegin.Checked = this.GetOptionValue("EmployeeFilterEmploymentFirstDateBegin", false);
@@ -757,6 +767,16 @@ namespace NDK.SofdViewer {
 			this.SetOptionValue("EmployeeFilterTextAutoWildcards", this.employeeFilterTextAutoWildcards.Checked);
 			this.SetOptionValue("EmployeeFilterActive", (Int32)this.employeeFilterActive.CheckState);
 			this.SetOptionValue("EmployeeFilterAd", (Int32)this.employeeFilterAd.CheckState);
+			this.SetOptionValue("EmployeeFilterFirstName", this.employeeFilterFirstName.Checked);
+			this.SetOptionValue("EmployeeFilterLastName", this.employeeFilterLastName.Checked);
+			this.SetOptionValue("EmployeeFilterName", this.employeeFilterName.Checked);
+			this.SetOptionValue("EmployeeFilterDisplayName", this.employeeFilterDisplayName.Checked);
+			this.SetOptionValue("EmployeeFilterPhone", this.employeeFilterPhoneNumber.Checked);
+			this.SetOptionValue("EmployeeFilterMail", this.employeeFilterMail.Checked);
+			this.SetOptionValue("EmployeeFilterTitle", this.employeeFilterTitle.Checked);
+			this.SetOptionValue("EmployeeFilterIdentifier", this.employeeFilterIdentifier.Checked);
+			this.SetOptionValue("EmployeeFilterOrganization", this.employeeFilterOrganization.Checked);
+			this.SetOptionValue("EmployeeFilterLeader", this.employeeFilterLeader.Checked);
 
 			this.SetOptionValue("EmployeeFilterEmploymentFirstDateBeginValue", this.employeeFilterEmploymentFirstDateBegin.Value);
 			this.SetOptionValue("EmployeeFilterEmploymentFirstDateBegin", this.employeeFilterEmploymentFirstDateBegin.Checked);
@@ -915,18 +935,45 @@ namespace NDK.SofdViewer {
 						employeeFilters.Add(new SqlWhereFilterEndGroup());
 					} else {
 						employeeFilters.Add(new SqlWhereFilterBeginGroup());
-						employeeFilters.Add(new SofdEmployeeFilter_Navn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
-						employeeFilters.Add(new SofdEmployeeFilter_ForNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
-						employeeFilters.Add(new SofdEmployeeFilter_EfterNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
-						employeeFilters.Add(new SofdEmployeeFilter_KaldeNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
-						employeeFilters.Add(new SofdEmployeeFilter_TelefonNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
-						employeeFilters.Add(new SofdEmployeeFilter_MobilNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
-						employeeFilters.Add(new SofdEmployeeFilter_MobilNummer2(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
-						employeeFilters.Add(new SofdEmployeeFilter_Epost(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
-						employeeFilters.Add(new SofdEmployeeFilter_MaNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Equals, filterNumber));
-						employeeFilters.Add(new SofdEmployeeFilter_AdBrugerNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
-						employeeFilters.Add(new SofdEmployeeFilter_CprNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
-						employeeFilters.Add(new SqlWhereFilterEndGroup());
+						if (this.employeeFilterFirstName.Checked == true) {
+							employeeFilters.Add(new SofdEmployeeFilter_ForNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+						}
+						if (this.employeeFilterLastName.Checked == true) {
+							employeeFilters.Add(new SofdEmployeeFilter_EfterNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+						}
+						if (this.employeeFilterName.Checked == true) {
+							employeeFilters.Add(new SofdEmployeeFilter_Navn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+						}
+						if (this.employeeFilterDisplayName.Checked == true) {
+							employeeFilters.Add(new SofdEmployeeFilter_KaldeNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+						}
+						if (this.employeeFilterPhoneNumber.Checked == true) {
+							employeeFilters.Add(new SofdEmployeeFilter_TelefonNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+							employeeFilters.Add(new SofdEmployeeFilter_MobilNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+							employeeFilters.Add(new SofdEmployeeFilter_MobilNummer2(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+						}
+						if (this.employeeFilterMail.Checked == true) {
+							employeeFilters.Add(new SofdEmployeeFilter_Epost(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+						}
+						if (this.employeeFilterTitle.Checked == true) {
+							employeeFilters.Add(new SofdEmployeeFilter_StillingsBetegnelse(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+						}
+						if (this.employeeFilterIdentifier.Checked == true) {
+							employeeFilters.Add(new SofdEmployeeFilter_MaNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Equals, filterNumber));
+							employeeFilters.Add(new SofdEmployeeFilter_AdBrugerNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+							employeeFilters.Add(new SofdEmployeeFilter_CprNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+						}
+						if (this.employeeFilterOrganization.Checked == true) {
+							employeeFilters.Add(new SofdEmployeeFilter_OrganisationId(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Equals, filterNumber));
+							employeeFilters.Add(new SofdEmployeeFilter_OrganisationNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+						}
+						if (this.employeeFilterLeader.Checked == true) {
+							employeeFilters.Add(new SofdEmployeeFilter_NaermesteLederAdBrugerNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Equals, filterText));
+							employeeFilters.Add(new SofdEmployeeFilter_NaermesteLederCprNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Equals, filterText));
+							employeeFilters.Add(new SofdEmployeeFilter_NaermesteLederMaNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Equals, filterNumber));
+							employeeFilters.Add(new SofdEmployeeFilter_NaermesteLederNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+						}
+							employeeFilters.Add(new SqlWhereFilterEndGroup());
 					}
 				}
 
