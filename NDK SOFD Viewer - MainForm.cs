@@ -16,11 +16,15 @@ namespace NDK.SofdViewer {
 		private ManualResetEvent employeeSearchThreadShutdownEvent = null;
 		private Thread employeeSearchThread = null;
 		private SofdEmployee employeeLastShown = null;
+		private Boolean employeeFilterTextFocus = false;
+		private Int32 employeeFirstDisplayedScrollingRowIndex = -1;
 
 		private System.Windows.Forms.Timer organizationSearchThreadTimer = null;
 		private ManualResetEvent organizationSearchThreadShutdownEvent = null;
 		private Thread organizationSearchThread = null;
 		private SofdOrganization organizationLastShown = null;
+		private Boolean organizationFilterTextFocus = false;
+		private Int32 organizationFirstDisplayedScrollingRowIndex = -1;
 
 		#region Constructors.
 		public MainForm() {
@@ -901,6 +905,9 @@ namespace NDK.SofdViewer {
 				List<SqlWhereFilterBase> employeeFilters = new List<SqlWhereFilterBase>();
 
 				if (filterText.IsNullOrWhiteSpace() == false) {
+					// Trim the filter text.
+					filterText = filterText.Trim();
+
 					// If the filter contains a equal character, split the filter text into a filter name and filter text.
 					if (filterText.Contains("=") == true) {
 						filterName = filterText.Substring(0, filterText.IndexOf("="));
@@ -1087,7 +1094,11 @@ namespace NDK.SofdViewer {
 				//
 				StringBuilder result = new StringBuilder();
 				List<SofdEmployee> employees = new List<SofdEmployee>();
-				foreach (String filterText in filterTexts) {
+				String filterText = null;
+				for (Int32 filterIndex = 0; filterIndex < filterTexts.Length; filterIndex++) {
+					// Get and trim the filter text.
+					filterText = filterTexts[filterIndex].Trim();
+
 					// Build employee filters.
 					List<SqlWhereFilterBase> employeeFilters = new List<SqlWhereFilterBase>();
 
@@ -1154,6 +1165,31 @@ namespace NDK.SofdViewer {
 				this.employeeListStatus.Text = String.Format("{0} employees found", this.employeeList.RowCount);
 			}
 		} // EmployeeSearchRunThreadFromClipboard
+
+		private void EmployeeFilterTextEnter(Object sender, EventArgs e) {
+			if (MouseButtons == MouseButtons.None) {
+				// Select all text.
+				this.employeeFilterText.SelectAll();
+
+				// Register as focused.
+				this.employeeFilterTextFocus = true;
+			}
+		} // EmployeeFilterTextEnter
+
+		private void EmployeeFilterTextLeave(Object sender, EventArgs e) {
+			// Register as not focused.
+			this.employeeFilterTextFocus = false;
+		} // EmployeeFilterTextLeave
+
+		void EmployeeFilterTextMouseUp(Object sender, MouseEventArgs e) {
+			if ((this.employeeFilterTextFocus == false) && (this.employeeFilterText.SelectionLength == 0)) {
+				// Select all text.
+				this.employeeFilterText.SelectAll();
+
+				// Register as focused.
+				this.employeeFilterTextFocus = true;
+			}
+		} // EmployeeFilterTextMouseUp
 
 		private void EmployeeListDataError(Object sender, DataGridViewDataErrorEventArgs e) {
 			// Trapping errors.
@@ -1324,6 +1360,9 @@ namespace NDK.SofdViewer {
 							this.employeePropertyHistoryList.Rows[index].Selected = true;
 						}
 					}
+					if ((this.employeeFirstDisplayedScrollingRowIndex > -1) && (this.employeeFirstDisplayedScrollingRowIndex < this.employeePropertyHistoryList.RowCount)) {
+						this.employeePropertyHistoryList.FirstDisplayedScrollingRowIndex = this.employeeFirstDisplayedScrollingRowIndex;
+					}
 
 					// Active Directory.
 					if (user == null) {
@@ -1369,6 +1408,7 @@ namespace NDK.SofdViewer {
 				if ((this.employeePropertyHistoryList.Focused == true) && (this.employeePropertyHistoryList.SelectedRows.Count == 1)) {
 					// Unfocus the history list.
 					this.employeePropertyClose.Focus();
+					this.employeeFirstDisplayedScrollingRowIndex = this.employeePropertyHistoryList.FirstDisplayedScrollingRowIndex;
 
 					// Get the SOFD employee.
 					SofdEmployee employee = (SofdEmployee)this.employeePropertyHistoryList.SelectedRows[0].DataBoundItem;
@@ -1539,35 +1579,42 @@ namespace NDK.SofdViewer {
 			}
 		} // OrganizationSearchStartThreadFromClipboard
 
-		private void OrganizationSearchRunThreadFromFilterText(String filterTexts) {
+		private void OrganizationSearchRunThreadFromFilterText(String filterText) {
 			try {
 				// Status.
 				this.organizationListStatus.Text = String.Format("{0} organizations found - Searching Sofd Directory...", this.organizationList.RowCount);
 
-				// Build organization filters.
+				Int32 filterNumber = 0;
 				List<SqlWhereFilterBase> organizationFilters = new List<SqlWhereFilterBase>();
 
-				// Add filter text.
-				Int32 filterNumber = 0;
-				Int32.TryParse(filterTexts, out filterNumber);
-				String filterText = filterTexts;
-				if ((filterText != String.Empty) && (this.organizationFilterTextAutoWildcards.Checked == true)) {
-					if (filterText.StartsWith("*") == false) {
-						filterText = "*" + filterText;
+				if (filterText.IsNullOrWhiteSpace() == false) {
+					// Trim the filter text.
+					filterText = filterText.Trim();
+
+					// Get the filter text converted to a integer.
+					filterNumber = filterText.ToInt32();
+
+					// Add wildcards to the filter text.
+					if ((filterText != String.Empty) && (this.organizationFilterTextAutoWildcards.Checked == true)) {
+						if (filterText.StartsWith("*") == false) {
+							filterText = "*" + filterText;
+						}
+						if (filterText.EndsWith("*") == false) {
+							filterText = filterText + "*";
+						}
 					}
-					if (filterText.EndsWith("*") == false) {
-						filterText = filterText + "*";
+
+					// Build organization filters.
+					if (filterText != String.Empty) {
+						organizationFilters.Add(new SqlWhereFilterBeginGroup());
+						organizationFilters.Add(new SofdOrganizationFilter_Navn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+						organizationFilters.Add(new SofdOrganizationFilter_KortNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+						organizationFilters.Add(new SofdOrganizationFilter_TelefonNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
+						organizationFilters.Add(new SofdOrganizationFilter_SeNumber(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Equals, filterNumber));
+						organizationFilters.Add(new SofdOrganizationFilter_EanNumber(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Equals, filterNumber));
+						organizationFilters.Add(new SofdOrganizationFilter_OmkostningsSted(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Equals, filterNumber));
+						organizationFilters.Add(new SqlWhereFilterEndGroup());
 					}
-				}
-				if (filterText != String.Empty) {
-					organizationFilters.Add(new SqlWhereFilterBeginGroup());
-					organizationFilters.Add(new SofdOrganizationFilter_Navn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
-					organizationFilters.Add(new SofdOrganizationFilter_KortNavn(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
-					organizationFilters.Add(new SofdOrganizationFilter_TelefonNummer(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Like, filterText));
-					organizationFilters.Add(new SofdOrganizationFilter_SeNumber(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Equals, filterNumber));
-					organizationFilters.Add(new SofdOrganizationFilter_EanNumber(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Equals, filterNumber));
-					organizationFilters.Add(new SofdOrganizationFilter_OmkostningsSted(SqlWhereFilterOperator.OR, SqlWhereFilterValueOperator.Equals, filterNumber));
-					organizationFilters.Add(new SqlWhereFilterEndGroup());
 				}
 
 				// Add filter Active.
@@ -1642,7 +1689,11 @@ namespace NDK.SofdViewer {
 				//
 				StringBuilder result = new StringBuilder();
 				List<SofdOrganization> organizations = new List<SofdOrganization>();
-				foreach (String filterText in filterTexts) {
+				String filterText = null;
+				for (Int32 filterIndex = 0; filterIndex < filterTexts.Length; filterIndex++) {
+					// Get and trim the filter text.
+					filterText = filterTexts[filterIndex].Trim();
+
 					// Build organization filters.
 					List<SqlWhereFilterBase> organizationFilters = new List<SqlWhereFilterBase>();
 
@@ -1710,6 +1761,31 @@ namespace NDK.SofdViewer {
 				this.organizationListStatus.Text = String.Format("{0} organizations found", this.organizationList.RowCount);
 			}
 		} // OrganizationSearchRunThreadFromClipboard
+
+		private void OrganizationFilterTextEnter(Object sender, EventArgs e) {
+			if (MouseButtons == MouseButtons.None) {
+				// Select all text.
+				this.organizationFilterText.SelectAll();
+
+				// Register as focused.
+				this.organizationFilterTextFocus = true;
+			}
+		} // OrganizationFilterTextEnter
+
+		private void OrganizationFilterTextLeave(Object sender, EventArgs e) {
+			// Register as not focused.
+			this.organizationFilterTextFocus = false;
+		} // OrganizationFilterTextLeave
+
+		void OrganizationFilterTextMouseUp(Object sender, MouseEventArgs e) {
+			if ((this.organizationFilterTextFocus == false) && (this.organizationFilterText.SelectionLength == 0)) {
+				// Select all text.
+				this.organizationFilterText.SelectAll();
+
+				// Register as focused.
+				this.organizationFilterTextFocus = true;
+			}
+		} // OrganizationFilterTextMouseUp
 
 		private void OrganizationListDataError(Object sender, DataGridViewDataErrorEventArgs e) {
 			// Trapping errors.
@@ -1823,6 +1899,9 @@ namespace NDK.SofdViewer {
 							this.organizationPropertyHistoryList.Rows[index].Selected = true;
 						}
 					}
+					if ((this.organizationFirstDisplayedScrollingRowIndex > -1) && (this.organizationFirstDisplayedScrollingRowIndex < this.organizationPropertyHistoryList.RowCount)) {
+						this.organizationPropertyHistoryList.FirstDisplayedScrollingRowIndex = this.organizationFirstDisplayedScrollingRowIndex;
+					}
 				}
 			} catch (Exception exception) {
 				// Log and show the error.
@@ -1836,6 +1915,7 @@ namespace NDK.SofdViewer {
 				if ((this.organizationPropertyHistoryList.Focused == true) && (this.organizationPropertyHistoryList.SelectedRows.Count == 1)) {
 					// Unfocus the history list.
 					this.organizationPropertyClose.Focus();
+					this.organizationFirstDisplayedScrollingRowIndex = this.organizationPropertyHistoryList.FirstDisplayedScrollingRowIndex;
 
 					// Get the SOFD organization.
 					SofdOrganization organization = (SofdOrganization)this.organizationPropertyHistoryList.SelectedRows[0].DataBoundItem;

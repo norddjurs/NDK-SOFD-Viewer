@@ -777,6 +777,9 @@
 			this.employeeFilterText.Size = new System.Drawing.Size(184, 22);
 			this.employeeFilterText.TabIndex = 0;
 			this.employeeFilterText.TextChanged += new System.EventHandler(this.EmployeeSearchStartTimer);
+			this.employeeFilterText.Enter += new System.EventHandler(this.EmployeeFilterTextEnter);
+			this.employeeFilterText.Leave += new System.EventHandler(this.EmployeeFilterTextLeave);
+			this.employeeFilterText.MouseUp += new System.Windows.Forms.MouseEventHandler(this.EmployeeFilterTextMouseUp);
 			// 
 			// employeeFilterTextAutoWildcards
 			// 
@@ -2534,6 +2537,9 @@
 			this.organizationFilterText.Size = new System.Drawing.Size(184, 22);
 			this.organizationFilterText.TabIndex = 0;
 			this.organizationFilterText.TextChanged += new System.EventHandler(this.OrganizationSearchStartTimer);
+			this.organizationFilterText.Enter += new System.EventHandler(this.OrganizationFilterTextEnter);
+			this.organizationFilterText.Leave += new System.EventHandler(this.OrganizationFilterTextLeave);
+			this.organizationFilterText.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OrganizationFilterTextMouseUp);
 			// 
 			// organizationPropertyPage
 			// 
