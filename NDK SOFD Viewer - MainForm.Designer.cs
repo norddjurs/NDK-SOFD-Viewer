@@ -81,21 +81,6 @@
 			this.employeeListSearchFromClipboard = new System.Windows.Forms.Button();
 			this.employeeListRefresh = new System.Windows.Forms.Button();
 			this.employeeListPage = new System.Windows.Forms.TabPage();
-			this.employeeList = new NDK.SofdViewer.SafeDataGridView();
-			this.employeeListActiveStatus = new System.Windows.Forms.DataGridViewImageColumn();
-			this.employeeListAdStatus = new System.Windows.Forms.DataGridViewImageColumn();
-			this.employeeListFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListCprNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListAdUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListOpusUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListMail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListOrganizationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.employeeListLeaderName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.employeeListStatus = new System.Windows.Forms.Label();
 			this.employeeListPanelLeft = new System.Windows.Forms.Panel();
 			this.employeeFilterPages = new System.Windows.Forms.TabControl();
@@ -200,15 +185,6 @@
 			this.label47 = new System.Windows.Forms.Label();
 			this.MainFormPages = new System.Windows.Forms.TabControl();
 			this.organizationListPage = new System.Windows.Forms.TabPage();
-			this.organizationList = new NDK.SofdViewer.SafeDataGridView();
-			this.organizationListActiveStatus = new System.Windows.Forms.DataGridViewImageColumn();
-			this.organizationListShortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.organizationListName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.organizationListPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.organizationListSeNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.organizationListEanNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.organizationListOmkSted = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.organizationListLeaderName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.organizationListStatus = new System.Windows.Forms.Label();
 			this.organizationListPanelLeft = new System.Windows.Forms.Panel();
 			this.organizationFilterPanel = new System.Windows.Forms.GroupBox();
@@ -278,9 +254,32 @@
 			this.MainFormToolStrip = new System.Windows.Forms.ToolStrip();
 			this.actionOrganizationList = new System.Windows.Forms.ToolStripButton();
 			this.actionOrganizationProperties = new System.Windows.Forms.ToolStripButton();
+			this.employeeList = new NDK.SofdViewer.SafeDataGridView();
+			this.employeeListActiveStatus = new System.Windows.Forms.DataGridViewImageColumn();
+			this.employeeListAdStatus = new System.Windows.Forms.DataGridViewImageColumn();
+			this.employeeListFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListCprNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListAdUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListOpusUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListMail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListOrganizationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.employeeListLeaderName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.organizationList = new NDK.SofdViewer.SafeDataGridView();
+			this.organizationListActiveStatus = new System.Windows.Forms.DataGridViewImageColumn();
+			this.organizationListShortName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.organizationListName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.organizationListPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.organizationListSeNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.organizationListEanNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.organizationListOmkSted = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.organizationListLeaderName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.employeeFilterTextPanel.SuspendLayout();
 			this.employeeListPage.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.employeeList)).BeginInit();
 			this.employeeListPanelLeft.SuspendLayout();
 			this.employeeFilterPages.SuspendLayout();
 			this.employeeFilterPage1.SuspendLayout();
@@ -296,7 +295,6 @@
 			this.employeePropertyPage.SuspendLayout();
 			this.MainFormPages.SuspendLayout();
 			this.organizationListPage.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.organizationList)).BeginInit();
 			this.organizationListPanelLeft.SuspendLayout();
 			this.organizationFilterPanel.SuspendLayout();
 			this.organizationFilterTextPanel.SuspendLayout();
@@ -308,6 +306,8 @@
 			this.groupBox5.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.organizationPropertyActiveImage)).BeginInit();
 			this.MainFormToolStrip.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.employeeList)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.organizationList)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// actionActiveDirectory
@@ -846,180 +846,6 @@
 			this.employeeListPage.TabIndex = 0;
 			this.employeeListPage.Text = "Employees";
 			// 
-			// employeeList
-			// 
-			this.employeeList.AllowUserToAddRows = false;
-			this.employeeList.AllowUserToDeleteRows = false;
-			this.employeeList.AllowUserToResizeRows = false;
-			this.employeeList.BackgroundColor = System.Drawing.SystemColors.Control;
-			this.employeeList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.employeeList.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-			this.employeeList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.employeeList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.employeeListActiveStatus,
-            this.employeeListAdStatus,
-            this.employeeListFirstName,
-            this.employeeListLastName,
-            this.employeeListDisplayName,
-            this.employeeListCprNumber,
-            this.employeeListAdUserName,
-            this.employeeListOpusUserName,
-            this.employeeListPhone,
-            this.employeeListMobile,
-            this.employeeListMail,
-            this.employeeListTitle,
-            this.employeeListOrganizationName,
-            this.employeeListLeaderName});
-			this.employeeList.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.employeeList.Location = new System.Drawing.Point(243, 3);
-			this.employeeList.Name = "employeeList";
-			this.employeeList.ReadOnly = true;
-			this.employeeList.RowHeadersVisible = false;
-			this.employeeList.RowHeadersWidth = 22;
-			this.employeeList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-			this.employeeList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.employeeList.ShowCellErrors = false;
-			this.employeeList.ShowCellToolTips = false;
-			this.employeeList.ShowEditingIcon = false;
-			this.employeeList.ShowRowErrors = false;
-			this.employeeList.Size = new System.Drawing.Size(980, 578);
-			this.employeeList.TabIndex = 3;
-			this.employeeList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.EmployeeListDataError);
-			this.employeeList.SelectionChanged += new System.EventHandler(this.ActionUpdate);
-			this.employeeList.DoubleClick += new System.EventHandler(this.ActionEmployeeShowPropertiesClick);
-			// 
-			// employeeListActiveStatus
-			// 
-			this.employeeListActiveStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListActiveStatus.HeaderText = "";
-			this.employeeListActiveStatus.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-			this.employeeListActiveStatus.MinimumWidth = 25;
-			this.employeeListActiveStatus.Name = "employeeListActiveStatus";
-			this.employeeListActiveStatus.ReadOnly = true;
-			this.employeeListActiveStatus.ToolTipText = "SOFD Directory status";
-			this.employeeListActiveStatus.Width = 25;
-			// 
-			// employeeListAdStatus
-			// 
-			this.employeeListAdStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListAdStatus.HeaderText = "";
-			this.employeeListAdStatus.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-			this.employeeListAdStatus.MinimumWidth = 25;
-			this.employeeListAdStatus.Name = "employeeListAdStatus";
-			this.employeeListAdStatus.ReadOnly = true;
-			this.employeeListAdStatus.ToolTipText = "Active Directory status";
-			this.employeeListAdStatus.Width = 25;
-			// 
-			// employeeListFirstName
-			// 
-			this.employeeListFirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListFirstName.DataPropertyName = "ForNavn";
-			this.employeeListFirstName.HeaderText = "First name";
-			this.employeeListFirstName.MinimumWidth = 100;
-			this.employeeListFirstName.Name = "employeeListFirstName";
-			this.employeeListFirstName.ReadOnly = true;
-			// 
-			// employeeListLastName
-			// 
-			this.employeeListLastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListLastName.DataPropertyName = "EfterNavn";
-			this.employeeListLastName.HeaderText = "Last name";
-			this.employeeListLastName.MinimumWidth = 100;
-			this.employeeListLastName.Name = "employeeListLastName";
-			this.employeeListLastName.ReadOnly = true;
-			// 
-			// employeeListDisplayName
-			// 
-			this.employeeListDisplayName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListDisplayName.DataPropertyName = "KaldeNavn";
-			this.employeeListDisplayName.HeaderText = "Display name";
-			this.employeeListDisplayName.MinimumWidth = 150;
-			this.employeeListDisplayName.Name = "employeeListDisplayName";
-			this.employeeListDisplayName.ReadOnly = true;
-			this.employeeListDisplayName.Width = 150;
-			// 
-			// employeeListCprNumber
-			// 
-			this.employeeListCprNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListCprNumber.DataPropertyName = "CprNummer";
-			this.employeeListCprNumber.HeaderText = "CPR";
-			this.employeeListCprNumber.MinimumWidth = 70;
-			this.employeeListCprNumber.Name = "employeeListCprNumber";
-			this.employeeListCprNumber.ReadOnly = true;
-			this.employeeListCprNumber.Width = 70;
-			// 
-			// employeeListAdUserName
-			// 
-			this.employeeListAdUserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListAdUserName.DataPropertyName = "AdBrugerNavn";
-			this.employeeListAdUserName.HeaderText = "AD";
-			this.employeeListAdUserName.MinimumWidth = 100;
-			this.employeeListAdUserName.Name = "employeeListAdUserName";
-			this.employeeListAdUserName.ReadOnly = true;
-			// 
-			// employeeListOpusUserName
-			// 
-			this.employeeListOpusUserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListOpusUserName.DataPropertyName = "OpusBrugerNavn";
-			this.employeeListOpusUserName.HeaderText = "Opus";
-			this.employeeListOpusUserName.MinimumWidth = 100;
-			this.employeeListOpusUserName.Name = "employeeListOpusUserName";
-			this.employeeListOpusUserName.ReadOnly = true;
-			// 
-			// employeeListPhone
-			// 
-			this.employeeListPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListPhone.DataPropertyName = "TelefonNummer";
-			this.employeeListPhone.HeaderText = "Phone";
-			this.employeeListPhone.MinimumWidth = 100;
-			this.employeeListPhone.Name = "employeeListPhone";
-			this.employeeListPhone.ReadOnly = true;
-			// 
-			// employeeListMobile
-			// 
-			this.employeeListMobile.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListMobile.DataPropertyName = "MobilNummer";
-			this.employeeListMobile.HeaderText = "Mobile";
-			this.employeeListMobile.MinimumWidth = 100;
-			this.employeeListMobile.Name = "employeeListMobile";
-			this.employeeListMobile.ReadOnly = true;
-			// 
-			// employeeListMail
-			// 
-			this.employeeListMail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListMail.DataPropertyName = "Epost";
-			this.employeeListMail.HeaderText = "E-mail";
-			this.employeeListMail.MinimumWidth = 100;
-			this.employeeListMail.Name = "employeeListMail";
-			this.employeeListMail.ReadOnly = true;
-			// 
-			// employeeListTitle
-			// 
-			this.employeeListTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListTitle.DataPropertyName = "StillingsBetegnelse";
-			this.employeeListTitle.HeaderText = "Title";
-			this.employeeListTitle.Name = "employeeListTitle";
-			this.employeeListTitle.ReadOnly = true;
-			this.employeeListTitle.Width = 59;
-			// 
-			// employeeListOrganizationName
-			// 
-			this.employeeListOrganizationName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListOrganizationName.DataPropertyName = "OrganisationNavn";
-			this.employeeListOrganizationName.HeaderText = "Organization";
-			this.employeeListOrganizationName.Name = "employeeListOrganizationName";
-			this.employeeListOrganizationName.ReadOnly = true;
-			this.employeeListOrganizationName.Width = 108;
-			// 
-			// employeeListLeaderName
-			// 
-			this.employeeListLeaderName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.employeeListLeaderName.DataPropertyName = "NaermesteLederNavn";
-			this.employeeListLeaderName.HeaderText = "Leader";
-			this.employeeListLeaderName.Name = "employeeListLeaderName";
-			this.employeeListLeaderName.ReadOnly = true;
-			this.employeeListLeaderName.Width = 76;
-			// 
 			// employeeListStatus
 			// 
 			this.employeeListStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -1079,7 +905,7 @@
 			this.employeeFilterSelectClear.AccessibleName = "Deselect all search filters";
 			this.employeeFilterSelectClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.employeeFilterSelectClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.employeeFilterSelectClear.Location = new System.Drawing.Point(167, 456);
+			this.employeeFilterSelectClear.Location = new System.Drawing.Point(167, 465);
 			this.employeeFilterSelectClear.Name = "employeeFilterSelectClear";
 			this.employeeFilterSelectClear.Size = new System.Drawing.Size(25, 23);
 			this.employeeFilterSelectClear.TabIndex = 22;
@@ -1093,7 +919,7 @@
 			this.employeeFilterSelectAll.AccessibleName = "Select all search filters";
 			this.employeeFilterSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.employeeFilterSelectAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.employeeFilterSelectAll.Location = new System.Drawing.Point(198, 456);
+			this.employeeFilterSelectAll.Location = new System.Drawing.Point(198, 465);
 			this.employeeFilterSelectAll.Name = "employeeFilterSelectAll";
 			this.employeeFilterSelectAll.Size = new System.Drawing.Size(25, 23);
 			this.employeeFilterSelectAll.TabIndex = 4;
@@ -1670,7 +1496,7 @@
 			// 
 			this.employeePropertyInternExtern.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.employeePropertyInternExtern.Cursor = System.Windows.Forms.Cursors.Default;
-			this.employeePropertyInternExtern.Location = new System.Drawing.Point(732, 65);
+			this.employeePropertyInternExtern.Location = new System.Drawing.Point(1033, 65);
 			this.employeePropertyInternExtern.Name = "employeePropertyInternExtern";
 			this.employeePropertyInternExtern.ReadOnly = true;
 			this.employeePropertyInternExtern.Size = new System.Drawing.Size(168, 15);
@@ -1681,7 +1507,7 @@
 			// 
 			this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label42.ForeColor = System.Drawing.Color.SteelBlue;
-			this.label42.Location = new System.Drawing.Point(606, 62);
+			this.label42.Location = new System.Drawing.Point(907, 62);
 			this.label42.Name = "label42";
 			this.label42.Size = new System.Drawing.Size(120, 22);
 			this.label42.TabIndex = 26;
@@ -1692,7 +1518,7 @@
 			// 
 			this.employeePropertyLeaderName.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.employeePropertyLeaderName.Cursor = System.Windows.Forms.Cursors.Default;
-			this.employeePropertyLeaderName.Location = new System.Drawing.Point(1032, 43);
+			this.employeePropertyLeaderName.Location = new System.Drawing.Point(731, 65);
 			this.employeePropertyLeaderName.Name = "employeePropertyLeaderName";
 			this.employeePropertyLeaderName.ReadOnly = true;
 			this.employeePropertyLeaderName.Size = new System.Drawing.Size(168, 15);
@@ -1703,7 +1529,7 @@
 			// 
 			this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label22.ForeColor = System.Drawing.Color.SteelBlue;
-			this.label22.Location = new System.Drawing.Point(907, 40);
+			this.label22.Location = new System.Drawing.Point(606, 62);
 			this.label22.Name = "label22";
 			this.label22.Size = new System.Drawing.Size(120, 22);
 			this.label22.TabIndex = 24;
@@ -1717,7 +1543,7 @@
 			this.employeePropertyOrganizationName.Location = new System.Drawing.Point(732, 43);
 			this.employeePropertyOrganizationName.Name = "employeePropertyOrganizationName";
 			this.employeePropertyOrganizationName.ReadOnly = true;
-			this.employeePropertyOrganizationName.Size = new System.Drawing.Size(168, 15);
+			this.employeePropertyOrganizationName.Size = new System.Drawing.Size(468, 15);
 			this.employeePropertyOrganizationName.TabIndex = 23;
 			this.employeePropertyOrganizationName.TabStop = false;
 			// 
@@ -2291,121 +2117,10 @@
 			this.organizationListPage.TabIndex = 2;
 			this.organizationListPage.Text = "Organizations";
 			// 
-			// organizationList
-			// 
-			this.organizationList.AllowUserToAddRows = false;
-			this.organizationList.AllowUserToDeleteRows = false;
-			this.organizationList.AllowUserToResizeRows = false;
-			this.organizationList.BackgroundColor = System.Drawing.SystemColors.Control;
-			this.organizationList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.organizationList.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-			this.organizationList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.organizationList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.organizationListActiveStatus,
-            this.organizationListShortName,
-            this.organizationListName,
-            this.organizationListPhone,
-            this.organizationListSeNumber,
-            this.organizationListEanNumber,
-            this.organizationListOmkSted,
-            this.organizationListLeaderName});
-			this.organizationList.Dock = System.Windows.Forms.DockStyle.Right;
-			this.organizationList.Location = new System.Drawing.Point(243, 3);
-			this.organizationList.Name = "organizationList";
-			this.organizationList.ReadOnly = true;
-			this.organizationList.RowHeadersVisible = false;
-			this.organizationList.RowHeadersWidth = 22;
-			this.organizationList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-			this.organizationList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.organizationList.ShowCellErrors = false;
-			this.organizationList.ShowCellToolTips = false;
-			this.organizationList.ShowEditingIcon = false;
-			this.organizationList.ShowRowErrors = false;
-			this.organizationList.Size = new System.Drawing.Size(980, 578);
-			this.organizationList.TabIndex = 4;
-			this.organizationList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OrganizationListDataError);
-			this.organizationList.DoubleClick += new System.EventHandler(this.ActionOrganizationShowPropertiesClick);
-			// 
-			// organizationListActiveStatus
-			// 
-			this.organizationListActiveStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.organizationListActiveStatus.HeaderText = "";
-			this.organizationListActiveStatus.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-			this.organizationListActiveStatus.MinimumWidth = 25;
-			this.organizationListActiveStatus.Name = "organizationListActiveStatus";
-			this.organizationListActiveStatus.ReadOnly = true;
-			this.organizationListActiveStatus.ToolTipText = "SOFD Directory status";
-			this.organizationListActiveStatus.Width = 25;
-			// 
-			// organizationListShortName
-			// 
-			this.organizationListShortName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.organizationListShortName.DataPropertyName = "KortNavn";
-			this.organizationListShortName.HeaderText = "Short name";
-			this.organizationListShortName.MinimumWidth = 100;
-			this.organizationListShortName.Name = "organizationListShortName";
-			this.organizationListShortName.ReadOnly = true;
-			this.organizationListShortName.Width = 101;
-			// 
-			// organizationListName
-			// 
-			this.organizationListName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.organizationListName.DataPropertyName = "Navn";
-			this.organizationListName.HeaderText = "Name";
-			this.organizationListName.MinimumWidth = 150;
-			this.organizationListName.Name = "organizationListName";
-			this.organizationListName.ReadOnly = true;
-			this.organizationListName.Width = 150;
-			// 
-			// organizationListPhone
-			// 
-			this.organizationListPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.organizationListPhone.DataPropertyName = "Telefon";
-			this.organizationListPhone.HeaderText = "Phone";
-			this.organizationListPhone.MinimumWidth = 100;
-			this.organizationListPhone.Name = "organizationListPhone";
-			this.organizationListPhone.ReadOnly = true;
-			// 
-			// organizationListSeNumber
-			// 
-			this.organizationListSeNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.organizationListSeNumber.DataPropertyName = "SeNummer";
-			this.organizationListSeNumber.HeaderText = "SE#";
-			this.organizationListSeNumber.MinimumWidth = 100;
-			this.organizationListSeNumber.Name = "organizationListSeNumber";
-			this.organizationListSeNumber.ReadOnly = true;
-			// 
-			// organizationListEanNumber
-			// 
-			this.organizationListEanNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.organizationListEanNumber.DataPropertyName = "EanNummer";
-			this.organizationListEanNumber.HeaderText = "EAN#";
-			this.organizationListEanNumber.MinimumWidth = 100;
-			this.organizationListEanNumber.Name = "organizationListEanNumber";
-			this.organizationListEanNumber.ReadOnly = true;
-			// 
-			// organizationListOmkSted
-			// 
-			this.organizationListOmkSted.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.organizationListOmkSted.DataPropertyName = "OmkostningsSted";
-			this.organizationListOmkSted.HeaderText = "Omk.sted";
-			this.organizationListOmkSted.Name = "organizationListOmkSted";
-			this.organizationListOmkSted.ReadOnly = true;
-			this.organizationListOmkSted.Width = 90;
-			// 
-			// organizationListLeaderName
-			// 
-			this.organizationListLeaderName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.organizationListLeaderName.DataPropertyName = "LederNavn";
-			this.organizationListLeaderName.HeaderText = "Leder";
-			this.organizationListLeaderName.Name = "organizationListLeaderName";
-			this.organizationListLeaderName.ReadOnly = true;
-			this.organizationListLeaderName.Width = 68;
-			// 
 			// organizationListStatus
 			// 
 			this.organizationListStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.organizationListStatus.Location = new System.Drawing.Point(243, 581);
+			this.organizationListStatus.Location = new System.Drawing.Point(243, 584);
 			this.organizationListStatus.Name = "organizationListStatus";
 			this.organizationListStatus.Size = new System.Drawing.Size(980, 20);
 			this.organizationListStatus.TabIndex = 7;
@@ -2418,7 +2133,7 @@
 			this.organizationListPanelLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.organizationListPanelLeft.Location = new System.Drawing.Point(3, 3);
 			this.organizationListPanelLeft.Name = "organizationListPanelLeft";
-			this.organizationListPanelLeft.Size = new System.Drawing.Size(240, 598);
+			this.organizationListPanelLeft.Size = new System.Drawing.Size(240, 601);
 			this.organizationListPanelLeft.TabIndex = 1;
 			// 
 			// organizationFilterPanel
@@ -2436,7 +2151,7 @@
 			this.organizationFilterPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.organizationFilterPanel.Location = new System.Drawing.Point(0, 84);
 			this.organizationFilterPanel.Name = "organizationFilterPanel";
-			this.organizationFilterPanel.Size = new System.Drawing.Size(240, 514);
+			this.organizationFilterPanel.Size = new System.Drawing.Size(240, 517);
 			this.organizationFilterPanel.TabIndex = 6;
 			this.organizationFilterPanel.TabStop = false;
 			this.organizationFilterPanel.Text = "Filters";
@@ -3242,6 +2957,293 @@
 			this.actionOrganizationProperties.Text = "toolStripButton1";
 			this.actionOrganizationProperties.Click += new System.EventHandler(this.ActionOrganizationShowPropertiesClick);
 			// 
+			// employeeList
+			// 
+			this.employeeList.AllowUserToAddRows = false;
+			this.employeeList.AllowUserToDeleteRows = false;
+			this.employeeList.AllowUserToResizeRows = false;
+			this.employeeList.BackgroundColor = System.Drawing.SystemColors.Control;
+			this.employeeList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.employeeList.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+			this.employeeList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.employeeList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.employeeListActiveStatus,
+            this.employeeListAdStatus,
+            this.employeeListFirstName,
+            this.employeeListLastName,
+            this.employeeListDisplayName,
+            this.employeeListCprNumber,
+            this.employeeListAdUserName,
+            this.employeeListOpusUserName,
+            this.employeeListPhone,
+            this.employeeListMobile,
+            this.employeeListMail,
+            this.employeeListTitle,
+            this.employeeListOrganizationName,
+            this.employeeListLeaderName});
+			this.employeeList.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.employeeList.Location = new System.Drawing.Point(243, 3);
+			this.employeeList.Name = "employeeList";
+			this.employeeList.ReadOnly = true;
+			this.employeeList.RowHeadersVisible = false;
+			this.employeeList.RowHeadersWidth = 22;
+			this.employeeList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+			this.employeeList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.employeeList.ShowCellErrors = false;
+			this.employeeList.ShowCellToolTips = false;
+			this.employeeList.ShowEditingIcon = false;
+			this.employeeList.ShowRowErrors = false;
+			this.employeeList.Size = new System.Drawing.Size(980, 578);
+			this.employeeList.TabIndex = 3;
+			this.employeeList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.EmployeeListCellFormatting);
+			this.employeeList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.EmployeeListDataError);
+			this.employeeList.SelectionChanged += new System.EventHandler(this.ActionUpdate);
+			this.employeeList.DoubleClick += new System.EventHandler(this.ActionEmployeeShowPropertiesClick);
+			// 
+			// employeeListActiveStatus
+			// 
+			this.employeeListActiveStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListActiveStatus.HeaderText = "";
+			this.employeeListActiveStatus.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+			this.employeeListActiveStatus.MinimumWidth = 25;
+			this.employeeListActiveStatus.Name = "employeeListActiveStatus";
+			this.employeeListActiveStatus.ReadOnly = true;
+			this.employeeListActiveStatus.ToolTipText = "SOFD Directory status";
+			this.employeeListActiveStatus.Width = 25;
+			// 
+			// employeeListAdStatus
+			// 
+			this.employeeListAdStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListAdStatus.HeaderText = "";
+			this.employeeListAdStatus.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+			this.employeeListAdStatus.MinimumWidth = 25;
+			this.employeeListAdStatus.Name = "employeeListAdStatus";
+			this.employeeListAdStatus.ReadOnly = true;
+			this.employeeListAdStatus.ToolTipText = "Active Directory status";
+			this.employeeListAdStatus.Width = 25;
+			// 
+			// employeeListFirstName
+			// 
+			this.employeeListFirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListFirstName.DataPropertyName = "ForNavn";
+			this.employeeListFirstName.HeaderText = "First name";
+			this.employeeListFirstName.MinimumWidth = 100;
+			this.employeeListFirstName.Name = "employeeListFirstName";
+			this.employeeListFirstName.ReadOnly = true;
+			// 
+			// employeeListLastName
+			// 
+			this.employeeListLastName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListLastName.DataPropertyName = "EfterNavn";
+			this.employeeListLastName.HeaderText = "Last name";
+			this.employeeListLastName.MinimumWidth = 100;
+			this.employeeListLastName.Name = "employeeListLastName";
+			this.employeeListLastName.ReadOnly = true;
+			// 
+			// employeeListDisplayName
+			// 
+			this.employeeListDisplayName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListDisplayName.DataPropertyName = "KaldeNavn";
+			this.employeeListDisplayName.HeaderText = "Display name";
+			this.employeeListDisplayName.MinimumWidth = 150;
+			this.employeeListDisplayName.Name = "employeeListDisplayName";
+			this.employeeListDisplayName.ReadOnly = true;
+			this.employeeListDisplayName.Width = 150;
+			// 
+			// employeeListCprNumber
+			// 
+			this.employeeListCprNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListCprNumber.DataPropertyName = "CprNummer";
+			this.employeeListCprNumber.HeaderText = "CPR";
+			this.employeeListCprNumber.MinimumWidth = 70;
+			this.employeeListCprNumber.Name = "employeeListCprNumber";
+			this.employeeListCprNumber.ReadOnly = true;
+			this.employeeListCprNumber.Width = 70;
+			// 
+			// employeeListAdUserName
+			// 
+			this.employeeListAdUserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListAdUserName.DataPropertyName = "AdBrugerNavn";
+			this.employeeListAdUserName.HeaderText = "AD";
+			this.employeeListAdUserName.MinimumWidth = 100;
+			this.employeeListAdUserName.Name = "employeeListAdUserName";
+			this.employeeListAdUserName.ReadOnly = true;
+			// 
+			// employeeListOpusUserName
+			// 
+			this.employeeListOpusUserName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListOpusUserName.DataPropertyName = "OpusBrugerNavn";
+			this.employeeListOpusUserName.HeaderText = "Opus";
+			this.employeeListOpusUserName.MinimumWidth = 100;
+			this.employeeListOpusUserName.Name = "employeeListOpusUserName";
+			this.employeeListOpusUserName.ReadOnly = true;
+			// 
+			// employeeListPhone
+			// 
+			this.employeeListPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListPhone.DataPropertyName = "TelefonNummer";
+			this.employeeListPhone.HeaderText = "Phone";
+			this.employeeListPhone.MinimumWidth = 100;
+			this.employeeListPhone.Name = "employeeListPhone";
+			this.employeeListPhone.ReadOnly = true;
+			// 
+			// employeeListMobile
+			// 
+			this.employeeListMobile.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListMobile.DataPropertyName = "MobilNummer";
+			this.employeeListMobile.HeaderText = "Mobile";
+			this.employeeListMobile.MinimumWidth = 100;
+			this.employeeListMobile.Name = "employeeListMobile";
+			this.employeeListMobile.ReadOnly = true;
+			// 
+			// employeeListMail
+			// 
+			this.employeeListMail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListMail.DataPropertyName = "Epost";
+			this.employeeListMail.HeaderText = "E-mail";
+			this.employeeListMail.MinimumWidth = 100;
+			this.employeeListMail.Name = "employeeListMail";
+			this.employeeListMail.ReadOnly = true;
+			// 
+			// employeeListTitle
+			// 
+			this.employeeListTitle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListTitle.DataPropertyName = "StillingsBetegnelse";
+			this.employeeListTitle.HeaderText = "Title";
+			this.employeeListTitle.Name = "employeeListTitle";
+			this.employeeListTitle.ReadOnly = true;
+			this.employeeListTitle.Width = 59;
+			// 
+			// employeeListOrganizationName
+			// 
+			this.employeeListOrganizationName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListOrganizationName.DataPropertyName = "OrganisationNavn";
+			this.employeeListOrganizationName.HeaderText = "Organization";
+			this.employeeListOrganizationName.Name = "employeeListOrganizationName";
+			this.employeeListOrganizationName.ReadOnly = true;
+			this.employeeListOrganizationName.Width = 108;
+			// 
+			// employeeListLeaderName
+			// 
+			this.employeeListLeaderName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.employeeListLeaderName.DataPropertyName = "NaermesteLederNavn";
+			this.employeeListLeaderName.HeaderText = "Leader";
+			this.employeeListLeaderName.Name = "employeeListLeaderName";
+			this.employeeListLeaderName.ReadOnly = true;
+			this.employeeListLeaderName.Width = 76;
+			// 
+			// organizationList
+			// 
+			this.organizationList.AllowUserToAddRows = false;
+			this.organizationList.AllowUserToDeleteRows = false;
+			this.organizationList.AllowUserToResizeRows = false;
+			this.organizationList.BackgroundColor = System.Drawing.SystemColors.Control;
+			this.organizationList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.organizationList.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+			this.organizationList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.organizationList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.organizationListActiveStatus,
+            this.organizationListShortName,
+            this.organizationListName,
+            this.organizationListPhone,
+            this.organizationListSeNumber,
+            this.organizationListEanNumber,
+            this.organizationListOmkSted,
+            this.organizationListLeaderName});
+			this.organizationList.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.organizationList.Location = new System.Drawing.Point(243, 3);
+			this.organizationList.Name = "organizationList";
+			this.organizationList.ReadOnly = true;
+			this.organizationList.RowHeadersVisible = false;
+			this.organizationList.RowHeadersWidth = 22;
+			this.organizationList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+			this.organizationList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.organizationList.ShowCellErrors = false;
+			this.organizationList.ShowCellToolTips = false;
+			this.organizationList.ShowEditingIcon = false;
+			this.organizationList.ShowRowErrors = false;
+			this.organizationList.Size = new System.Drawing.Size(980, 581);
+			this.organizationList.TabIndex = 4;
+			this.organizationList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.OrganizationListCellFormatting);
+			this.organizationList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OrganizationListDataError);
+			this.organizationList.DoubleClick += new System.EventHandler(this.ActionOrganizationShowPropertiesClick);
+			// 
+			// organizationListActiveStatus
+			// 
+			this.organizationListActiveStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.organizationListActiveStatus.HeaderText = "";
+			this.organizationListActiveStatus.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+			this.organizationListActiveStatus.MinimumWidth = 25;
+			this.organizationListActiveStatus.Name = "organizationListActiveStatus";
+			this.organizationListActiveStatus.ReadOnly = true;
+			this.organizationListActiveStatus.ToolTipText = "SOFD Directory status";
+			this.organizationListActiveStatus.Width = 25;
+			// 
+			// organizationListShortName
+			// 
+			this.organizationListShortName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.organizationListShortName.DataPropertyName = "KortNavn";
+			this.organizationListShortName.HeaderText = "Short name";
+			this.organizationListShortName.MinimumWidth = 100;
+			this.organizationListShortName.Name = "organizationListShortName";
+			this.organizationListShortName.ReadOnly = true;
+			this.organizationListShortName.Width = 101;
+			// 
+			// organizationListName
+			// 
+			this.organizationListName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.organizationListName.DataPropertyName = "Navn";
+			this.organizationListName.HeaderText = "Name";
+			this.organizationListName.MinimumWidth = 150;
+			this.organizationListName.Name = "organizationListName";
+			this.organizationListName.ReadOnly = true;
+			this.organizationListName.Width = 150;
+			// 
+			// organizationListPhone
+			// 
+			this.organizationListPhone.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.organizationListPhone.DataPropertyName = "Telefon";
+			this.organizationListPhone.HeaderText = "Phone";
+			this.organizationListPhone.MinimumWidth = 100;
+			this.organizationListPhone.Name = "organizationListPhone";
+			this.organizationListPhone.ReadOnly = true;
+			// 
+			// organizationListSeNumber
+			// 
+			this.organizationListSeNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.organizationListSeNumber.DataPropertyName = "SeNummer";
+			this.organizationListSeNumber.HeaderText = "SE#";
+			this.organizationListSeNumber.MinimumWidth = 100;
+			this.organizationListSeNumber.Name = "organizationListSeNumber";
+			this.organizationListSeNumber.ReadOnly = true;
+			// 
+			// organizationListEanNumber
+			// 
+			this.organizationListEanNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.organizationListEanNumber.DataPropertyName = "EanNummer";
+			this.organizationListEanNumber.HeaderText = "EAN#";
+			this.organizationListEanNumber.MinimumWidth = 100;
+			this.organizationListEanNumber.Name = "organizationListEanNumber";
+			this.organizationListEanNumber.ReadOnly = true;
+			// 
+			// organizationListOmkSted
+			// 
+			this.organizationListOmkSted.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.organizationListOmkSted.DataPropertyName = "OmkostningsSted";
+			this.organizationListOmkSted.HeaderText = "Omk.sted";
+			this.organizationListOmkSted.Name = "organizationListOmkSted";
+			this.organizationListOmkSted.ReadOnly = true;
+			this.organizationListOmkSted.Width = 90;
+			// 
+			// organizationListLeaderName
+			// 
+			this.organizationListLeaderName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.organizationListLeaderName.DataPropertyName = "LederNavn";
+			this.organizationListLeaderName.HeaderText = "Leder";
+			this.organizationListLeaderName.Name = "organizationListLeaderName";
+			this.organizationListLeaderName.ReadOnly = true;
+			this.organizationListLeaderName.Width = 68;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -3258,7 +3260,6 @@
 			this.employeeFilterTextPanel.ResumeLayout(false);
 			this.employeeFilterTextPanel.PerformLayout();
 			this.employeeListPage.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.employeeList)).EndInit();
 			this.employeeListPanelLeft.ResumeLayout(false);
 			this.employeeFilterPages.ResumeLayout(false);
 			this.employeeFilterPage1.ResumeLayout(false);
@@ -3281,7 +3282,6 @@
 			this.employeePropertyPage.ResumeLayout(false);
 			this.MainFormPages.ResumeLayout(false);
 			this.organizationListPage.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.organizationList)).EndInit();
 			this.organizationListPanelLeft.ResumeLayout(false);
 			this.organizationFilterPanel.ResumeLayout(false);
 			this.organizationFilterPanel.PerformLayout();
@@ -3300,6 +3300,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.organizationPropertyActiveImage)).EndInit();
 			this.MainFormToolStrip.ResumeLayout(false);
 			this.MainFormToolStrip.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.employeeList)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.organizationList)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -3516,14 +3518,6 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem actionSofdDirectoryShowLeader;
 		private System.Windows.Forms.ToolStripMenuItem actionSofdDirectoryShowOrganization;
-		private System.Windows.Forms.DataGridViewImageColumn organizationListActiveStatus;
-		private System.Windows.Forms.DataGridViewTextBoxColumn organizationListShortName;
-		private System.Windows.Forms.DataGridViewTextBoxColumn organizationListName;
-		private System.Windows.Forms.DataGridViewTextBoxColumn organizationListPhone;
-		private System.Windows.Forms.DataGridViewTextBoxColumn organizationListSeNumber;
-		private System.Windows.Forms.DataGridViewTextBoxColumn organizationListEanNumber;
-		private System.Windows.Forms.DataGridViewTextBoxColumn organizationListOmkSted;
-		private System.Windows.Forms.DataGridViewTextBoxColumn organizationListLeaderName;
 		private System.Windows.Forms.ToolStripMenuItem actionSofdDirectoryListEmployees;
 		private System.Windows.Forms.CheckBox employeeFilterIdentifier;
 		private System.Windows.Forms.CheckBox employeeFilterTitle;
@@ -3555,5 +3549,13 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeeListLeaderName;
 		private System.Windows.Forms.Button employeeFilterSelectClear;
 		private System.Windows.Forms.Button employeeFilterSelectAll;
+		private System.Windows.Forms.DataGridViewImageColumn organizationListActiveStatus;
+		private System.Windows.Forms.DataGridViewTextBoxColumn organizationListShortName;
+		private System.Windows.Forms.DataGridViewTextBoxColumn organizationListName;
+		private System.Windows.Forms.DataGridViewTextBoxColumn organizationListPhone;
+		private System.Windows.Forms.DataGridViewTextBoxColumn organizationListSeNumber;
+		private System.Windows.Forms.DataGridViewTextBoxColumn organizationListEanNumber;
+		private System.Windows.Forms.DataGridViewTextBoxColumn organizationListOmkSted;
+		private System.Windows.Forms.DataGridViewTextBoxColumn organizationListLeaderName;
 	}
 }

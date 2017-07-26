@@ -118,7 +118,7 @@ namespace NDK.SofdViewer {
 					if ((promptWhenActiveEmployeeIsLeader == true) &&
 						(this.GetActiveEmployee().Leder == true) &&
 						(MessageBox.Show(
-							String.Format("The active employee is a leader. Select YES to show the employees who have {0} as leader, or NO to show users who have the same leader as {0}.", this.GetActiveEmployee().Navn),
+							String.Format("The active employee is a leader.\r\n\r\nSelect YES to show the employees who have {0} as leader.\r\n\r\nSelect NO to show employees who have {1} as leader.", this.GetActiveEmployee().Navn, (this.GetActiveEmployee().GetNearestLeader() != null) ? this.GetActiveEmployee().GetNearestLeader().Navn : "the same"),
 							"Active employee is leader",
 							MessageBoxButtons.YesNo,
 							MessageBoxIcon.Question
@@ -1219,6 +1219,26 @@ namespace NDK.SofdViewer {
 			this.employeeFilterLeader.Checked = false;
 		} // employeeFilterSelectClearClick
 
+		private void EmployeeListCellFormatting(Object sender, DataGridViewCellFormattingEventArgs e) {
+			// Format displayed text.
+			if ((this.employeeList.Columns[e.ColumnIndex] == this.employeeListCprNumber) && (e.Value != null)) {
+				e.Value = ((String)e.Value).FormatStringCpr();
+				e.FormattingApplied = true;
+			}
+			if ((this.employeeList.Columns[e.ColumnIndex] == this.employeeListMail) && (e.Value != null)) {
+				e.Value = ((String)e.Value).ToUpper();
+				e.FormattingApplied = true;
+			}
+			if ((this.employeeList.Columns[e.ColumnIndex] == this.employeeListPhone) && (e.Value != null)) {
+				e.Value = ((String)e.Value).FormatStringPhone();
+				e.FormattingApplied = true;
+			}
+			if ((this.employeeList.Columns[e.ColumnIndex] == this.employeeListMobile) && (e.Value != null)) {
+				e.Value = ((String)e.Value).FormatStringPhone();
+				e.FormattingApplied = true;
+			}
+		} // EmployeeListCellFormatting
+
 		private void EmployeeListDataError(Object sender, DataGridViewDataErrorEventArgs e) {
 			// Trapping errors.
 			e.Cancel = true;
@@ -1814,6 +1834,14 @@ namespace NDK.SofdViewer {
 				this.organizationFilterTextFocus = true;
 			}
 		} // OrganizationFilterTextMouseUp
+
+		private void OrganizationListCellFormatting(Object sender, DataGridViewCellFormattingEventArgs e) {
+			// Format displayed text.
+			if ((this.organizationList.Columns[e.ColumnIndex] == this.organizationListPhone) && (e.Value != null)) {
+				e.Value = ((String)e.Value).FormatStringPhone();
+				e.FormattingApplied = true;
+			}
+		} // OrganizationListCellFormatting
 
 		private void OrganizationListDataError(Object sender, DataGridViewDataErrorEventArgs e) {
 			// Trapping errors.
