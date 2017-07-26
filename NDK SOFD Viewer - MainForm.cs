@@ -1089,7 +1089,7 @@ namespace NDK.SofdViewer {
 		private void EmployeeSearchRunThreadFromClipboard(String[] filterTexts) {
 			try {
 				// Status.
-				this.employeeListStatus.Text = String.Format("{0} employees found - Searching Sofd Directory...", this.employeeList.RowCount);
+				this.employeeListStatus.Text = String.Format("{0} employees found from clipboard text - Searching Sofd Directory...", this.employeeList.RowCount);
 
 				//
 				StringBuilder result = new StringBuilder();
@@ -1142,7 +1142,7 @@ namespace NDK.SofdViewer {
 				}
 
 				// Status.
-				this.employeeListStatus.Text = String.Format("{0} employees found - Searching Active Directory...", this.employeeList.RowCount);
+				this.employeeListStatus.Text = String.Format("{0} employees found from clipboard text - Searching Active Directory...", this.employeeList.RowCount);
 
 				// Update the list with AD data.
 				// Loop until the service is stopped.
@@ -1162,7 +1162,7 @@ namespace NDK.SofdViewer {
 				this.LogError(exception);
 			} finally {
 				// Status.
-				this.employeeListStatus.Text = String.Format("{0} employees found", this.employeeList.RowCount);
+				this.employeeListStatus.Text = String.Format("{0} employees found from clipboard text", this.employeeList.RowCount);
 			}
 		} // EmployeeSearchRunThreadFromClipboard
 
@@ -1181,7 +1181,7 @@ namespace NDK.SofdViewer {
 			this.employeeFilterTextFocus = false;
 		} // EmployeeFilterTextLeave
 
-		void EmployeeFilterTextMouseUp(Object sender, MouseEventArgs e) {
+		private void EmployeeFilterTextMouseUp(Object sender, MouseEventArgs e) {
 			if ((this.employeeFilterTextFocus == false) && (this.employeeFilterText.SelectionLength == 0)) {
 				// Select all text.
 				this.employeeFilterText.SelectAll();
@@ -1190,6 +1190,34 @@ namespace NDK.SofdViewer {
 				this.employeeFilterTextFocus = true;
 			}
 		} // EmployeeFilterTextMouseUp
+
+		private void employeeFilterSelectAllClick(Object sender, EventArgs e) {
+			// Select all search filters.
+			this.employeeFilterFirstName.Checked = true;
+			this.employeeFilterLastName.Checked = true;
+			this.employeeFilterName.Checked = true;
+			this.employeeFilterDisplayName.Checked = true;
+			this.employeeFilterPhoneNumber.Checked = true;
+			this.employeeFilterMail.Checked = true;
+			this.employeeFilterTitle.Checked = true;
+			this.employeeFilterIdentifier.Checked = true;
+			this.employeeFilterOrganization.Checked = true;
+			this.employeeFilterLeader.Checked = true;
+		} // employeeFilterSelectAllClick
+
+		private void employeeFilterSelectClearClick(Object sender, EventArgs e) {
+			// Unselect all search filters.
+			this.employeeFilterFirstName.Checked = false;
+			this.employeeFilterLastName.Checked = false;
+			this.employeeFilterName.Checked = false;
+			this.employeeFilterDisplayName.Checked = false;
+			this.employeeFilterPhoneNumber.Checked = false;
+			this.employeeFilterMail.Checked = false;
+			this.employeeFilterTitle.Checked = false;
+			this.employeeFilterIdentifier.Checked = false;
+			this.employeeFilterOrganization.Checked = false;
+			this.employeeFilterLeader.Checked = false;
+		} // employeeFilterSelectClearClick
 
 		private void EmployeeListDataError(Object sender, DataGridViewDataErrorEventArgs e) {
 			// Trapping errors.
@@ -1684,7 +1712,7 @@ namespace NDK.SofdViewer {
 		private void OrganizationSearchRunThreadFromClipboard(String[] filterTexts) {
 			try {
 				// Status.
-				this.organizationListStatus.Text = String.Format("{0} organizations found - Searching Sofd Directory...", this.organizationList.RowCount);
+				this.organizationListStatus.Text = String.Format("{0} organizations found from clipboard text - Searching Sofd Directory...", this.organizationList.RowCount);
 
 				//
 				StringBuilder result = new StringBuilder();
@@ -1738,7 +1766,7 @@ namespace NDK.SofdViewer {
 				}
 
 				// Status.
-				this.organizationListStatus.Text = String.Format("{0} organizations found - Searching Active Directory...", this.organizationList.RowCount);
+				this.organizationListStatus.Text = String.Format("{0} organizations found from clipboard text - Searching Active Directory...", this.organizationList.RowCount);
 
 				// Update the list with AD data.
 				// Loop until the service is stopped.
@@ -1758,7 +1786,7 @@ namespace NDK.SofdViewer {
 				this.LogError(exception);
 			} finally {
 				// Status.
-				this.organizationListStatus.Text = String.Format("{0} organizations found", this.organizationList.RowCount);
+				this.organizationListStatus.Text = String.Format("{0} organizations found from clipboard text", this.organizationList.RowCount);
 			}
 		} // OrganizationSearchRunThreadFromClipboard
 

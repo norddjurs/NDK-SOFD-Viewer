@@ -100,6 +100,8 @@
 			this.employeeListPanelLeft = new System.Windows.Forms.Panel();
 			this.employeeFilterPages = new System.Windows.Forms.TabControl();
 			this.employeeFilterPage1 = new System.Windows.Forms.TabPage();
+			this.employeeFilterSelectClear = new System.Windows.Forms.Button();
+			this.employeeFilterSelectAll = new System.Windows.Forms.Button();
 			this.employeeFilterLeader = new System.Windows.Forms.CheckBox();
 			this.employeeFilterOrganization = new System.Windows.Forms.CheckBox();
 			this.employeeFilterMail = new System.Windows.Forms.CheckBox();
@@ -808,6 +810,7 @@
 			// 
 			// employeeListSearchFromClipboard
 			// 
+			this.employeeListSearchFromClipboard.AccessibleDescription = "Search from clipboard";
 			this.employeeListSearchFromClipboard.AccessibleName = "Search from clipboard";
 			this.employeeListSearchFromClipboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.employeeListSearchFromClipboard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
@@ -820,7 +823,8 @@
 			// 
 			// employeeListRefresh
 			// 
-			this.employeeListRefresh.AccessibleName = "Refresh";
+			this.employeeListRefresh.AccessibleDescription = "Refresh search";
+			this.employeeListRefresh.AccessibleName = "Refresh search";
 			this.employeeListRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.employeeListRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.employeeListRefresh.Location = new System.Drawing.Point(202, 20);
@@ -1048,6 +1052,8 @@
 			// 
 			// employeeFilterPage1
 			// 
+			this.employeeFilterPage1.Controls.Add(this.employeeFilterSelectClear);
+			this.employeeFilterPage1.Controls.Add(this.employeeFilterSelectAll);
 			this.employeeFilterPage1.Controls.Add(this.employeeFilterLeader);
 			this.employeeFilterPage1.Controls.Add(this.employeeFilterOrganization);
 			this.employeeFilterPage1.Controls.Add(this.employeeFilterMail);
@@ -1066,6 +1072,34 @@
 			this.employeeFilterPage1.Size = new System.Drawing.Size(232, 485);
 			this.employeeFilterPage1.TabIndex = 1;
 			this.employeeFilterPage1.Text = "Filters";
+			// 
+			// employeeFilterSelectClear
+			// 
+			this.employeeFilterSelectClear.AccessibleDescription = "Deselect all search filters";
+			this.employeeFilterSelectClear.AccessibleName = "Deselect all search filters";
+			this.employeeFilterSelectClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.employeeFilterSelectClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.employeeFilterSelectClear.Location = new System.Drawing.Point(167, 456);
+			this.employeeFilterSelectClear.Name = "employeeFilterSelectClear";
+			this.employeeFilterSelectClear.Size = new System.Drawing.Size(25, 23);
+			this.employeeFilterSelectClear.TabIndex = 22;
+			this.employeeFilterSelectClear.Text = "[   ]";
+			this.employeeFilterSelectClear.UseVisualStyleBackColor = true;
+			this.employeeFilterSelectClear.Click += new System.EventHandler(this.employeeFilterSelectClearClick);
+			// 
+			// employeeFilterSelectAll
+			// 
+			this.employeeFilterSelectAll.AccessibleDescription = "Select all search filters";
+			this.employeeFilterSelectAll.AccessibleName = "Select all search filters";
+			this.employeeFilterSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.employeeFilterSelectAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.employeeFilterSelectAll.Location = new System.Drawing.Point(198, 456);
+			this.employeeFilterSelectAll.Name = "employeeFilterSelectAll";
+			this.employeeFilterSelectAll.Size = new System.Drawing.Size(25, 23);
+			this.employeeFilterSelectAll.TabIndex = 4;
+			this.employeeFilterSelectAll.Text = "[X]";
+			this.employeeFilterSelectAll.UseVisualStyleBackColor = true;
+			this.employeeFilterSelectAll.Click += new System.EventHandler(this.employeeFilterSelectAllClick);
 			// 
 			// employeeFilterLeader
 			// 
@@ -3519,5 +3553,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeeListTitle;
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeeListOrganizationName;
 		private System.Windows.Forms.DataGridViewTextBoxColumn employeeListLeaderName;
+		private System.Windows.Forms.Button employeeFilterSelectClear;
+		private System.Windows.Forms.Button employeeFilterSelectAll;
 	}
 }
